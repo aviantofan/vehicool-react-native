@@ -6,14 +6,13 @@ import {
   SafeAreaView,
 } from 'react-native';
 import React from 'react';
-import { auth } from './components/index';
-import Button from './components/Button';
-import Input from './components/Input'
+import Button from '../components/Button';
+import Input from '../components/Input'
 
 const ForgotPassword = () => {
   return (
     <View style={styles.container}>
-      <ImageBackground source={auth} resizeMode="cover" style={styles.img}>
+      <ImageBackground source={require('../assets/auth-bg.png')} resizeMode="cover" style={styles.img}>
         <Text style={styles.text}>THAT`S OKAY, WE</Text>
         <Text style={styles.text1}>GOT YOUR BACK</Text>
         <SafeAreaView style={styles.form}>
