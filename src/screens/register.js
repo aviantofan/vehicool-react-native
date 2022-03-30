@@ -4,17 +4,15 @@ import {
   ImageBackground,
   StyleSheet,
   SafeAreaView,
-  Alert,
 } from 'react-native';
 import React from 'react';
-import { auth } from './components/index';
-import Button from './components/Button';
-import Input from './components/Input'
+import Button from '../components/Button';
+import Input from '../components/Input'
 
 const Register = () => {
   return (
     <View style={styles.container}>
-      <ImageBackground source={auth} resizeMode="cover" style={styles.img}>
+      <ImageBackground source={require('../assets/auth-bg.png')} resizeMode="cover" style={styles.img}>
         <Text style={styles.text}>LET`S HAVE</Text>
         <Text style={styles.text1}>SOME RIDE</Text>
         <SafeAreaView style={styles.form}>
