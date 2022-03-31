@@ -21,15 +21,19 @@ const ForgotPassword = () => {
             placeholder='Enter your email address'
             keyboardType='alphanumeric'
           />
+        </SafeAreaView>
+        <View style={styles.btn}>
           <Button
             color='primary'
             onPress={() => alert('Code Send Success')}
-          >Send Code</Button>
+          >Send Code
+          </Button>
           <Button
             color='secondary'
             onPress={() => alert('Code Send Success')}
-          >Resend Code</Button>
-        </SafeAreaView>
+          >Resend Code
+          </Button>
+        </View>
       </ImageBackground>
     </View>
   )
@@ -65,8 +69,13 @@ const styles = StyleSheet.create({
     marginHorizontal: 25,
     marginEnd: 50,
   },
+  btn: {
+    marginTop: 10,
+    marginHorizontal: 15,
+    justifyContent: 'center'
+  },
   form: {
-    marginTop: 200,
+    marginTop: 150,
   },
   forgot: {
     color: 'white',
