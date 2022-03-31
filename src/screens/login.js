@@ -4,6 +4,7 @@ import {
   ImageBackground,
   StyleSheet,
   SafeAreaView,
+  TouchableOpacity
 } from 'react-native';
 import React from 'react';
 import Button from '../components/Button';
@@ -25,12 +26,19 @@ const Login = () => {
             keyboardType='alphanumeric'
           />
           <Text style={styles.forgot}>Forgot Password ?</Text>
+        </SafeAreaView>
+        <View style={styles.btn}>
           <Button
             color='primary'
             onPress={() => alert('Login Success')}
           >Login</Button>
-        </SafeAreaView>
-        <Text style={styles.signup}>Don`t have account? Sign up now</Text>
+        </View>
+        <View style={styles.signupWrapper}>
+          <Text style={styles.signup}>Don`t have account? </Text>
+          <TouchableOpacity>
+            <Text style={styles.signup}> Sign up now</Text>
+          </TouchableOpacity>
+        </View>
       </ImageBackground>
     </View>
   )
@@ -66,6 +74,11 @@ const styles = StyleSheet.create({
     marginHorizontal: 25,
     marginEnd: 50,
   },
+  btn: {
+    marginBottom: 30,
+    marginHorizontal: 15,
+    justifyContent: 'center'
+  },
   form: {
     marginTop: 200,
   },
@@ -80,13 +93,14 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
     marginEnd: 235,
   },
-  signup: {
+  signupWrapper: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginHorizontal: 80,
-    marginTop: 20,
-    color: 'white'
+    justifyContent: 'center',
   },
+  signup: {
+    color: 'white',
+
+  }
 })
 
 export default Login

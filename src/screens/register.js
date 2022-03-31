@@ -4,6 +4,7 @@ import {
   ImageBackground,
   StyleSheet,
   SafeAreaView,
+  TouchableOpacity
 } from 'react-native';
 import React from 'react';
 import Button from '../components/Button';
@@ -29,11 +30,18 @@ const Register = () => {
             keyboardType='password'
           />
         </SafeAreaView>
-        <Button
-          color='primary'
-          onPress={() => alert('Register Success')}
-        >Sign Up</Button>
-        <Text style={styles.signup}>Don`t have account? Sign up now</Text>
+        <View style={styles.btn}>
+          <Button
+            color='primary'
+            onPress={() => alert('Register Success')}
+          >Sign Up</Button>
+        </View>
+        <View style={styles.loginWrapper}>
+          <Text style={styles.login}>Already have an account?</Text>
+          <TouchableOpacity>
+            <Text style={styles.login}> Login now</Text>
+          </TouchableOpacity>
+        </View>
       </ImageBackground>
     </View>
   )
@@ -72,6 +80,11 @@ const styles = StyleSheet.create({
   form: {
     marginTop: 200,
   },
+  btn: {
+    marginBottom: 30,
+    marginHorizontal: 15,
+    justifyContent: 'center'
+  },
   forgot: {
     color: 'white',
     fontSize: 14,
@@ -83,13 +96,13 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
     marginEnd: 235,
   },
-  signup: {
+  loginWrapper: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginHorizontal: 80,
-    marginTop: 20,
-    color: 'white'
+    justifyContent: 'center',
   },
+  login: {
+    color: 'white'
+  }
 })
 
 export default Register
