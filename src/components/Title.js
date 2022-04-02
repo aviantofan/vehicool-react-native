@@ -22,12 +22,14 @@ const styles = StyleSheet.create({
   header: {
     fontSize: 28,
     fontWeight: 'bold',
+    color: '#261C2C'
   },
   link: {
     marginLeft: 'auto',
   },
   line: {
     textDecorationLine: 'underline',
+    color: '#261C2C'
   },
 });
 
