@@ -10,8 +10,8 @@ const HistoryTab = createMaterialTopTabNavigator()
 const HistoryNav = () => {
   return (
     <HistoryTab.Navigator >
-      <HistoryTab.Screen name='ChatList' component={ChatList} />
-      <HistoryTab.Screen name='History' component={History} />
+      <HistoryTab.Screen name='Chat' component={ChatList} />
+      <HistoryTab.Screen name='History Order' component={History} />
     </HistoryTab.Navigator>
   )
 }
