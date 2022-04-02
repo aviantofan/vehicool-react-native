@@ -4,11 +4,11 @@ import detailImg from '../assets/detail.png'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import LinearGradient from 'react-native-linear-gradient'
-import { useNavigation } from '@react-navi  gation/native'
+import { useNavigation } from '@react-navigation/native'
 
-const detail = () => {
+const Detail = () => {
   const [fav, setFav] = useState(false)
-  // const navigation = useNavigation()
+  const navigation = useNavigation()
   return (
     <View style={styles.wrapper}>
       <View style={styles.barWrapper}>
@@ -17,7 +17,7 @@ const detail = () => {
         </View>
         <View style={styles.barItem}>
           <View style={styles.barSectionLeft}>
-            <TouchableOpacity /*onPress={navigation.goBack}*/>
+            <TouchableOpacity onPress={navigation.goBack}>
               <Icon name='chevron-left' size={30} color='white' />
             </TouchableOpacity>
           </View>
@@ -106,4 +106,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default detail
+export default Detail

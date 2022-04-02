@@ -8,9 +8,11 @@ import {
 } from 'react-native';
 import React from 'react';
 import Button from '../components/Button';
-import Input from '../components/Input'
+import Input from '../components/Input';
+import { useNavigation } from '@react-navigation/native';
 
 const Register = () => {
+  const navigation = useNavigation()
   return (
     <View style={styles.container}>
       <ImageBackground source={require('../assets/auth-bg.png')} resizeMode="cover" style={styles.img}>
@@ -38,8 +40,10 @@ const Register = () => {
         </View>
         <View style={styles.loginWrapper}>
           <Text style={styles.login}>Already have an account?</Text>
-          <TouchableOpacity>
-            <Text style={styles.login}> Login now</Text>
+          <TouchableOpacity >
+            <Text style={styles.login} onPress={() => {
+              navigation.navigate('Login')
+            }}> Login now</Text>
           </TouchableOpacity>
         </View>
       </ImageBackground>

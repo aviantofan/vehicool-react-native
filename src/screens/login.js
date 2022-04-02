@@ -9,8 +9,10 @@ import {
 import React from 'react';
 import Button from '../components/Button';
 import Input from '../components/Input'
+import { useNavigation } from '@react-navigation/native';
 
 const Login = () => {
+  const navigation = useNavigation()
   return (
     <View style={styles.container}>
       <ImageBackground source={require('../assets/auth-bg.png')} resizeMode="cover" style={styles.img}>
@@ -25,7 +27,11 @@ const Login = () => {
             placeholder='Password'
             keyboardType='alphanumeric'
           />
-          <Text style={styles.forgot}>Forgot Password ?</Text>
+          <TouchableOpacity>
+            <Text style={styles.forgot} onPress={() => {
+              navigation.navigate('ForgotPassword')
+            }}>Forgot Password ?</Text>
+          </TouchableOpacity>
         </SafeAreaView>
         <View style={styles.btn}>
           <Button
@@ -36,7 +42,9 @@ const Login = () => {
         <View style={styles.signupWrapper}>
           <Text style={styles.signup}>Don`t have account? </Text>
           <TouchableOpacity>
-            <Text style={styles.signup}> Sign up now</Text>
+            <Text style={styles.signup} onPress={() => {
+              navigation.navigate('Register')
+            }}> Sign up now</Text>
           </TouchableOpacity>
         </View>
       </ImageBackground>
