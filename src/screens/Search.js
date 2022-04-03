@@ -113,14 +113,16 @@ const Search = ({ navigation }) => {
           showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}>
           {listVehicles.map((data, index) => (
-            <List
-              image={data.image}
-              name={data.name}
-              seet={data.seet}
-              stock={data.stock}
-              price={data.price}
-              key={index}
-            />
+            <TouchableOpacity onPress={() => navigation.navigate('DetailVehicle')}>
+              <List
+                image={data.image}
+                name={data.name}
+                seet={data.seet}
+                stock={data.stock}
+                price={data.price}
+                key={index}
+              />
+            </TouchableOpacity>
           ))}
         </ScrollView>
       </View>
