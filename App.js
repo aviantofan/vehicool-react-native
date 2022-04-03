@@ -77,6 +77,8 @@ const App = () => {
           <MainStack.Screen name='ChatRoom' component={ChatRoom} />
           <MainStack.Screen name='DetailVehicle' component={Detail} />
           <MainStack.Screen name='Payment' component={Payment} />
+          {/* <MainStack.Screen name="SecondPayment" component={SecondPayment} />
+          <MainStack.Screen name="ThirdPayment" component={ThirdPayment} /> */}
           <MainStack.Screen name='FinishedPayment' component={FinishedPayment} />
         </MainStack.Navigator>
       </NativeBaseProvider>
