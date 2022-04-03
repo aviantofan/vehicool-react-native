@@ -12,6 +12,8 @@ import Favorite from './src/screens/Favorite'
 import ChatRoom from './src/screens/ChatRoom'
 import Detail from './src/screens/Detail'
 import Payment from './src/screens/Payment'
+import PaymentStepTwo from './src/screens/PaymentStepTwo'
+import PaymentStepThree from './src/screens/PaymentStepThree'
 import FinishedPayment from './src/screens/FinishedPayment'
 
 import HomeNav from './src/navigations/HomeNav'
@@ -24,6 +26,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NativeBaseProvider } from 'native-base'
 
 import Icon from 'react-native-vector-icons/FontAwesome'
+
 
 // const AuthStack = createNativeStackNavigator()
 const MainStack = createNativeStackNavigator()
@@ -77,8 +80,8 @@ const App = () => {
           <MainStack.Screen name='ChatRoom' component={ChatRoom} />
           <MainStack.Screen name='DetailVehicle' component={Detail} />
           <MainStack.Screen name='Payment' component={Payment} />
-          {/* <MainStack.Screen name="SecondPayment" component={SecondPayment} />
-          <MainStack.Screen name="ThirdPayment" component={ThirdPayment} /> */}
+          <MainStack.Screen name="PaymentStepTwo" component={PaymentStepTwo} />
+          <MainStack.Screen name="PaymentStepThree" component={PaymentStepThree} />
           <MainStack.Screen name='FinishedPayment' component={FinishedPayment} />
         </MainStack.Navigator>
       </NativeBaseProvider>
