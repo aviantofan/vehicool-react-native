@@ -21,7 +21,8 @@ const Profile = ({ navigation }) => {
       </View>
       <View style={styles.container}>
         <View>
-          <TouchableOpacity style={styles.linkItem}>
+          <TouchableOpacity style={styles.linkItem}
+            onPress={() => navigation.navigate('Favorite')}>
             <Text fontSize="2xl">Your favourites</Text>
             <FaIcon name="chevron-right" size={25} />
           </TouchableOpacity>
