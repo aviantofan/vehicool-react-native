@@ -7,10 +7,29 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 import LinearGradient from 'react-native-linear-gradient'
 import { useNavigation } from '@react-navigation/native'
 import Button from '../components/Button'
+import DatePicker from 'react-native-date-picker';
+import { Picker } from '@react-native-picker/picker';
+import moment from 'moment';
 
 const Detail = () => {
   const [fav, setFav] = useState(false)
+  const [count, setCount] = useState(1);
+  const [open, setOpen] = useState(false);
+  const [date, setDate] = useState(new Date());
+  const [isStart, setIsStart] = useState(false);
+  const [endDate, setEndDate] = useState();
   const navigation = useNavigation()
+
+  const increment = () => {
+    if (count < 0) {
+      setCount(count + 1);
+    }
+  };
+  const decrement = () => {
+    if (count > 1) {
+      setCount(count - 1);
+    }
+  };
   return (
     <View style={styles.wrapper}>
       <View style={styles.barWrapper}>
@@ -57,7 +76,66 @@ const Detail = () => {
         <Text style={styles.directText}>3.2 miles from your location</Text>
       </View>
       <View style={styles.qtyWrapper}>
-        <Text style={styles.selectQty}>Select Quantity Vehicle</Text>
+        <Text style={styles.selectQty}>Select Bikes</Text>
+        <View style={styles.counters}>
+          <TouchableOpacity style={styles.counter} onPress={increment}>
+            <Text style={{ alignSelf: 'center', fontSize: 20, fontWeight: 'bold' }}>
+              +
+            </Text>
+          </TouchableOpacity>
+          <Text style={{ color: 'black', marginLeft: 20, marginRight: 20, alignSelf: 'center', fontSize: 15, fontWeight: 'bold' }}>
+            {count}
+          </Text>
+          <TouchableOpacity style={styles.counter} onPress={decrement}>
+            <Text style={{ alignSelf: 'center', fontSize: 20, fontWeight: 'bold' }}>
+              -
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+      <View style={{ marginTop: 19, marginLeft: 19, marginRight: 19, justifyContent: 'space-between', flexDirection: 'row' }}>
+        <TouchableOpacity style={styles.startDate}>
+          <TouchableOpacity
+            title={String(date)}
+            onPress={() => setOpen(true)}>
+            <Text style={{ color: 'black' }}>
+              {isStart ? moment(date).format('MMM DD YYYY') : 'Select date'}
+            </Text>
+          </TouchableOpacity>
+          <DatePicker
+            style={styles.datePicker}
+            fadeToColor="white"
+            theme="dark"
+            textColor="white"
+            modal
+            mode="date"
+            open={open}
+            date={date}
+            onConfirm={dateItem => {
+              setOpen(false);
+              setDate(dateItem);
+              setIsStart(true);
+            }}
+            onCancel={() => {
+              setOpen(false);
+            }}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.endDate}>
+          <Picker
+            style={{ color: 'black' }}
+            selectedValue={endDate}
+            onValueChange={(itemValue, itemIndex) => setEndDate(itemValue)}>
+            {[...Array(7)].map((data, index) => (
+              <Picker.Item
+                style={{ color: 'white' }}
+                label={String(index + 1) + ' Day'}
+                value={index + 1}
+                key={index}
+              />
+            ))}
+          </Picker>
+        </TouchableOpacity>
       </View>
       <View style={styles.btn}>
         <Button onPress={() => navigation.navigate('Payment')}>Reservation</Button>
@@ -178,23 +256,48 @@ const styles = StyleSheet.create({
     color: 'black'
   },
   qtyWrapper: {
+    flexDirection: 'row',
     marginTop: 10,
     flexDirection: 'row',
     marginLeft: 19,
     marginTop: 20,
   },
   selectQty: {
+    flex: 1,
     marginTop: 19,
     color: 'black',
     fontSize: 15,
     fontWeight: 'bold'
   },
+  counter: {
+    backgroundColor: '#6E85B2',
+    width: 30,
+    height: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 50,
+  },
+  counters: {
+    flexDirection: 'row',
+    marginTop: 19,
+    marginRight: 19
+  },
   btn: {
-    marginVertical: 10,
     marginHorizontal: 19,
     fontSize: 50,
     fontWeight: 'bold'
-  }
+  },
+  startDate: {
+    borderRadius: 10,
+    backgroundColor: 'rgba(57, 57, 57, 0.15)',
+    padding: 15,
+    width: '60%',
+  },
+  endDate: {
+    width: '35%',
+    borderRadius: 10,
+    backgroundColor: 'rgba(57, 57, 57, 0.15)',
+  },
 })
 
 export default Detail
