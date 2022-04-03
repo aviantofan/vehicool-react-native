@@ -21,6 +21,8 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
+import { NativeBaseProvider } from 'native-base'
+
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 // const AuthStack = createNativeStackNavigator()
@@ -62,20 +64,22 @@ const BottomNav = () => {
 const App = () => {
   return (
     <NavigationContainer>
-      {/* <AuthStack.Navigator screenOptions={{ headerShown: false }}>
+      <NativeBaseProvider>
+        {/* <AuthStack.Navigator screenOptions={{ headerShown: false }}>
         <AuthStack.Screen name='Login' component={Login} />
         <AuthStack.Screen name='Register' component={Register} />
         <AuthStack.Screen name='ForgotPassword' component={ForgotPassword} />
       </AuthStack.Navigator> */}
-      <MainStack.Navigator screenOptions={{ headerShown: false }}>
-        <MainStack.Screen name='BottomTab' component={BottomNav} />
-        <MainStack.Screen name='UpdateProfile' component={UpdateProfile} />
-        <MainStack.Screen name='Favorite' component={Favorite} />
-        <MainStack.Screen name='ChatRoom' component={ChatRoom} />
-        <MainStack.Screen name='DetailVehicle' component={Detail} />
-        <MainStack.Screen name='Payment' component={Payment} />
-        <MainStack.Screen name='FinishedPayment' component={FinishedPayment} />
-      </MainStack.Navigator>
+        <MainStack.Navigator screenOptions={{ headerShown: false }}>
+          <MainStack.Screen name='BottomTab' component={BottomNav} />
+          <MainStack.Screen name='UpdateProfile' component={UpdateProfile} />
+          <MainStack.Screen name='Favorite' component={Favorite} />
+          <MainStack.Screen name='ChatRoom' component={ChatRoom} />
+          <MainStack.Screen name='DetailVehicle' component={Detail} />
+          <MainStack.Screen name='Payment' component={Payment} />
+          <MainStack.Screen name='FinishedPayment' component={FinishedPayment} />
+        </MainStack.Navigator>
+      </NativeBaseProvider>
     </NavigationContainer>
   )
 }
