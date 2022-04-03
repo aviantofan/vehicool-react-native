@@ -74,8 +74,8 @@ const Payment = () => {
         </Box>
         <Box py={'10'}>
           <Button
-            color="primary"
-            onPress={() => navigation.navigate('PaymentSecondScreen')}>
+            color="secondary"
+            onPress={() => navigation.navigate('PaymentStepTwo')}>
             See Order Details
           </Button>
         </Box>
