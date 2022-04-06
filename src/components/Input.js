@@ -1,10 +1,15 @@
 import { TextInput, SafeAreaView, StyleSheet } from 'react-native'
 import React from 'react'
 
-const Input = ({ placeholder }) => {
+const Input = ({ placeholder, ...set }) => {
   return (
     <SafeAreaView>
-      <TextInput placeholder={placeholder} placeholderTextColor='#FFFF' style={styles.input} />
+      <TextInput
+        placeholder={placeholder}
+        placeholderTextColor='#FFFF'
+        style={styles.input}
+        {...set}
+      />
     </SafeAreaView>
   )
 }
