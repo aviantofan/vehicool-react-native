@@ -6,12 +6,34 @@ import {
   SafeAreaView,
   TouchableOpacity
 } from 'react-native';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '../components/Button';
 import Input from '../components/Input'
 import { useNavigation } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
+import { authLogin } from '../redux/actions/auth';
 
 const Login = () => {
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const [isError, setIsError] = useState();
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch({
+      type: 'AUTH_CLEAR_ERR',
+    });
+  }, [dispatch]);
+
+  const onLogin = () => {
+    if (email && password) {
+      setIsError(false);
+      dispatch(authLogin(email, password));
+    } else {
+      setIsError(true);
+    }
+  }
+
   const navigation = useNavigation()
   return (
     <View style={styles.container}>
@@ -20,12 +42,14 @@ const Login = () => {
         <Text style={styles.text1}>THE WORLDS</Text>
         <SafeAreaView style={styles.form}>
           <Input
-            placeholder='Username'
-            keyboardType='alphanumeric'
+            placeholder='Email'
+            onChangeText={setEmail}
+            value={email}
           />
           <Input
             placeholder='Password'
-            keyboardType='alphanumeric'
+            onChangeText={setPassword}
+            value={password}
           />
           <TouchableOpacity>
             <Text style={styles.forgot} onPress={() => {
@@ -36,7 +60,7 @@ const Login = () => {
         <View style={styles.btn}>
           <Button
             color='primary'
-            onPress={() => alert('Login Success')}
+            onPress={onLogin}
           >Login</Button>
         </View>
         <View style={styles.signupWrapper}>

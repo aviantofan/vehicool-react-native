@@ -3,8 +3,16 @@ import React from 'react';
 import { Image, Text } from 'native-base';
 import FaIcon from 'react-native-vector-icons/FontAwesome';
 import Button from '../components/Button';
+import { useDispatch } from 'react-redux';
 
 const Profile = ({ navigation }) => {
+  const dispatch = useDispatch();
+  const onLogout = () => {
+    dispatch({
+      type: 'AUTH_LOGOUT',
+    });
+  };
+
   return (
     <View style={styles.main}>
       <View style={styles.header}>
@@ -42,7 +50,7 @@ const Profile = ({ navigation }) => {
           </TouchableOpacity>
         </View>
         <View>
-          <Button color="primary">Log out</Button>
+          <Button color="primary" onPress={onLogout}>Log out</Button>
         </View>
       </View>
     </View>

@@ -6,13 +6,49 @@ import {
   SafeAreaView,
   TouchableOpacity
 } from 'react-native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import { useNavigation } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { authRegister } from '../redux/actions/register';
 
 const Register = () => {
   const navigation = useNavigation()
+
+  const [isEmpty, setIsEmpty] = useState();
+  const [name, setName] = useState();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+
+  const dispatch = useDispatch();
+
+  const { register } = useSelector(state => state);
+
+  useEffect(() => {
+    dispatch({
+      type: 'REGISTER_CLEAR',
+    });
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (register.isSuccess) {
+      navigation.navigate('Login');
+    }
+  }, [register]);
+
+  const onRegister = () => {
+    if (name && email && password) {
+      setIsEmpty(false);
+      dispatch(authRegister(name, email, password));
+      if (register.isSuccess) {
+        navigation.navigate('Login');
+      }
+    } else {
+      setIsEmpty(true);
+    }
+  };
   return (
     <View style={styles.container}>
       <ImageBackground source={require('../assets/auth-bg.png')} resizeMode="cover" style={styles.img}>
@@ -20,22 +56,26 @@ const Register = () => {
         <Text style={styles.text1}>SOME RIDE</Text>
         <SafeAreaView style={styles.form}>
           <Input
-            placeholder='Username'
-            keyboardType='alphanumeric'
+            placeholder='Name'
+            onChangeText={setName}
+            value={name}
           />
           <Input
-            placeholder='Mobile Phone'
-            keyboardType='numeric'
+            placeholder='Email'
+            onChangeText={setEmail}
+            value={email}
           />
           <Input
             placeholder='Password'
-            keyboardType='password'
+            onChangeText={setPassword}
+            value={password}
+            secureTextEntry={true}
           />
         </SafeAreaView>
         <View style={styles.btn}>
           <Button
             color='primary'
-            onPress={() => alert('Register Success')}
+            onPress={onRegister}
           >Sign Up</Button>
         </View>
         <View style={styles.loginWrapper}>
