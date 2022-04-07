@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { NavigationContainer } from '@react-navigation/native'
 import { NativeBaseProvider } from 'native-base'
@@ -11,6 +11,9 @@ import Store from './src/redux/store';
 import MainStackNav from './src/navigations/MainStack'
 import AuthStack from './src/navigations/AuthStackNav'
 
+import messaging from '@react-native-firebase/messaging'
+import pushNotification from 'react-native-push-notification'
+
 const Main = () => {
   const { auth } = useSelector(state => state);
   return (
@@ -22,9 +25,22 @@ const Main = () => {
   );
 };
 
+pushNotification.createChannel({
+  channelId: 'payment',
+  channelName: 'Notification Testing'
+})
+
 const { store, persistor } = Store();
 
 const App = () => {
+  const getToken = async () => {
+    const token = await messaging().getToken()
+    console.log(token);
+  }
+  useEffect(() => {
+    getToken()
+  }, [])
+
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor}>

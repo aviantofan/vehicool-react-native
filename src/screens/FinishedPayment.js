@@ -12,6 +12,7 @@ import Format from '../helper/format';
 import Rating from '../components/Rating';
 import Button from '../components/Button';
 import { useNavigation } from '@react-navigation/native';
+import PushNotification from 'react-native-push-notification'
 
 const FinishedPayment = () => {
   const vehicle = {
@@ -33,6 +34,13 @@ const FinishedPayment = () => {
     address: 'Jakarta, Indonesia',
     email: 'Sam.doe@mail.com',
     total: 400000,
+  }
+  const localNotif = () => {
+    PushNotification.localNotification({
+      channelId: 'payment',
+      title: 'Payment Success!',
+      message: 'Your vehicle is waiting for you!'
+    })
   }
   const navigation = useNavigation()
   return (
@@ -89,7 +97,7 @@ const FinishedPayment = () => {
           <Text py={'1'}>{customer.address}</Text>
         </Box>
         <Box my="5">
-          <Button color="primary">Total: {Format(customer.total)}</Button>
+          <Button color="primary" onPress={localNotif}>Total: {Format(customer.total)}</Button>
         </Box>
         <Box />
       </ScrollView>

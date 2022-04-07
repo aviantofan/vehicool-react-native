@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "324581915081",
+    "project_id": "vehicool-97ea8",
+    "storage_bucket": "vehicool-97ea8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:324581915081:android:82108c1fbde7fffe3dd018",
+        "android_client_info": {
+          "package_name": "com.vehicool"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "324581915081-qeaq5qkie94pf2irqcm9j3gnts0sasei.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnxbi7zMBfgNVd1qkElJcG2G6iNImUrjE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "324581915081-qeaq5qkie94pf2irqcm9j3gnts0sasei.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
