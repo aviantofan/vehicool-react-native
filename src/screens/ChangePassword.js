@@ -9,33 +9,36 @@ import React, { useState, useEffect } from 'react';
 import Button from '../components/Button';
 import Input from '../components/Input'
 import { useDispatch, useSelector } from 'react-redux';
-import { authForgot } from '../redux/actions/forgot';
 import { useNavigation } from '@react-navigation/native';
+import { changePass } from '../redux/actions/change';
 
-const ForgotPassword = () => {
+const ChangePassword = () => {
   const [email, setEmail] = useState();
+  const [code, setCode] = useState();
+  const [password, setPassword] = useState();
+  const [confirmPassword, setConfirmPassword] = useState();
   const [isError, setIsError] = useState();
   const navigation = useNavigation()
 
-  const { forgot } = useSelector(state => state);
+  const { change } = useSelector(state => state);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch({
-      type: 'FORGOT_CLEAR',
+      type: 'CHANGE_CLEAR',
     });
   }, [dispatch]);
 
   useEffect(() => {
-    if (forgot.isSuccess) {
-      navigation.navigate('ChangePassword');
+    if (change.isSuccess) {
+      navigation.navigate('Login');
     }
-  }, [forgot]);
+  }, [change]);
 
   const onSubmit = () => {
-    if (email) {
+    if (email && code && password && confirmPassword) {
       setIsError(false);
-      dispatch(authForgot(email));
+      dispatch(changePass(email, code, password, confirmPassword));
     } else {
       setIsError(true);
     }
@@ -53,12 +56,27 @@ const ForgotPassword = () => {
             onChangeText={setEmail}
             value={email}
           />
+          <Input
+            placeholder='Enter your OTP code'
+            onChangeText={setCode}
+            value={code}
+          />
+          <Input
+            placeholder='Input your new password'
+            onChangeText={setPassword}
+            value={password}
+          />
+          <Input
+            placeholder='Confirmation your new password'
+            onChangeText={setConfirmPassword}
+            value={confirmPassword}
+          />
         </SafeAreaView>
         <View style={styles.btn}>
           <Button
             color='primary'
             onPress={onSubmit}
-          >Send Code
+          >Change Password
           </Button>
         </View>
       </ImageBackground>
@@ -102,7 +120,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   form: {
-    marginTop: 150,
+    marginTop: 80,
   },
   forgot: {
     color: 'white',
@@ -115,4 +133,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default ForgotPassword
+export default ChangePassword
