@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -11,19 +11,36 @@ import {
 } from 'react-native';
 import Title from '../components/Title';
 import { useNavigation } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCars, getMotorbike, getBike } from '../redux/actions/category';
+import { getPopular } from '../redux/actions/popular';
+import Zonk from '../assets/photo-camera.png';
 
 const Home = () => {
+  const dispatch = useDispatch()
+
   const data = [
     { id: 1, image: require('../assets/1.png') },
     { id: 2, image: require('../assets/2.png') },
     { id: 3, image: require('../assets/3.png') },
     { id: 4, image: require('../assets/4.png') },
   ];
+
+  const { category } = useSelector(state => state);
+  const { popular } = useSelector(state => state);
+
+  useEffect(() => {
+    dispatch(getCars())
+    dispatch(getMotorbike())
+    dispatch(getBike())
+    dispatch(getPopular())
+  }, [dispatch]);
+
   const navigation = useNavigation()
   const renderItem = ({ item }) => {
     return (
-      <TouchableOpacity style={styles.coverImg} onPress={() => navigation.navigate('DetailVehicle')}>
-        <Image source={item.image} style={styles.listImg} />
+      <TouchableOpacity key={item.id} style={styles.coverImg} onPress={() => navigation.navigate('DetailVehicle')}>
+        <Image source={item.image ? { uri: `${item.image}`.replace(/localhost/g, '192.168.0.101') } : Zonk} style={styles.listImg} width={265} height={168} />
       </TouchableOpacity>
     );
   };
@@ -39,35 +56,35 @@ const Home = () => {
             child={'Recommended'} resChild={'View more'} onPress={() => navigation.navigate('Category')}
           />
           <FlatList
-            data={data}
+            data={popular?.popularVehicle}
             renderItem={renderItem}
             horizontal={true}
             showsHorizontalScrollIndicator={false}
           />
           <Title child={'Hot Deals'} resChild={'View more'} onPress={() => navigation.navigate('Category')} />
           <FlatList
-            data={data}
+            data={popular?.popularVehicle}
             renderItem={renderItem}
             horizontal={true}
             showsHorizontalScrollIndicator={false}
           />
           <Title child={'Cars'} resChild={'View more'} onPress={() => navigation.navigate('Category')} />
           <FlatList
-            data={data}
+            data={category?.cars}
             renderItem={renderItem}
             horizontal={true}
             showsHorizontalScrollIndicator={false}
           />
           <Title child={'Bike'} resChild={'View more'} onPress={() => navigation.navigate('Category')} />
           <FlatList
-            data={data}
+            data={category?.bike}
             renderItem={renderItem}
             horizontal={true}
             showsHorizontalScrollIndicator={false}
           />
           <Title child={'Motorbike'} resChild={'View more'} onPress={() => navigation.navigate('Category')} />
           <FlatList
-            data={data}
+            data={category?.motorbike}
             renderItem={renderItem}
             horizontal={true}
             showsHorizontalScrollIndicator={false}
