@@ -5,10 +5,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import auth from './auth';
 import register from './register';
 import forgot from './forgot'
+import change from './change';
 import counter from './counter';
 import category from './category';
 import popular from './popular';
-import change from './change'
+import detail from './detail.js'
 
 const persistAuth = {
   key: 'auth',
@@ -45,6 +46,11 @@ const persistPopular = {
   storage: AsyncStorage,
 }
 
+const persistDetail = {
+  key: 'detail',
+  storage: AsyncStorage,
+}
+
 const rootReducers = combineReducers({
   auth: persistReducer(persistAuth, auth),
   register: persistReducer(persistRegister, register),
@@ -53,6 +59,7 @@ const rootReducers = combineReducers({
   counter: persistReducer(persistCounter, counter),
   category: persistReducer(persistCategory, category),
   popular: persistReducer(persistPopular, popular),
+  detail: persistReducer(persistDetail, detail),
 });
 
 export default rootReducers;

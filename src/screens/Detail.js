@@ -1,5 +1,6 @@
 import { View, SafeAreaView, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
-import React, { useState } from 'react'
+import { skeleton } from 'native-base'
+import React, { useEffect, useState } from 'react'
 import detailImg from '../assets/detail.png'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
@@ -10,8 +11,10 @@ import Button from '../components/Button'
 import DatePicker from 'react-native-date-picker';
 import { Picker } from '@react-native-picker/picker';
 import moment from 'moment';
+import { getVehicleDetail } from '../redux/actions/detail';
+import { useDispatch, useSelector } from 'react-redux';
 
-const Detail = () => {
+const Detail = ({ route }) => {
   const [fav, setFav] = useState(false)
   const [count, setCount] = useState(0);
   const [open, setOpen] = useState(false);
@@ -19,6 +22,11 @@ const Detail = () => {
   const [isStart, setIsStart] = useState(false);
   const [endDate, setEndDate] = useState();
   const navigation = useNavigation()
+  const dispatch = useDispatch()
+  const { detail } = useSelector(state => state);
+  const { id: idVehicle } = route.params;
+
+  // console.log(route)
 
   const increment = () => {
     setCount(count + 1);
@@ -27,12 +35,16 @@ const Detail = () => {
     if (count > 0) {
       setCount(count - 1);
     }
-  };
+  }
+
+  useEffect(() => {
+    dispatch(getVehicleDetail(idVehicle));
+  }, [dispatch, idVehicle]);
   return (
     <View style={styles.wrapper}>
       <View style={styles.barWrapper}>
         <View style={styles.imgWrapper}>
-          <Image source={detailImg} style={styles.img} />
+          <Image source={{ uri: `${detail.vehicle?.image}`.replace(/localhost/g, '192.168.0.101') }} style={styles.img} />
         </View>
         <View style={styles.barItem}>
           <View style={styles.barSectionLeft}>
@@ -52,22 +64,32 @@ const Detail = () => {
       </View>
       <View style={styles.descWrapper}>
         <View style={styles.desc}>
-          <Text style={styles.descVehicle}>Vespa Matic </Text>
-          <Text style={styles.descVehicle}>Rp. 120.000/day </Text>
+          <Text style={styles.descVehicle}>{detail.vehicle?.name} </Text>
+          <Text style={styles.descVehicle}>Rp. {detail.vehicle?.price}/day </Text>
         </View>
         <View style={styles.chatIcon}>
           <Ionicons name='chatbubble-outline' size={40} color='#5C527F' />
         </View>
       </View>
       <View style={styles.detailV}>
-        <Text style={styles.detailVehicle}>Max for 2 person</Text>
-        <Text style={styles.detailVehicle}>No Prepayment</Text>
-        <Text style={styles.detailVehicleSuccess}>Available</Text>
+        <Text style={styles.detailVehicle}>Max for {detail.vehicle?.capacity} person</Text>
+        {detail.vehicle?.isPrepay === 1 &&
+          <Text style={styles.detailVehicle}>Prepayment</Text>
+        }
+        {detail.vehicle?.isPrepay === 0 &&
+          <Text style={styles.detailVehicle}>No Prepayment</Text>
+        }
+        {detail.vehicle?.isAvailable === 1 &&
+          <Text style={styles.detailVehicleSuccess}>Available</Text>
+        }
+        {detail.vehicle?.isAvailable === 0 &&
+          <Text style={styles.detailVehicleWarning}>Not Available</Text>
+        }
       </View>
       <View></View>
       <View style={styles.locWrapper}>
         <Icon style={styles.loc} name='map-marker' size={30} color='#3E2C41' />
-        <Text style={styles.locText}>Jalan Maliboboro, No. 21, Yogyakarta</Text>
+        <Text style={styles.locText}>{detail.vehicle?.loc}</Text>
       </View>
       <View style={styles.direction}>
         <MaterialIcon style={styles.direct} name='directions-walk' size={30} color='#3E2C41' />
@@ -153,6 +175,7 @@ const styles = StyleSheet.create({
   },
   img: {
     width: '100%',
+    height: 299
   },
   barWrapper: {
     position: 'relative'
@@ -208,6 +231,11 @@ const styles = StyleSheet.create({
   },
   detailVehicleSuccess: {
     color: 'green',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  detailVehicleWarning: {
+    color: 'red',
     fontSize: 16,
     fontWeight: 'bold',
   },

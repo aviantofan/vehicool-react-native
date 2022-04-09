@@ -39,7 +39,7 @@ const Home = () => {
   const navigation = useNavigation()
   const renderItem = ({ item }) => {
     return (
-      <TouchableOpacity key={item.id} style={styles.coverImg} onPress={() => navigation.navigate('DetailVehicle')}>
+      <TouchableOpacity key={item.id} style={styles.coverImg} onPress={() => navigation.navigate('DetailVehicle', { id: item.id })}>
         <Image source={item.image ? { uri: `${item.image}`.replace(/localhost/g, '192.168.0.101') } : Zonk} style={styles.listImg} width={265} height={168} />
       </TouchableOpacity>
     );
