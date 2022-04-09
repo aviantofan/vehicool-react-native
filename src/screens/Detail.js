@@ -13,7 +13,7 @@ import moment from 'moment';
 
 const Detail = () => {
   const [fav, setFav] = useState(false)
-  const [count, setCount] = useState(1);
+  const [count, setCount] = useState(0);
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState(new Date());
   const [isStart, setIsStart] = useState(false);
@@ -21,12 +21,10 @@ const Detail = () => {
   const navigation = useNavigation()
 
   const increment = () => {
-    if (count < 0) {
-      setCount(count + 1);
-    }
+    setCount(count + 1);
   };
   const decrement = () => {
-    if (count > 1) {
+    if (count > 0) {
       setCount(count - 1);
     }
   };
