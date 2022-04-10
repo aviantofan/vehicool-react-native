@@ -11,13 +11,13 @@ import Store from './src/redux/store';
 import MainStackNav from './src/navigations/MainStack'
 import AuthStack from './src/navigations/AuthStackNav'
 
-import messaging from '@react-native-firebase/messaging'
 import pushNotification from 'react-native-push-notification'
+import RNBootSplash from "react-native-bootsplash";
 
 const Main = () => {
   const { auth } = useSelector(state => state);
   return (
-    <NavigationContainer>
+    <NavigationContainer onReady={() => RNBootSplash.hide()}>
       <NativeBaseProvider>
         {auth.token ? <MainStackNav /> : <AuthStack />}
       </NativeBaseProvider>
@@ -38,13 +38,6 @@ pushNotification.createChannel({
 const { store, persistor } = Store();
 
 const App = () => {
-  const getToken = async () => {
-    const token = await messaging().getToken()
-    console.log(token);
-  }
-  useEffect(() => {
-    getToken()
-  }, [])
 
   return (
     <Provider store={store}>
