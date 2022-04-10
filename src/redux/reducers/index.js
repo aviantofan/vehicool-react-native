@@ -9,7 +9,8 @@ import change from './change';
 import counter from './counter';
 import category from './category';
 import popular from './popular';
-import detail from './detail.js'
+import detail from './detail.js';
+import transaction from './transaction'
 
 const persistAuth = {
   key: 'auth',
@@ -51,6 +52,11 @@ const persistDetail = {
   storage: AsyncStorage,
 }
 
+const persistTransaction = {
+  key: 'transaction',
+  storage: AsyncStorage,
+}
+
 const rootReducers = combineReducers({
   auth: persistReducer(persistAuth, auth),
   register: persistReducer(persistRegister, register),
@@ -60,6 +66,7 @@ const rootReducers = combineReducers({
   category: persistReducer(persistCategory, category),
   popular: persistReducer(persistPopular, popular),
   detail: persistReducer(persistDetail, detail),
+  transaction: persistReducer(persistTransaction, transaction)
 });
 
 export default rootReducers;
