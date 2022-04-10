@@ -2,6 +2,9 @@ import http from '../../helper/http';
 
 export const getVehicleDetail = id => {
   return async dispatch => {
+    dispatch({
+      type: 'VEHICLES_CLEAR'
+    })
     try {
       const { data } = await http().get(`/vehicles/${id}`);
       dispatch({

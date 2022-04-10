@@ -9,8 +9,10 @@ const button = (state = buttonsState, action) => {
       return { ...state };
     }
     case 'COUNTER_DECREMENT': {
-      state.value = state.value - 1;
-      return { ...state };
+      if (state.value > 0) {
+        state.value = state.value - 1;
+        return { ...state };
+      }
     }
     default: {
       return { ...state };

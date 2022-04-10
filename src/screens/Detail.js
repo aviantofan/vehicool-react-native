@@ -13,6 +13,7 @@ import { Picker } from '@react-native-picker/picker';
 import moment from 'moment';
 import { getVehicleDetail } from '../redux/actions/detail';
 import { useDispatch, useSelector } from 'react-redux';
+import { increment, decrement } from '../redux/actions/counter'
 
 const Detail = ({ route }) => {
   const [fav, setFav] = useState(false)
@@ -25,16 +26,13 @@ const Detail = ({ route }) => {
   const dispatch = useDispatch()
   const { detail } = useSelector(state => state);
   const { id: idVehicle } = route.params;
+  const counter = useSelector(state => state.counter)
 
-  // console.log(route)
-
-  const increment = () => {
-    setCount(count + 1);
+  const onincrement = () => {
+    dispatch(increment())
   };
-  const decrement = () => {
-    if (count > 0) {
-      setCount(count - 1);
-    }
+  const ondecrement = () => {
+    dispatch(decrement())
   }
 
   useEffect(() => {
@@ -98,15 +96,15 @@ const Detail = ({ route }) => {
       <View style={styles.qtyWrapper}>
         <Text style={styles.selectQty}>Select Bikes</Text>
         <View style={styles.counters}>
-          <TouchableOpacity style={styles.counter} onPress={increment}>
+          <TouchableOpacity style={styles.counter} onPress={onincrement}>
             <Text style={{ alignSelf: 'center', fontSize: 20, fontWeight: 'bold' }}>
               +
             </Text>
           </TouchableOpacity>
           <Text style={{ color: 'black', marginLeft: 20, marginRight: 20, alignSelf: 'center', fontSize: 15, fontWeight: 'bold' }}>
-            {count}
+            {counter.value}
           </Text>
-          <TouchableOpacity style={styles.counter} onPress={decrement}>
+          <TouchableOpacity style={styles.counter} onPress={ondecrement}>
             <Text style={{ alignSelf: 'center', fontSize: 20, fontWeight: 'bold' }}>
               -
             </Text>

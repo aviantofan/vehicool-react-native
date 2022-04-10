@@ -1,6 +1,7 @@
 const initialState = {
   message: null,
   isError: false,
+  errMsg: null,
   vehicle: [],
 };
 
@@ -12,6 +13,7 @@ const detail = (state = initialState, action) => {
       return { ...state };
     }
     case 'VEHICLES_CLEAR': {
+      state.vehicle = []
       state.isError = false;
       state.errMsg = null;
       return { ...state };
