@@ -1,11 +1,13 @@
 import {
   View,
   Text,
-  ImageBackground,
+  Image,
   StyleSheet,
   SafeAreaView,
-  TouchableOpacity
+  TouchableOpacity,
+  ScrollView
 } from 'react-native';
+import { Box } from 'native-base';
 import React, { useState, useEffect } from 'react';
 import Button from '../components/Button';
 import Input from '../components/Input'
@@ -36,52 +38,67 @@ const Login = () => {
 
   const navigation = useNavigation()
   return (
-    <View style={styles.container}>
-      <ImageBackground source={require('../assets/auth-bg.png')} resizeMode="cover" style={styles.img}>
-        <Text style={styles.text}>LET`S EXPLORE</Text>
-        <Text style={styles.text1}>THE WORLDS</Text>
-        <SafeAreaView style={styles.form}>
-          <Input
-            placeholder='Email'
-            onChangeText={setEmail}
-            value={email}
-          />
-          <Input
-            placeholder='Password'
-            onChangeText={setPassword}
-            value={password}
-          />
-          <TouchableOpacity>
-            <Text style={styles.forgot} onPress={() => {
-              navigation.navigate('ForgotPassword')
-            }}>Forgot Password ?</Text>
-          </TouchableOpacity>
-        </SafeAreaView>
-        <View style={styles.btn}>
-          <Button
-            color='primary'
-            onPress={onLogin}
-          >Login</Button>
-        </View>
-        <View style={styles.signupWrapper}>
-          <Text style={styles.signup}>Don`t have account? </Text>
-          <TouchableOpacity>
-            <Text style={styles.signup} onPress={() => {
-              navigation.navigate('Register')
-            }}> Sign up now</Text>
-          </TouchableOpacity>
-        </View>
-      </ImageBackground>
-    </View>
+    <ScrollView style={styles.container}>
+      <Box style={styles.main}>
+        <Image
+          source={require('../assets/auth-bg.png')}
+          resizeMode="cover"
+          style={styles.img}
+        />
+        <Box style={styles.forms}>
+          <Text style={styles.text}>LET`S EXPLORE</Text>
+          <Text style={styles.text1}>THE WORLDS</Text>
+          <SafeAreaView style={styles.form}>
+            <Input
+              placeholder='Email'
+              onChangeText={setEmail}
+              value={email}
+            />
+            <Input
+              placeholder='Password'
+              onChangeText={setPassword}
+              value={password}
+            />
+            <TouchableOpacity>
+              <Text style={styles.forgot} onPress={() => {
+                navigation.navigate('ForgotPassword')
+              }}>Forgot Password ?</Text>
+            </TouchableOpacity>
+          </SafeAreaView>
+          <View style={styles.btn}>
+            <Button
+              color='primary'
+              onPress={onLogin}
+            >Login</Button>
+          </View>
+          <View style={styles.signupWrapper}>
+            <Text style={styles.signup}>Don`t have account? </Text>
+            <TouchableOpacity>
+              <Text style={styles.signup} onPress={() => {
+                navigation.navigate('Register')
+              }}> Sign up now</Text>
+            </TouchableOpacity>
+          </View>
+        </Box>
+      </Box>
+    </ScrollView>
   )
 }
 
 const styles = StyleSheet.create({
+  main: {
+    position: 'relative',
+  },
+  forms: {
+    position: 'absolute',
+    width: '100%'
+  },
   container: {
     flex: 1
   },
   img: {
-    flex: 1,
+    width: 502,
+    height: 855,
   },
   text: {
     color: 'white',
@@ -112,7 +129,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   form: {
-    marginTop: 200,
+    marginTop: 130,
   },
   forgot: {
     color: 'white',

@@ -1,10 +1,13 @@
 import {
   View,
   Text,
-  ImageBackground,
+  Image,
   StyleSheet,
   SafeAreaView,
+  ScrollView
 } from 'react-native';
+
+import { Box } from 'native-base';
 import React, { useState, useEffect } from 'react';
 import Button from '../components/Button';
 import Input from '../components/Input'
@@ -45,51 +48,66 @@ const ChangePassword = () => {
   }
 
   return (
-    <View style={styles.container}>
-      <ImageBackground source={require('../assets/auth-bg.png')} resizeMode="cover" style={styles.img}>
-        <Text style={styles.text}>THAT`S OKAY, WE</Text>
-        <Text style={styles.text1}>GOT YOUR BACK</Text>
-        <SafeAreaView style={styles.form}>
-          <Text style={styles.forgot}>Enter your email to get reset password code</Text>
-          <Input
-            placeholder='Enter your email address'
-            onChangeText={setEmail}
-            value={email}
-          />
-          <Input
-            placeholder='Enter your OTP code'
-            onChangeText={setCode}
-            value={code}
-          />
-          <Input
-            placeholder='Input your new password'
-            onChangeText={setPassword}
-            value={password}
-          />
-          <Input
-            placeholder='Confirmation your new password'
-            onChangeText={setConfirmPassword}
-            value={confirmPassword}
-          />
-        </SafeAreaView>
-        <View style={styles.btn}>
-          <Button
-            color='primary'
-            onPress={onSubmit}
-          >Change Password
-          </Button>
-        </View>
-      </ImageBackground>
-    </View>
+    <ScrollView style={styles.container}>
+      <Box style={styles.main}>
+        <Image
+          source={require('../assets/auth-bg.png')}
+          resizeMode="cover"
+          style={styles.img}
+        />
+        <Box style={styles.forms}>
+          <Text style={styles.text}>THAT`S OKAY, WE</Text>
+          <Text style={styles.text1}>GOT YOUR BACK</Text>
+          <SafeAreaView style={styles.form}>
+            <Text style={styles.forgot}>Enter your email to get reset password code</Text>
+            <Input
+              placeholder='Enter your email address'
+              onChangeText={setEmail}
+              value={email}
+            />
+            <Input
+              placeholder='Enter your OTP code'
+              onChangeText={setCode}
+              value={code}
+            />
+            <Input
+              placeholder='Input your new password'
+              onChangeText={setPassword}
+              value={password}
+            />
+            <Input
+              placeholder='Confirmation your new password'
+              onChangeText={setConfirmPassword}
+              value={confirmPassword}
+            />
+          </SafeAreaView>
+          <View style={styles.btn}>
+            <Button
+              color='primary'
+              onPress={onSubmit}
+            >Change Password
+            </Button>
+          </View>
+        </Box>
+      </Box>
+    </ScrollView>
   )
 }
 
 const styles = StyleSheet.create({
+  main: {
+    position: 'relative',
+  },
+  forms: {
+    position: 'absolute',
+    width: '100%',
+  },
   container: {
     flex: 1
   },
   img: {
-    flex: 1,
+    width: 502,
+    height: 855,
   },
   text: {
     color: 'white',
@@ -120,7 +138,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   form: {
-    marginTop: 80,
+    marginTop: 50,
   },
   forgot: {
     color: 'white',
