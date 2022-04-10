@@ -28,7 +28,6 @@ const PaymentStepThree = () => {
   }
 
   const price = dataOrder.price * dataOrder.days * dataOrder.qty
-  console.log(price)
 
   const inputData = {
     userId: `${transaction.dataTransaction.userId}`,

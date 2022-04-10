@@ -19,7 +19,6 @@ export const inputTransaction = (token, dataInput) => {
   return async dispatch => {
     try {
       const { data } = await http(token).post('/histories', qs.stringify(dataInput))
-      console.log(data)
       dispatch({
         type: 'INPUT_TRANSACTION',
         payload: data.results
