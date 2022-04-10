@@ -27,7 +27,12 @@ const Main = () => {
 
 pushNotification.createChannel({
   channelId: 'payment',
-  channelName: 'Notification Testing'
+  channelName: 'Notification Transaction'
+})
+
+pushNotification.createChannel({
+  channelId: 'updateProfile',
+  channelName: 'Notification Auth'
 })
 
 const { store, persistor } = Store();
