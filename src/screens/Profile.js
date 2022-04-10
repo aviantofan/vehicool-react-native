@@ -1,17 +1,24 @@
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Image, Text } from 'native-base';
 import FaIcon from 'react-native-vector-icons/FontAwesome';
 import Button from '../components/Button';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { dataUser } from '../redux/actions/auth';
 
 const Profile = ({ navigation }) => {
+
   const dispatch = useDispatch();
+  const { auth } = useSelector(state => state);
   const onLogout = () => {
     dispatch({
       type: 'AUTH_LOGOUT',
     });
   };
+
+  useEffect(() => {
+    dispatch(dataUser(auth.token));
+  }, [dispatch, auth.token]);
 
   return (
     <View style={styles.main}>
@@ -24,7 +31,7 @@ const Profile = ({ navigation }) => {
           alt="Profile Pic"
         />
         <Text bold fontSize="2xl" style={styles.name}>
-          Samantha Doe
+          {auth.userData?.name}
         </Text>
       </View>
       <View style={styles.container}>

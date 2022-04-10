@@ -28,3 +28,37 @@ export const authLogin = (email, password) => {
     }
   };
 };
+
+export const dataUser = (token) => {
+  return async dispatch => {
+    try {
+      const { data } = await http(token).get('/profile')
+      dispatch({
+        type: 'GET_PROFILE',
+        payload: data.result
+      })
+    } catch (err) {
+      payload = err.message
+    }
+  }
+}
+
+export const updateData = (token, userData) => {
+  return async dispatch => {
+    try {
+      const dataUpdate = {
+        birthdate: userData.birthdate,
+        phone: userData.phone,
+        address: userData.address,
+        gender: userData.gender
+      }
+      const { data } = await http(token).patch(`/users/${id}`, qs.stringify(dataUpdate))
+      dispatch({
+        type: 'UPDATE_PROFILE',
+        payload: data.results
+      })
+    } catch (err) {
+      payload = err.message
+    }
+  }
+}

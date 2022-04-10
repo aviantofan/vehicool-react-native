@@ -5,20 +5,42 @@ import {
   StyleSheet,
   ScrollView,
 } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Text, Image, Center, Radio, Stack } from 'native-base';
 import EntypoIcon from 'react-native-vector-icons/Entypo';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Button from '../components/Button';
+import { useNavigation } from '@react-navigation/native';
+import PushNotification from 'react-native-push-notification'
+import { useDispatch, useSelector } from 'react-redux';
+import { dataUser, updateData } from '../redux/actions/auth';
 
 const UpdateProfile = ({ navigation: { goBack } }) => {
+
+  const dispatch = useDispatch();
+  const { auth } = useSelector(state => state);
+
+  useEffect(() => {
+    dispatch(dataUser(auth.token));
+  }, [dispatch, auth.token]);
+
   const dataInput = [
-    { label: 'Name', value: 'Samantha Doe' },
-    { label: 'Email Address', value: 'samanthadoe17@gmail.com', type: 'email-address' },
-    { label: 'Phone Number', value: '+62 81348287878', type: 'name-phone-pad' },
-    { label: 'Date of Birth', value: 'December 21th 1998' },
-    { label: 'Delivery Address', value: 'Iskandar Street Block A Number 102' },
+    { label: 'Name', value: `${auth.userData?.name}` },
+    { label: 'Email Address', value: `${auth.userData?.email}` },
+    { label: 'Phone Number', value: `${auth.userData?.phone}` },
+    { label: 'Date of Birth', value: `${auth.userData?.birthdate}` },
+    { label: 'Delivery Address', value: `${auth.userData?.address}` },
   ];
+
+  const navigation = useNavigation()
+  const update = () => {
+    PushNotification.localNotification({
+      channelId: 'updateProfile',
+      title: 'Update Profile Success!',
+      message: 'You can see your personal information'
+    })
+    navigation.navigate('Profile')
+  }
 
   return (
     <View>
@@ -78,7 +100,7 @@ const UpdateProfile = ({ navigation: { goBack } }) => {
             </View>
           ))}
           <View style={styles.button}>
-            <Button color="primary">Save change</Button>
+            <Button color="primary" onPress={update}>Save change</Button>
           </View>
         </View>
       </ScrollView>

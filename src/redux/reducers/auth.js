@@ -1,5 +1,7 @@
 const initialState = {
   token: null,
+  userData: null,
+  message: null,
   isError: false,
   errMessage: '',
 };
@@ -12,6 +14,17 @@ const auth = (state = initialState, action) => {
     }
     case 'AUTH_LOGOUT': {
       return { ...initialState };
+    }
+    case 'GET_PROFILE': {
+      state.userData = action.payload
+      return { ...state };
+    }
+    case 'UPDATE_PROFILE': {
+      state.userData = action.payload;
+      state.message = action.payload.message;
+      state.errMsg = null;
+      state.isError = false;
+      return { ...state };
     }
     case 'AUTH_ERROR': {
       state.token = null;
