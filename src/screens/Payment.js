@@ -1,5 +1,5 @@
 import { TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import EntypoIcon from 'react-native-vector-icons/Entypo';
 import { Box, Text } from 'native-base';
 import Stepper from '../components/Step';
@@ -7,8 +7,14 @@ import InputPayment from '../components/InputNew';
 import { Picker } from '@react-native-picker/picker';
 import Button from '../components/Button';
 import { useNavigation } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
+// import { dataUser, updateData } from '../redux/actions/auth'
 
 const Payment = () => {
+
+  const dispatch = useDispatch();
+  const { auth } = useSelector(state => state);
+
   const [selectPayment, setSelectPayment] = useState();
   const [isSelect, setIsSelect] = useState(false);
   const navigation = useNavigation()
@@ -26,25 +32,23 @@ const Payment = () => {
           <Stepper currentlyActive={1} />
         </Box>
         <Box py="2">
-          <InputPayment placeholder="ID card Number" type="number-pad" />
+          <InputPayment placeholder="ID card Number" value={`${auth.userData?.id}`} type="number-pad" />
         </Box>
         <Box py="2">
-          <InputPayment placeholder="Name" />
-        </Box>
-        <Box py="2">
-          <InputPayment placeholder="Last Name" />
+          <InputPayment placeholder="Name" value={`${auth.userData?.name}`} />
         </Box>
         <Box py="2">
           <InputPayment
             placeholder="Mobile phone (must be active)"
             type="phone-pad"
+            value={`${auth.userData?.phone}`}
           />
         </Box>
         <Box py="2">
-          <InputPayment placeholder="Email address" type="email-address" />
+          <InputPayment placeholder="Email address" type="email-address" value={`${auth.userData?.email}`} />
         </Box>
         <Box py="2">
-          <InputPayment placeholder="Location (home, office, set)" />
+          <InputPayment placeholder="Location (home, office, set)" value={`${auth.userData?.address}`} />
         </Box>
         <Box py="2">
           <Picker
@@ -67,12 +71,12 @@ const Payment = () => {
                 key={index}
                 label={data}
                 value={data}
-                color="black"
+                color="gray"
               />
             ))}
           </Picker>
         </Box>
-        <Box py={'10'}>
+        <Box pt={'100'}>
           <Button
             color="secondary"
             onPress={() => navigation.navigate('PaymentStepTwo')}>
@@ -92,7 +96,7 @@ const styles = StyleSheet.create({
     height: 60,
     // color: 'gray',
     backgroundColor: 'rgba(178, 190, 195,0.3)',
-    borderRadius: 20,
+    borderRadius: 40,
     fontSize: 20,
     paddingHorizontal: 15,
   },

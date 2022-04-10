@@ -13,20 +13,34 @@ import Rating from '../components/Rating';
 import Format from '../helper/format';
 import Button from '../components/Button';
 import { useNavigation } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
+import { getData } from '../redux/actions/transaction';
 
 const PaymentStepTwo = () => {
+  const { detail } = useSelector(state => state);
+  const { auth } = useSelector(state => state);
+  const counter = useSelector(state => state.counter)
+  const dispatch = useDispatch()
+
   const vehicle = {
-    name: 'Vespa',
+    vehicleId: `${detail.vehicle?.id}`,
+    userId: `${auth.userData?.id}`,
+    name: `${detail.vehicle?.name}`,
     seet: 2,
     stock: 5,
-    price: 50000,
-    image: require('../assets/vespa.png'),
+    prepayment: `${detail.vehicle?.price}`,
+    image: { uri: `${detail.vehicle?.image}`.replace(/localhost/g, '192.168.0.101') },
     rating: 4,
-    qty: 2,
-    days: 4,
-    startDate: 'Jan 18 2022',
-    endDate: 'Jan 22 2022',
+    qty: `${counter.value}`,
+    days: 3,
+    rentStartDate: '2022-02-02',
+    rentEndDate: '2022-02-05',
   };
+
+  const getCode = () => {
+    dispatch(getData(vehicle))
+    navigation.navigate('PaymentStepThree')
+  }
   const navigation = useNavigation()
 
   return (
@@ -60,13 +74,13 @@ const PaymentStepTwo = () => {
             {vehicle.days} {vehicle.days === 1 ? 'day' : 'days'}
           </Text>
           <Text py={'1'}>
-            {vehicle.startDate} to {vehicle.endDate}
+            {vehicle.rentStartDate} to {vehicle.rentEndDate}
           </Text>
         </Box>
         <View style={styles.borderBtm} />
         <Box style={{ marginVertical: 30 }} flexDirection={'row'} justifyContent="space-between">
           <Text fontSize={'3xl'} bold>
-            {Format(vehicle.price * vehicle.days * vehicle.qty)}
+            {Format(vehicle.prepayment * vehicle.days * counter.value)}
           </Text>
           <TouchableOpacity>
             <EntypoIcon name="info-with-circle" size={40} color="#d2dae2" />
@@ -75,7 +89,7 @@ const PaymentStepTwo = () => {
         <Box style={{ marginBottom: 25 }}>
           <Button
             color="secondary"
-            onPress={() => navigation.navigate('PaymentStepThree')}>
+            onPress={getCode}>
             Get Payment Code
           </Button>
         </Box>

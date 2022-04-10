@@ -12,35 +12,34 @@ import Format from '../helper/format';
 import Rating from '../components/Rating';
 import Button from '../components/Button';
 import { useNavigation } from '@react-navigation/native';
-import PushNotification from 'react-native-push-notification'
+import { useDispatch, useSelector } from 'react-redux';
 
 const FinishedPayment = () => {
+  const { transaction } = useSelector(state => state)
+  const { auth } = useSelector(state => state)
+  const { detail } = useSelector(state => state);
+
   const vehicle = {
-    name: 'Vespa',
-    seet: 2,
-    stock: 3,
-    price: 50000,
-    image: require('../assets/vespa.png'),
-    rating: 4,
-    qty: 2,
-    days: 4,
-    startDate: 'Jan 18 2022',
-    endDate: 'Jan 22 2022',
+    name: `${transaction.dataTransaction.name}`,
+    seet: `${transaction.dataTransaction.seet}`,
+    price: `${transaction.dataTransaction.prepayment}`,
+    image: { uri: `${detail.vehicle?.image}`.replace(/localhost/g, '192.168.0.101') },
+    rating: `${transaction.dataTransaction.rating}`,
+    qty: `${transaction.dataTransaction.qty}`,
+    days: `${transaction.dataTransaction.days}`,
+    startDate: `${transaction.dataTransaction.rentStartDate}`,
+    endDate: `${transaction.dataTransaction.rentEndDate}`,
   }
+
+  const price = vehicle.price * vehicle.days * vehicle.qty
+
   const customer = {
-    id: 13454,
-    name: 'Samantha Doe',
-    phone: '089234543',
-    address: 'Jakarta, Indonesia',
-    email: 'Sam.doe@mail.com',
-    total: 400000,
-  }
-  const localNotif = () => {
-    PushNotification.localNotification({
-      channelId: 'payment',
-      title: 'Payment Success!',
-      message: 'Your vehicle is waiting for you!'
-    })
+    id: `${auth.userData?.id}`,
+    name: `${auth.userData?.name}`,
+    phone: `${auth.userData?.phone}`,
+    address: `${auth.userData?.address}`,
+    email: `${auth.userData?.email}`,
+    total: price
   }
   const navigation = useNavigation()
   return (
@@ -97,7 +96,7 @@ const FinishedPayment = () => {
           <Text py={'1'}>{customer.address}</Text>
         </Box>
         <Box my="5">
-          <Button color="primary" onPress={localNotif}>Total: {Format(customer.total)}</Button>
+          <Button color="primary">Total: {Format(customer.total)}</Button>
         </Box>
         <Box />
       </ScrollView>

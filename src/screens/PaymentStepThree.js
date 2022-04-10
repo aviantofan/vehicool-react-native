@@ -6,16 +6,46 @@ import Step from '../components/Step';
 import Button from '../components/Button';
 import Format from '../helper/format';
 import { useNavigation } from '@react-navigation/native';
+import PushNotification from 'react-native-push-notification'
+import { useDispatch, useSelector } from 'react-redux';
+import { inputTransaction } from '../redux/actions/transaction';
 
 const PaymentStepThree = () => {
+
+  const { transaction } = useSelector(state => state)
+  const { auth } = useSelector(state => state)
+  const { detail } = useSelector(state => state)
+  const dispatch = useDispatch()
+
   const dataOrder = {
-    qty: 2,
-    name: 'Vespa',
+    qty: `${transaction.dataTransaction.qty}`,
+    name: `${transaction.dataTransaction.name}`,
     perpayment: 'no tax',
-    days: 4,
-    startDate: 'Jan 18 2022',
-    endDate: 'Jan 22 2022',
-    price: 50000,
+    days: `${transaction.dataTransaction.days}`,
+    rentStartDate: '2022-02-02',
+    rentEndDate: '2022-02-05',
+    price: `${transaction.dataTransaction.prepayment}`,
+  }
+
+  const price = dataOrder.price * dataOrder.days * dataOrder.qty
+  console.log(price)
+
+  const inputData = {
+    userId: `${transaction.dataTransaction.userId}`,
+    vehicleId: `${transaction.dataTransaction.vehicleId}`,
+    rentStartDate: `${transaction.dataTransaction.rentStartDate}`,
+    rentEndDate: `${transaction.dataTransaction.rentEndDate}`,
+    prepayment: price,
+    isReturned: 1
+  }
+  const paymentFinish = () => {
+    dispatch(inputTransaction(auth.token, inputData))
+    PushNotification.localNotification({
+      channelId: 'payment',
+      title: 'Payment Success!',
+      message: 'Your vehicle is waiting for you!'
+    })
+    navigation.navigate('FinishedPayment')
   }
   const navigation = useNavigation()
   return (
@@ -52,7 +82,7 @@ const PaymentStepThree = () => {
             0290-9023-342-9
           </Text>
           <Text fontSize="md" color="gray.500" bold>
-            Vespa Rental Jogja
+            {detail.vehicle?.name} {detail.vehicle?.loc}
           </Text>
           <Box py="5" style={styles.borderBtm} />
           <Text fontSize={'md'} pt="5" bold>
@@ -61,7 +91,7 @@ const PaymentStepThree = () => {
               VSP90322
             </Text>
           </Text>
-          <Text>Use your booking code to pick your vespa</Text>
+          <Text>Use your booking code to pick your {detail.vehicle?.name}</Text>
           <Box style={{ marginBottom: 15 }}>
             <Button fontSize={15} color={'primary'}>
               Copy payment & Booking Code
@@ -79,7 +109,7 @@ const PaymentStepThree = () => {
           </Text>
           <Text fontSize={'lg'}>Order Details:</Text>
           <Text fontSize={'lg'}>
-            {dataOrder.startDate} to {dataOrder.endDate}
+            {dataOrder.rentStartDate} to {dataOrder.rentEndDate}
           </Text>
           <Box py="5" style={styles.borderBtm} />
         </Box>
@@ -93,7 +123,7 @@ const PaymentStepThree = () => {
         </Box>
         <Button
           color="secondary"
-          onPress={() => navigation.navigate('FinishedPayment')}>
+          onPress={paymentFinish}>
           Finish Payment
         </Button>
         <Box mb={'20'} />
