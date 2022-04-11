@@ -35,6 +35,11 @@ pushNotification.createChannel({
   channelName: 'Notification Auth'
 })
 
+pushNotification.createChannel({
+  channelId: 'addingVehicle',
+  channelName: 'Notification Vehicle'
+})
+
 const { store, persistor } = Store();
 
 const App = () => {
