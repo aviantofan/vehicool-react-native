@@ -20,14 +20,13 @@ const auth = (state = initialState, action) => {
       return { ...state }
     }
     case 'UPDATE_PROFILE': {
-      state.userData = action.payload.results
       state.message = action.payload.message
       state.errMsg = null
       state.isError = false
       return { ...state }
     }
     case 'AUTH_ERROR': {
-      // state.token = null
+      state.token = null
       state.isError = true
       state.errMessage = action.payload
       return { ...state }
