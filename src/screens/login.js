@@ -58,6 +58,7 @@ const Login = () => {
               placeholder='Password'
               onChangeText={setPassword}
               value={password}
+              secureTextEntry={true}
             />
             <TouchableOpacity>
               <Text style={styles.forgot} onPress={() => {
