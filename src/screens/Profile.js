@@ -24,15 +24,20 @@ const Profile = ({ navigation }) => {
     <View style={styles.main}>
       <View style={styles.header}>
         <Image
-          size={69}
+          size={99}
           resizeMode={'contain'}
-          borderRadius={200}
-          source={require('../assets/ava.png')}
+          borderRadius={'full'}
+          source={{ uri: `http:/192.168.0.101:5000/${auth.userData?.image}` }}
           alt="Profile Pic"
         />
-        <Text bold fontSize="2xl" style={styles.name}>
-          {auth.userData?.name}
-        </Text>
+        <View style={styles.head}>
+          <Text bold fontSize="2xl" style={styles.name}>
+            {auth.userData?.name}
+          </Text>
+          <Text bold style={styles.name}>
+            {auth.userData?.email}
+          </Text>
+        </View>
       </View>
       <View style={styles.container}>
         <View>

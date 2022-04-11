@@ -5,7 +5,7 @@ import {
   StyleSheet,
   ScrollView,
 } from 'react-native';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, Image, Center, Radio, Stack } from 'native-base';
 import EntypoIcon from 'react-native-vector-icons/Entypo';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -14,26 +14,40 @@ import { useNavigation } from '@react-navigation/native';
 import PushNotification from 'react-native-push-notification'
 import { useDispatch, useSelector } from 'react-redux';
 import { dataUser, updateData } from '../redux/actions/auth';
+import { launchImageLibrary } from 'react-native-image-picker';
 
 const UpdateProfile = ({ navigation: { goBack } }) => {
 
   const dispatch = useDispatch();
   const { auth } = useSelector(state => state);
 
+  const [gender, setGender] = useState(`${auth.userData?.gender}`);
+  const [phone, setPhone] = useState(`${auth.userData?.phone}`);
+  const [birthdate, setBirthdate] = useState(`${auth.userData?.birthdate}`);
+  const [address, setAddress] = useState(`${auth.userData?.address}`);
+  const [image, setImage] = useState('');
+
   useEffect(() => {
     dispatch(dataUser(auth.token));
   }, [dispatch, auth.token]);
 
-  const dataInput = [
-    { label: 'Name', value: `${auth.userData?.name}` },
-    { label: 'Email Address', value: `${auth.userData?.email}` },
-    { label: 'Phone Number', value: `${auth.userData?.phone}` },
-    { label: 'Date of Birth', value: `${auth.userData?.birthdate}` },
-    { label: 'Delivery Address', value: `${auth.userData?.address}` },
-  ];
+  const addImage = async () => {
+    const photo = await launchImageLibrary({});
+    setImage(photo.assets[0]);
+  }
 
   const navigation = useNavigation()
   const update = () => {
+    dispatch(updateData(
+      auth.userData?.id,
+      auth.token,
+      gender,
+      phone,
+      birthdate,
+      address,
+      image
+    ))
+    console.log(image)
     PushNotification.localNotification({
       channelId: 'updateProfile',
       title: 'Update Profile Success!',
@@ -59,46 +73,94 @@ const UpdateProfile = ({ navigation: { goBack } }) => {
         <View style={styles.wrapper}>
           <View style={styles.profilePict}>
             <Center>
-              <Image
-                size={99}
-                resizeMode={'contain'}
-                borderRadius={200}
-                source={require('../assets/ava.png')}
-                alt="Profile Pic"
-              />
+              {image ? (
+                <Image
+                  source={{ uri: image.uri }}
+                  size={99}
+                  resizeMode={'contain'}
+                  borderRadius={'full'}
+                  alt="Profile Pic"
+                />
+              ) : (
+                <Image
+                  source={{ uri: `http:/192.168.0.101:5000/${auth.userData?.image}` }}
+                  size={99}
+                  resizeMode={'contain'}
+                  borderRadius={'full'}
+                  alt="Profile Pic"
+                />
+              )}
             </Center>
-            <View style={styles.iconEdit}>
-              <MaterialIcon
-                color="white"
-                name="pencil-outline"
-                style={styles.iconPen}
-                size={21}
-              />
-            </View>
+            <TouchableOpacity onPress={addImage}>
+              <View style={styles.iconEdit}>
+                <MaterialIcon
+                  color="white"
+                  name="pencil-outline"
+                  style={styles.iconPen}
+                  size={21}
+                />
+              </View>
+            </TouchableOpacity>
           </View>
           <View style={styles.radioGrup}>
-            <Radio.Group defaultValue="1" name="myRadioGroup" accessibilityLabel="favorite colorscheme">
+            <Radio.Group
+              defaultValue="1"
+              name="myRadioGroup"
+              accessibilityLabel="favorite colorscheme"
+              onChange={value => { setGender(value) }}>
               <Stack
                 direction={{ base: 'row' }}
                 alignItems="center"
                 space={4}
                 w="75%"
                 maxW="300px">
-                <Radio colorScheme='purple' value="1" my={1}>
+                <Radio colorScheme='purple' value="Female" my={1}>
                   <Text style={styles.textRadio}>Female</Text>
                 </Radio>
-                <Radio colorScheme='purple' value="2" my={1}>
+                <Radio colorScheme='purple' value="Male" my={1}>
                   <Text style={styles.textRadio}>Male</Text>
                 </Radio>
               </Stack>
             </Radio.Group>
           </View>
-          {dataInput.map((data, index) => (
-            <View key={index}>
-              <Text style={styles.label}>{data.label}:</Text>
-              <TextInput defaultValue={data.value} style={styles.input} />
-            </View>
-          ))}
+          <View>
+            <Text style={styles.label}>Name:</Text>
+            <TextInput
+              value={`${auth.userData?.name}`}
+              style={styles.input}
+            />
+          </View>
+          <View>
+            <Text style={styles.label}>Email Address:</Text>
+            <TextInput
+              value={`${auth.userData?.email}`}
+              style={styles.input}
+            />
+          </View>
+          <View>
+            <Text style={styles.label}>Phone Number:</Text>
+            <TextInput
+              value={phone}
+              style={styles.input}
+              onChangeText={setPhone}
+            />
+          </View>
+          <View>
+            <Text style={styles.label}>Date Of Birth:</Text>
+            <TextInput
+              value={birthdate}
+              style={styles.input}
+              onChangeText={setBirthdate}
+            />
+          </View>
+          <View>
+            <Text style={styles.label}>Delivery Address:</Text>
+            <TextInput
+              value={address}
+              style={styles.input}
+              onChangeText={setAddress}
+            />
+          </View>
           <View style={styles.button}>
             <Button color="primary" onPress={update}>Save change</Button>
           </View>

@@ -115,12 +115,12 @@ const Search = ({ navigation }) => {
           {listVehicles.map((data, index) => (
             <TouchableOpacity onPress={() => navigation.navigate('DetailVehicle')}>
               <List
+                key={id}
                 image={data.image}
                 name={data.name}
                 seet={data.seet}
                 stock={data.stock}
                 price={data.price}
-                key={index}
               />
             </TouchableOpacity>
           ))}

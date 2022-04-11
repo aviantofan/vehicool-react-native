@@ -1,5 +1,7 @@
 import http from '../../helper/http'
 import qs from 'qs';
+import RNFetchBlob from 'rn-fetch-blob';
+import { parse } from 'react-native-svg';
 
 export const authLogin = (email, password) => {
   return async dispatch => {
@@ -8,7 +10,6 @@ export const authLogin = (email, password) => {
     });
     try {
       const input = { email: email, password: password };
-      console.log(input)
       const { data } = await http().post('/auth/login', qs.stringify(input));
       dispatch({
         type: 'AUTH_LOGIN',
@@ -43,22 +44,38 @@ export const dataUser = (token) => {
   }
 }
 
-export const updateData = (token, userData) => {
+export const updateData = (id, token, gender, phone, birthdate, address, image) => {
   return async dispatch => {
     try {
-      const dataUpdate = {
-        birthdate: userData.birthdate,
-        phone: userData.phone,
-        address: userData.address,
-        gender: userData.gender
-      }
-      const { data } = await http(token).patch(`/users/${id}`, qs.stringify(dataUpdate))
+      dispatch({
+        type: 'PAGES_LOADING',
+      });
+      const { data } = await RNFetchBlob.fetch(
+        'PATCH',
+        `http://192.168.0.101:5000/users/${id}`,
+        {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data',
+        },
+        [
+          {
+            name: 'image',
+            filename: image.fileName,
+            type: image.type,
+            data: RNFetchBlob.wrap(image.uri),
+          },
+          { name: 'gender', data: gender },
+          { name: 'birthdate', data: birthdate },
+          { name: 'phone', data: phone },
+          { name: 'address', data: address },
+        ],
+      )
       dispatch({
         type: 'UPDATE_PROFILE',
-        payload: data.results
+        payload: JSON.parse(data)
       })
-    } catch (err) {
-      payload = err.message
+    } catch (e) {
+      payload = JSON.parse(e.message)
     }
   }
 }
