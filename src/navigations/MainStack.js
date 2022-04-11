@@ -10,6 +10,7 @@ import Payment from '../screens/Payment'
 import PaymentStepTwo from '../screens/PaymentStepTwo'
 import PaymentStepThree from '../screens/PaymentStepThree'
 import FinishedPayment from '../screens/FinishedPayment'
+import AddVehicle from '../screens/AddVehicle'
 
 const MainStack = createNativeStackNavigator()
 
@@ -25,6 +26,7 @@ const MainStackNav = () => {
       <MainStack.Screen name="PaymentStepTwo" component={PaymentStepTwo} />
       <MainStack.Screen name="PaymentStepThree" component={PaymentStepThree} />
       <MainStack.Screen name='FinishedPayment' component={FinishedPayment} />
+      <MainStack.Screen name='AddVehicle' component={AddVehicle} />
     </MainStack.Navigator>
   )
 }
