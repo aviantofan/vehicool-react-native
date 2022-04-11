@@ -6,7 +6,7 @@ export const getCars = () => {
       dispatch({
         type: 'PAGES_LOADING',
       });
-      const { data } = await http().get('/vehicles/category?categoryId=1');
+      const { data } = await http().get('/vehicles/category?categoryId=1&limit=10');
       dispatch({
         type: 'GET_CARS',
         payload: data,
@@ -29,7 +29,7 @@ export const getMotorbike = () => {
       dispatch({
         type: 'PAGES_LOADING',
       });
-      const { data } = await http().get('/vehicles/category?categoryId=2');
+      const { data } = await http().get('/vehicles/category?categoryId=2&limit=10');
       dispatch({
         type: 'GET_MOTORBIKE',
         payload: data,
@@ -52,7 +52,7 @@ export const getBike = () => {
       dispatch({
         type: 'PAGES_LOADING',
       });
-      const { data } = await http().get('/vehicles/category?categoryId=3');
+      const { data } = await http().get('/vehicles/category?categoryId=3&limit=10');
       dispatch({
         type: 'GET_BIKE',
         payload: data,
