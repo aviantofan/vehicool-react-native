@@ -83,7 +83,7 @@ const UpdateProfile = ({ navigation: { goBack } }) => {
                 />
               ) : (
                 <Image
-                  source={{ uri: `http:/192.168.0.101:5000/${auth.userData?.image}` }}
+                  source={{ uri: `${auth.userData?.image}`.replace(/localhost/g, '192.168.0.101') }}
                   size={99}
                   resizeMode={'contain'}
                   borderRadius={'full'}
@@ -106,6 +106,7 @@ const UpdateProfile = ({ navigation: { goBack } }) => {
             <Radio.Group
               defaultValue="1"
               name="myRadioGroup"
+              value={gender}
               accessibilityLabel="favorite colorscheme"
               onChange={value => { setGender(value) }}>
               <Stack
