@@ -1,5 +1,5 @@
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Image, Text } from 'native-base';
 import FaIcon from 'react-native-vector-icons/FontAwesome';
 import Button from '../components/Button';
@@ -7,6 +7,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { dataUser } from '../redux/actions/auth';
 
 const Profile = ({ navigation }) => {
+
+
+  const [image, setImage] = useState('');
 
   const dispatch = useDispatch();
   const { auth } = useSelector(state => state);
@@ -24,10 +27,10 @@ const Profile = ({ navigation }) => {
     <View style={styles.main}>
       <View style={styles.header}>
         <Image
+          source={{ uri: `${auth.userData?.image}`.replace(/localhost/g, '192.168.0.101') }}
           size={99}
           resizeMode={'contain'}
           borderRadius={'full'}
-          source={{ uri: `http:/192.168.0.101:5000/${auth.userData?.image}` }}
           alt="Profile Pic"
         />
         <View style={styles.head}>
@@ -54,6 +57,14 @@ const Profile = ({ navigation }) => {
             <Text fontSize="2xl">Help</Text>
             <FaIcon name="chevron-right" size={25} />
           </TouchableOpacity>
+          {
+            auth.userData?.username === 'Admin' &&
+            <TouchableOpacity style={styles.linkItem}
+              onPress={() => navigation.navigate('AddVehicle')}>
+              <Text fontSize="2xl">Add Vehicle</Text>
+              <FaIcon name="chevron-right" size={25} />
+            </TouchableOpacity>
+          }
           <TouchableOpacity
             style={styles.linkItem}
             onPress={() => navigation.navigate('UpdateProfile')}>
