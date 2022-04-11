@@ -1,7 +1,6 @@
 import http from '../../helper/http'
 import qs from 'qs';
 import RNFetchBlob from 'rn-fetch-blob';
-import { parse } from 'react-native-svg';
 
 export const authLogin = (email, password) => {
   return async dispatch => {
