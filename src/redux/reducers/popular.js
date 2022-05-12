@@ -1,21 +1,21 @@
 const popularState = {
-  popularVehicle: {},
-  isLoading: false,
-  err: false,
-  errMsg: '',
-  successMsg: null,
+    popularVehicle: {},
+    isLoading: false,
+    err: false,
+    errMsg: '',
+    successMsg: null,
 };
 
 const popular = (state = popularState, action) => {
-  switch (action.type) {
+    switch (action.type) {
     case 'GET_POPULAR': {
-      state.popularVehicle = action.payload.results;
-      return { ...state };
+        state.popularVehicle = action.payload.results;
+        return { ...state };
     }
     default: {
-      return { ...state };
+        return { ...state };
     }
-  }
+    }
 };
 
 export default popular;

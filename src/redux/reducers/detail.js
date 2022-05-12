@@ -1,27 +1,27 @@
 const initialState = {
-  message: null,
-  isError: false,
-  errMsg: null,
-  vehicle: [],
+    message: null,
+    isError: false,
+    errMsg: null,
+    vehicle: [],
 };
 
 const detail = (state = initialState, action) => {
-  switch (action.type) {
+    switch (action.type) {
 
     case 'GET_VEHICLE_DETAIL': {
-      state.vehicle = action.payload;
-      return { ...state };
+        state.vehicle = action.payload;
+        return { ...state };
     }
     case 'VEHICLES_CLEAR': {
-      state.vehicle = []
-      state.isError = false;
-      state.errMsg = null;
-      return { ...state };
+        state.vehicle = [];
+        state.isError = false;
+        state.errMsg = null;
+        return { ...state };
     }
     default: {
-      return { ...state };
+        return { ...state };
     }
-  }
+    }
 };
 
-export default detail
+export default detail;

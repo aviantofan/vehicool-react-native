@@ -4,69 +4,69 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import auth from './auth';
 import register from './register';
-import forgot from './forgot'
+import forgot from './forgot';
 import change from './change';
 import counter from './counter';
 import category from './category';
 import popular from './popular';
 import detail from './detail.js';
-import transaction from './transaction'
+import transaction from './transaction';
 
 const persistAuth = {
-  key: 'auth',
-  storage: AsyncStorage,
+    key: 'auth',
+    storage: AsyncStorage,
 };
 
 const persistRegister = {
-  key: 'register',
-  storage: AsyncStorage,
+    key: 'register',
+    storage: AsyncStorage,
 };
 
 const persistForgot = {
-  key: 'forgot',
-  storage: AsyncStorage,
-}
+    key: 'forgot',
+    storage: AsyncStorage,
+};
 
 const persistChange = {
-  key: 'change',
-  storage: AsyncStorage,
-}
+    key: 'change',
+    storage: AsyncStorage,
+};
 
 const persistCounter = {
-  key: 'counter',
-  storage: AsyncStorage,
-}
+    key: 'counter',
+    storage: AsyncStorage,
+};
 
 const persistCategory = {
-  key: 'category',
-  storage: AsyncStorage,
-}
+    key: 'category',
+    storage: AsyncStorage,
+};
 
 const persistPopular = {
-  key: 'popular',
-  storage: AsyncStorage,
-}
+    key: 'popular',
+    storage: AsyncStorage,
+};
 
 const persistDetail = {
-  key: 'detail',
-  storage: AsyncStorage,
-}
+    key: 'detail',
+    storage: AsyncStorage,
+};
 
 const persistTransaction = {
-  key: 'transaction',
-  storage: AsyncStorage,
-}
+    key: 'transaction',
+    storage: AsyncStorage,
+};
 
 const rootReducers = combineReducers({
-  auth: persistReducer(persistAuth, auth),
-  register: persistReducer(persistRegister, register),
-  forgot: persistReducer(persistForgot, forgot),
-  change: persistReducer(persistChange, change),
-  counter: persistReducer(persistCounter, counter),
-  category: persistReducer(persistCategory, category),
-  popular: persistReducer(persistPopular, popular),
-  detail: persistReducer(persistDetail, detail),
-  transaction: persistReducer(persistTransaction, transaction)
+    auth: persistReducer(persistAuth, auth),
+    register: persistReducer(persistRegister, register),
+    forgot: persistReducer(persistForgot, forgot),
+    change: persistReducer(persistChange, change),
+    counter: persistReducer(persistCounter, counter),
+    category: persistReducer(persistCategory, category),
+    popular: persistReducer(persistPopular, popular),
+    detail: persistReducer(persistDetail, detail),
+    transaction: persistReducer(persistTransaction, transaction)
 });
 
 export default rootReducers;
