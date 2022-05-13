@@ -29,7 +29,7 @@ const PaymentStepTwo = () => {
     seet: 2,
     stock: 5,
     prepayment: `${detail.vehicle?.price}`,
-    image: { uri: `${detail.vehicle?.image}`.replace(/localhost/g, '192.168.0.101') },
+    image: { uri: `${detail.vehicle?.image}` },
     rating: 4,
     qty: `${counter.value}`,
     days: 3,

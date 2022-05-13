@@ -14,6 +14,7 @@ import moment from 'moment';
 import { getVehicleDetail } from '../redux/actions/detail';
 import { useDispatch, useSelector } from 'react-redux';
 import { increment, decrement } from '../redux/actions/counter'
+import NoPhoto from '../assets/photo-camera.png'
 
 const Detail = ({ route }) => {
   const [fav, setFav] = useState(false)
@@ -42,7 +43,7 @@ const Detail = ({ route }) => {
     <View style={styles.wrapper}>
       <View style={styles.barWrapper}>
         <View style={styles.imgWrapper}>
-          <Image source={{ uri: `${detail.vehicle?.image}`.replace(/localhost/g, '192.168.0.101') }} style={styles.img} />
+          <Image source={detail.vehicle?.image ? { uri: `${detail.vehicle?.image}` } : NoPhoto} style={styles.img} />
         </View>
         <View style={styles.barItem}>
           <View style={styles.barSectionLeft}>

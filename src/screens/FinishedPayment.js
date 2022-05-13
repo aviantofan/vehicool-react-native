@@ -23,7 +23,7 @@ const FinishedPayment = () => {
     name: `${transaction.dataTransaction.name}`,
     seet: `${transaction.dataTransaction.seet}`,
     price: `${transaction.dataTransaction.prepayment}`,
-    image: { uri: `${detail.vehicle?.image}`.replace(/localhost/g, '192.168.0.101') },
+    image: { uri: `${detail.vehicle?.image}`},
     rating: `${transaction.dataTransaction.rating}`,
     qty: `${transaction.dataTransaction.qty}`,
     days: `${transaction.dataTransaction.days}`,

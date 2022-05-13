@@ -5,10 +5,9 @@ import FaIcon from 'react-native-vector-icons/FontAwesome';
 import Button from '../components/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { dataUser } from '../redux/actions/auth';
+import NoPhoto from '../assets/photo-camera.png';
 
 const Profile = ({ navigation }) => {
-
-
   const [image, setImage] = useState('');
 
   const dispatch = useDispatch();
@@ -27,7 +26,7 @@ const Profile = ({ navigation }) => {
     <View style={styles.main}>
       <View style={styles.header}>
         <Image
-          source={{ uri: `${auth.userData?.image}`.replace(/localhost/g, '192.168.0.101') }}
+          source={auth.userData?.image ? { uri: `${auth.userData?.image}`} : NoPhoto}
           size={99}
           resizeMode={'contain'}
           borderRadius={'full'}
@@ -58,7 +57,7 @@ const Profile = ({ navigation }) => {
             <FaIcon name="chevron-right" size={25} />
           </TouchableOpacity>
           {
-            auth.userData?.username === 'Admin' &&
+            auth.userData?.role === 'admin' &&
             <TouchableOpacity style={styles.linkItem}
               onPress={() => navigation.navigate('AddVehicle')}>
               <Text fontSize="2xl">Add Vehicle</Text>
