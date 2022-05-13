@@ -1,6 +1,7 @@
 import http from '../../helper/http';
 import qs from 'qs';
 import RNFetchBlob from 'rn-fetch-blob';
+import {REACT_APP_URL} from '@env'
 
 export const authLogin = (email, password) => {
     return async dispatch => {
@@ -43,15 +44,16 @@ export const dataUser = (token) => {
     };
 };
 
-export const updateData = (id, token, gender, phone, birthdate, address, image) => {
+export const updateData = (id, token, name, email, username, gender, phone, birthdate, address, image) => {
     return async dispatch => {
         try {
             dispatch({
                 type: 'PAGES_LOADING',
             });
+            if(image){
             const { data } = await RNFetchBlob.fetch(
                 'PATCH',
-                `http://192.168.0.101:5000/users/${id}`,
+                `${REACT_APP_URL}/users/${id}`,
                 {
                     Authorization: `Bearer ${token}`,
                     'Content-Type': 'multipart/form-data',
@@ -63,6 +65,9 @@ export const updateData = (id, token, gender, phone, birthdate, address, image) 
                         type: image.type,
                         data: RNFetchBlob.wrap(image.uri),
                     },
+                    { name: 'name', data: name },
+                    { name: 'username', data: username },
+                    { name: 'email', data: email },
                     { name: 'gender', data: gender },
                     { name: 'birthdate', data: birthdate },
                     { name: 'phone', data: phone },
@@ -73,8 +78,31 @@ export const updateData = (id, token, gender, phone, birthdate, address, image) 
                 type: 'UPDATE_PROFILE',
                 payload: JSON.parse(data)
             });
+          }else{
+            const { data } = await RNFetchBlob.fetch(
+              'PATCH',
+              `${REACT_APP_URL}/users/${id}`,
+              {
+                  Authorization: `Bearer ${token}`,
+                  'Content-Type': 'multipart/form-data',
+              },
+              [
+                  { name: 'name', data: name },
+                  { name: 'username', data: username },
+                  { name: 'email', data: email },
+                  { name: 'gender', data: gender },
+                  { name: 'birthdate', data: birthdate },
+                  { name: 'phone', data: phone },
+                  { name: 'address', data: address },
+              ],
+          );
+          dispatch({
+              type: 'UPDATE_PROFILE',
+              payload: JSON.parse(data)
+          });
+          }
         } catch (e) {
-            payload = JSON.parse(e.message);
+            payload = JSON.parse(e.response.data.message);
         }
     };
 };

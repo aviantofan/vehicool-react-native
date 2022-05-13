@@ -1,5 +1,6 @@
 /*eslint no-undef: "error"*/
 import RNFetchBlob from 'rn-fetch-blob';
+import {REACT_APP_URL} from '@env'
 // import http from '../../helper/http'
 // import qs from 'qs'
 
@@ -28,12 +29,12 @@ export const addVehicle = (
     color,
     loc,
     isAvailable,
-    isPrepay,
     capacity,
     categoryId,
     reservationBefore,
+    paymentMethod,
     price,
-    qty,
+    stock,
     image) => {
     return async dispatch => {
         try {
@@ -42,7 +43,7 @@ export const addVehicle = (
             });
             const { data } = await RNFetchBlob.fetch(
                 'POST',
-                'http://192.168.0.101:5000/vehicles',
+                `${REACT_APP_URL}/vehicles`,
                 {
                     Authorization: `Bearer ${token}`,
                     'Content-Type': 'multipart/form-data',
@@ -58,12 +59,12 @@ export const addVehicle = (
                     { name: 'color', data: color },
                     { name: 'loc', data: loc },
                     { name: 'isAvailable', data: isAvailable },
-                    { name: 'isPrepay', data: isPrepay },
                     { name: 'capacity', data: capacity },
                     { name: 'categoryId', data: categoryId },
                     { name: 'reservationBefore', data: reservationBefore },
+                    { name: 'paymentMethod', data: paymentMethod },
                     { name: 'price', data: price },
-                    { name: 'qty', data: qty },
+                    { name: 'stock', data: stock },
                 ],
             );
             dispatch({
@@ -71,7 +72,7 @@ export const addVehicle = (
                 payload: JSON.parse(data)
             });
         } catch (e) {
-            payload = JSON.parse(e.message);
+            payload = JSON.parse(e.response.data.message);
         }
     };
 };

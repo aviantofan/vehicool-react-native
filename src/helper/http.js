@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {REACT_APP_URL} from '@env'
 
 const http = token => {
     const headers = {};
@@ -6,7 +7,7 @@ const http = token => {
         headers.Authorization = `Bearer ${token}`;
     }
     return axios.create({
-        baseURL: 'http://192.168.0.101:5000',
+        baseURL: REACT_APP_URL,
         headers,
     });
 };
