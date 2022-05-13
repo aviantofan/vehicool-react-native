@@ -14,13 +14,17 @@ import { useNavigation } from '@react-navigation/native';
 import PushNotification from 'react-native-push-notification'
 import { useDispatch, useSelector } from 'react-redux';
 import { dataUser, updateData } from '../redux/actions/auth';
-import { launchImageLibrary } from 'react-native-image-picker';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+import NoPhoto from '../assets/photo-camera.png'
 
 const UpdateProfile = ({ navigation: { goBack } }) => {
 
   const dispatch = useDispatch();
   const { auth } = useSelector(state => state);
 
+  const [name, setName] = useState(`${auth.userData?.name}`);
+  const [email, setEmail] = useState(`${auth.userData?.email}`);
+  const [username, setUsername] = useState(`${auth.userData?.username}`);
   const [gender, setGender] = useState(`${auth.userData?.gender}`);
   const [phone, setPhone] = useState(`${auth.userData?.phone}`);
   const [birthdate, setBirthdate] = useState(`${auth.userData?.birthdate}`);
@@ -36,11 +40,30 @@ const UpdateProfile = ({ navigation: { goBack } }) => {
     setImage(photo.assets[0]);
   }
 
+  const handlePhotoCamera = async () => {
+    const photo = await launchCamera({});
+        setImage(photo.assets[0]);
+  }
+
   const navigation = useNavigation()
   const update = () => {
+    // const data = {
+    //   name,
+    //   email,
+    //   username,
+    //   gender,
+    //   phone,
+    //   birthdate,
+    //   address,
+    //   image
+    // }
+    // console.log(data);
     dispatch(updateData(
       auth.userData?.id,
       auth.token,
+      name,
+      email,
+      username,
       gender,
       phone,
       birthdate,
@@ -73,23 +96,13 @@ const UpdateProfile = ({ navigation: { goBack } }) => {
         <View style={styles.wrapper}>
           <View style={styles.profilePict}>
             <Center>
-              {image ? (
                 <Image
-                  source={{ uri: image.uri }}
+                  source={image? {uri: image.uri} : auth.userData?.image ? { uri: `${auth.userData?.image}`} : NoPhoto}
                   size={99}
                   resizeMode={'contain'}
                   borderRadius={'full'}
                   alt="Profile Pic"
                 />
-              ) : (
-                <Image
-                  source={{ uri: `${auth.userData?.image}`.replace(/localhost/g, '192.168.0.101') }}
-                  size={99}
-                  resizeMode={'contain'}
-                  borderRadius={'full'}
-                  alt="Profile Pic"
-                />
-              )}
             </Center>
             <TouchableOpacity onPress={addImage}>
               <View style={styles.iconEdit}>
@@ -99,6 +112,16 @@ const UpdateProfile = ({ navigation: { goBack } }) => {
                   style={styles.iconPen}
                   size={21}
                 />
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={handlePhotoCamera}>
+            <View style={styles.iconEditCam}>
+              <MaterialIcon
+                  color="white"
+                  name="camera"
+                  style={styles.iconPen}
+                  size={21}
+              />
               </View>
             </TouchableOpacity>
           </View>
@@ -127,15 +150,25 @@ const UpdateProfile = ({ navigation: { goBack } }) => {
           <View>
             <Text style={styles.label}>Name:</Text>
             <TextInput
-              value={`${auth.userData?.name}`}
+              value={name}
               style={styles.input}
+              onChangeText={setName}
+            />
+          </View>
+          <View>
+            <Text style={styles.label}>Username:</Text>
+            <TextInput
+              value={username}
+              style={styles.input}
+              onChangeText={setUsername}
             />
           </View>
           <View>
             <Text style={styles.label}>Email Address:</Text>
             <TextInput
-              value={`${auth.userData?.email}`}
+              value={email}
               style={styles.input}
+              onChangeText={setEmail}
             />
           </View>
           <View>
@@ -193,6 +226,15 @@ const styles = StyleSheet.create({
     position: 'absolute',
     alignSelf: 'center',
     bottom: 0,
+    right: 140,
+    backgroundColor: '#5C527F',
+    padding: 9,
+    borderRadius: 50,
+  },
+  iconEditCam: {
+    position: 'absolute',
+    alignSelf: 'center',
+    bottom: 60,
     right: 140,
     backgroundColor: '#5C527F',
     padding: 9,

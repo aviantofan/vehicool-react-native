@@ -14,7 +14,7 @@ import { useNavigation } from '@react-navigation/native';
 import PushNotification from 'react-native-push-notification'
 import { useDispatch, useSelector } from 'react-redux';
 import { addVehicle } from '../redux/actions/addVehicle';
-import { launchImageLibrary } from 'react-native-image-picker';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 
 const AddVehicle = () => {
 
@@ -25,18 +25,30 @@ const AddVehicle = () => {
   const [color, setColor] = useState('');
   const [loc, setLoc] = useState('');
   const [isAvailable, setIsAvailable] = useState('');
-  const [isPrepay, setIsPrepay] = useState('');
+  const [paymentMethod, setPaymentMethod] = useState('');
   const [capacity, setCapacity] = useState('');
   const [categoryId, setCategoryId] = useState('');
   const [reservationBefore, setReservationBefore] = useState('');
   const [price, setPrice] = useState('');
-  const [qty, setQty] = useState('');
+  const [stock, setStock] = useState('');
   const [image, setImage] = useState('');
 
   const addImage = async () => {
+
     const photo = await launchImageLibrary({});
     setImage(photo.assets[0]);
   }
+
+  const handlePhotoCamera = () => {
+    const options = {
+      noData: true,
+    };
+    launchCamera(options, response => {
+      if (response.assets) {
+        setImage(photo.assets[0]);
+      }
+    });
+  };
 
   const navigation = useNavigation()
   const addDataVehicle = () => {
@@ -45,12 +57,12 @@ const AddVehicle = () => {
     //   color,
     //   loc,
     //   isAvailable,
-    //   isPrepay,
     //   capacity,
     //   categoryId,
     //   reservationBefore,
+    //   paymentMethod,
     //   price,
-    //   qty,
+    //   stock,
     //   image
     // }
     // console.log(data)
@@ -60,12 +72,12 @@ const AddVehicle = () => {
       color,
       loc,
       isAvailable,
-      isPrepay,
       capacity,
       categoryId,
       reservationBefore,
+      paymentMethod,
       price,
-      qty,
+      stock,
       image))
     PushNotification.localNotification({
       channelId: 'addingVehicle',
@@ -120,6 +132,16 @@ const AddVehicle = () => {
                 />
               </View>
             </TouchableOpacity>
+            <TouchableOpacity onPress={handlePhotoCamera}>
+            <View style={styles.iconEditCam}>
+              <MaterialIcon
+                  color="white"
+                  name="camera"
+                  style={styles.iconPen}
+                  size={21}
+              />
+              </View>
+            </TouchableOpacity>
           </View>
           <View>
             <Text style={styles.label}>Name:</Text>
@@ -154,10 +176,10 @@ const AddVehicle = () => {
             />
           </View>
           <View>
-            <Text style={styles.label}>Quantity:</Text>
+            <Text style={styles.label}>Stock:</Text>
             <TextInput
-              value={qty}
-              onChangeText={setQty}
+              value={stock}
+              onChangeText={setStock}
               style={styles.input}
             />
           </View>
@@ -203,25 +225,28 @@ const AddVehicle = () => {
             </View>
           </View>
           <View>
-            <Text style={styles.label}>Prepayment:</Text>
+            <Text style={styles.label}>Payment Method:</Text>
             <View style={styles.radioGrup}>
               <Radio.Group
                 defaultValue="1"
                 name="myRadioGroup"
-                value={isPrepay}
+                value={paymentMethod}
                 accessibilityLabel="favorite colorscheme"
-                onChange={value => { setIsPrepay(value) }}>
+                onChange={value => { setPaymentMethod(value) }}>
                 <Stack
                   direction={{ base: 'row' }}
                   alignItems="center"
                   space={4}
                   w="75%"
                   maxW="300px">
-                  <Radio colorScheme='purple' value="1" my={1}>
-                    <Text style={styles.textRadio}>Prepayment</Text>
+                  <Radio colorScheme='purple' value="Cash" my={1}>
+                    <Text style={styles.textRadio}>Cash</Text>
                   </Radio>
-                  <Radio colorScheme='purple' value="0" my={1}>
-                    <Text style={styles.textRadio}>Not Prepayment</Text>
+                  <Radio colorScheme='purple' value="Transfer" my={1}>
+                    <Text style={styles.textRadio}>Transfer</Text>
+                  </Radio>
+                  <Radio colorScheme='purple' value="Excash" my={1}>
+                    <Text style={styles.textRadio}>Excash</Text>
                   </Radio>
                 </Stack>
               </Radio.Group>
@@ -288,6 +313,15 @@ const styles = StyleSheet.create({
     position: 'absolute',
     alignSelf: 'center',
     bottom: 0,
+    right: 140,
+    backgroundColor: '#5C527F',
+    padding: 9,
+    borderRadius: 50,
+  },
+  iconEditCam: {
+    position: 'absolute',
+    alignSelf: 'center',
+    bottom: 60,
     right: 140,
     backgroundColor: '#5C527F',
     padding: 9,
