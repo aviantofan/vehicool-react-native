@@ -9,7 +9,7 @@ export const getVehicleDetail = id => {
             const { data } = await http().get(`/vehicles/${id}`);
             dispatch({
                 type: 'GET_VEHICLE_DETAIL',
-                payload: data.results,
+                payload: data.result,
             });
         } catch (e) {
             dispatch({
