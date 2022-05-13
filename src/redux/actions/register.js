@@ -1,7 +1,7 @@
 import http from '../../helper/http';
 import qs from 'qs';
 
-export const authRegister = (name, email, password) => {
+export const authRegister = (name, username, email, password) => {
     return async dispatch => {
         dispatch({
             type: 'REGISTER_CLEAR',
@@ -9,6 +9,7 @@ export const authRegister = (name, email, password) => {
         try {
             const input = {
                 name,
+                username,
                 email,
                 password,
             };

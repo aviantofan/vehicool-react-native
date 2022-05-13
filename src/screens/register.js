@@ -21,6 +21,7 @@ const Register = () => {
 
   const [isEmpty, setIsEmpty] = useState();
   const [name, setName] = useState();
+  const [username, setUsername] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
@@ -41,9 +42,9 @@ const Register = () => {
   }, [register]);
 
   const onRegister = () => {
-    if (name && email && password) {
+    if (name && username && email && password) {
       setIsEmpty(false);
-      dispatch(authRegister(name, email, password));
+      dispatch(authRegister(name, username, email, password));
       if (register.isSuccess) {
         navigation.navigate('Login');
       }
@@ -67,6 +68,11 @@ const Register = () => {
               placeholder='Name'
               onChangeText={setName}
               value={name}
+            />
+            <Input
+              placeholder='Username'
+              onChangeText={setUsername}
+              value={username}
             />
             <Input
               placeholder='Email'
