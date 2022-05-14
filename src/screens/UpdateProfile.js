@@ -41,8 +41,11 @@ const UpdateProfile = ({ navigation: { goBack } }) => {
   }
 
   const handlePhotoCamera = async () => {
-    const photo = await launchCamera({});
-        setImage(photo.assets[0]);
+    const photo = await launchCamera({
+      maxWidth:640,
+      maxHeight:640
+    });
+    setImage(photo.assets[0]);
   }
 
   const navigation = useNavigation()
@@ -99,7 +102,7 @@ const UpdateProfile = ({ navigation: { goBack } }) => {
                 <Image
                   source={image? {uri: image.uri} : auth.userData?.image ? { uri: `${auth.userData?.image}`} : NoPhoto}
                   size={99}
-                  resizeMode={'contain'}
+                  resizeMode={'cover'}
                   borderRadius={'full'}
                   alt="Profile Pic"
                 />

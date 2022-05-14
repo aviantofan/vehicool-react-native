@@ -28,7 +28,7 @@ const Profile = ({ navigation }) => {
         <Image
           source={auth.userData?.image ? { uri: `${auth.userData?.image}`} : NoPhoto}
           size={99}
-          resizeMode={'contain'}
+          resizeMode={'cover'}
           borderRadius={'full'}
           alt="Profile Pic"
         />

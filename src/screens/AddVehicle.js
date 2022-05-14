@@ -39,15 +39,12 @@ const AddVehicle = () => {
     setImage(photo.assets[0]);
   }
 
-  const handlePhotoCamera = () => {
-    const options = {
-      noData: true,
-    };
-    launchCamera(options, response => {
-      if (response.assets) {
-        setImage(photo.assets[0]);
-      }
+  const handlePhotoCamera = async () => {
+    const photo = await launchCamera({
+      maxWidth:640,
+      maxHeight:640
     });
+    setImage(photo.assets[0]);
   };
 
   const navigation = useNavigation()
@@ -108,7 +105,7 @@ const AddVehicle = () => {
                 <Image
                   source={{ uri: image.uri }}
                   size={99}
-                  resizeMode={'contain'}
+                  resizeMode={'cover'}
                   borderRadius={'full'}
                   alt="Profile Pic"
                 />
@@ -116,7 +113,7 @@ const AddVehicle = () => {
                 <Image
                   source={require('../assets/photo-camera.png')}
                   size={99}
-                  resizeMode={'contain'}
+                  resizeMode={'cover'}
                   borderRadius={'full'}
                   alt="Profile Pic"
                 />
