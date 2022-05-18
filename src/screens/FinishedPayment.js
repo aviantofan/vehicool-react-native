@@ -23,7 +23,7 @@ const FinishedPayment = () => {
     name: `${transaction.dataTransaction.name}`,
     seet: `${transaction.dataTransaction.seet}`,
     price: `${transaction.dataTransaction.prepayment}`,
-    image: { uri: `${detail.vehicle?.image}`},
+    image: { uri: `${detail.vehicle?.image}` },
     rating: `${transaction.dataTransaction.rating}`,
     qty: `${transaction.dataTransaction.qty}`,
     days: `${transaction.dataTransaction.days}`,
@@ -31,7 +31,7 @@ const FinishedPayment = () => {
     endDate: `${transaction.dataTransaction.rentEndDate}`,
   }
 
-  const price = vehicle.price * vehicle.days * vehicle.qty
+  const price = vehicle.price * vehicle.qty
 
   const customer = {
     id: `${auth.userData?.id}`,
@@ -44,7 +44,7 @@ const FinishedPayment = () => {
   const navigation = useNavigation()
   return (
     <Box p="5">
-      <TouchableOpacity style={styles.back} onPress={() => navigation.navigate('History Order')}>
+      <TouchableOpacity style={styles.back} onPress={() => navigation.navigate('Home')}>
         <EntypoIcon name="chevron-left" color="black" size={35} />
         <Text fontSize={'2xl'} pl="2" bold>
           See history
@@ -71,12 +71,9 @@ const FinishedPayment = () => {
         </Box>
         <Box py={'5'}>
           <Text py={'1'}>
-            {vehicle.qty} {vehicle.name}
+            {vehicle.name}
           </Text>
           <Text py={'1'}>Prepayment (no tax)</Text>
-          <Text py={'1'}>
-            {vehicle.days} {vehicle.days === 1 ? 'day' : 'days'}
-          </Text>
           <Text py={'1'}>
             {vehicle.startDate} to {vehicle.endDate}
           </Text>

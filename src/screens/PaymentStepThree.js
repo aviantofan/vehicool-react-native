@@ -21,13 +21,12 @@ const PaymentStepThree = () => {
     qty: `${transaction.dataTransaction.qty}`,
     name: `${transaction.dataTransaction.name}`,
     perpayment: 'no tax',
-    days: `${transaction.dataTransaction.days}`,
-    rentStartDate: '2022-02-02',
-    rentEndDate: '2022-02-05',
+    rentStartDate: `${transaction.dataTransaction.rentStartDate}`,
+    rentEndDate: `${transaction.dataTransaction.rentEndDate}`,
     price: `${transaction.dataTransaction.prepayment}`,
   }
 
-  const price = dataOrder.price * dataOrder.days * dataOrder.qty
+  const price = dataOrder.price * dataOrder.qty
 
   const inputData = {
     userId: `${transaction.dataTransaction.userId}`,
@@ -100,12 +99,9 @@ const PaymentStepThree = () => {
         <Box>
           <Text fontSize={'lg'}>Order Details:</Text>
           <Text fontSize={'lg'}>
-            {dataOrder.qty} {dataOrder.name}
+            {dataOrder.name}
           </Text>
           <Text fontSize={'lg'}>Prepayment (no tax)</Text>
-          <Text fontSize={'lg'}>
-            {dataOrder.days} {dataOrder.days > 1 ? 'Days' : 'Day'}
-          </Text>
           <Text fontSize={'lg'}>Order Details:</Text>
           <Text fontSize={'lg'}>
             {dataOrder.rentStartDate} to {dataOrder.rentEndDate}
@@ -114,7 +110,7 @@ const PaymentStepThree = () => {
         </Box>
         <Box py="5" flexDirection={'row'} justifyContent="space-between">
           <Text fontSize={'3xl'} bold>
-            {Format(dataOrder.price * dataOrder.days * dataOrder.qty)}
+            {Format(dataOrder.price * dataOrder.qty)}
           </Text>
           <TouchableOpacity>
             <EntypoIcon name="info-with-circle" size={40} color="#d2dae2" />

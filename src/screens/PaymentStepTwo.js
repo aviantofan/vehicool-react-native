@@ -19,6 +19,7 @@ import { getData } from '../redux/actions/transaction';
 const PaymentStepTwo = () => {
   const { detail } = useSelector(state => state);
   const { auth } = useSelector(state => state);
+  const { transaction } = useSelector(state => state);
   const counter = useSelector(state => state.counter)
   const dispatch = useDispatch()
 
@@ -32,9 +33,8 @@ const PaymentStepTwo = () => {
     image: { uri: `${detail.vehicle?.image}` },
     rating: 4,
     qty: `${counter.value}`,
-    days: 3,
-    rentStartDate: '2022-02-02',
-    rentEndDate: '2022-02-05',
+    rentStartDate: `${transaction.dataTransaction.rentStartDate}`,
+    rentEndDate: `${transaction.dataTransaction.rentEndDate}`,
   };
 
   const getCode = () => {
@@ -67,12 +67,9 @@ const PaymentStepTwo = () => {
         </Box>
         <Box py={'10'}>
           <Text py={'1'}>
-            {vehicle.qty} {vehicle.name}
+            {vehicle.name}
           </Text>
           <Text py={'1'}>Prepayment (no tax)</Text>
-          <Text py={'1'}>
-            {vehicle.days} {vehicle.days === 1 ? 'day' : 'days'}
-          </Text>
           <Text py={'1'}>
             {vehicle.rentStartDate} to {vehicle.rentEndDate}
           </Text>
@@ -80,7 +77,7 @@ const PaymentStepTwo = () => {
         <View style={styles.borderBtm} />
         <Box style={{ marginVertical: 30 }} flexDirection={'row'} justifyContent="space-between">
           <Text fontSize={'3xl'} bold>
-            {Format(vehicle.prepayment * vehicle.days * counter.value)}
+            {Format(vehicle.prepayment * counter.value)}
           </Text>
           <TouchableOpacity>
             <EntypoIcon name="info-with-circle" size={40} color="#d2dae2" />
