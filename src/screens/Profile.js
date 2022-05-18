@@ -1,20 +1,20 @@
-import { View, StyleSheet, TouchableOpacity } from 'react-native';
-import React, { useEffect, useState } from 'react';
-import { Image, Text } from 'native-base';
-import FaIcon from 'react-native-vector-icons/FontAwesome';
-import Button from '../components/Button';
-import { useDispatch, useSelector } from 'react-redux';
-import { dataUser } from '../redux/actions/auth';
-import NoPhoto from '../assets/photo-camera.png';
+import { View, StyleSheet, TouchableOpacity } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Image, Text } from "native-base";
+import FaIcon from "react-native-vector-icons/FontAwesome";
+import Button from "../components/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { dataUser } from "../redux/actions/auth";
+import NoPhoto from "../assets/photo-camera.png";
 
 const Profile = ({ navigation }) => {
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState("");
 
   const dispatch = useDispatch();
   const { auth } = useSelector(state => state);
   const onLogout = () => {
     dispatch({
-      type: 'AUTH_LOGOUT',
+      type: "AUTH_LOGOUT",
     });
   };
 
@@ -28,8 +28,8 @@ const Profile = ({ navigation }) => {
         <Image
           source={auth.userData?.image ? { uri: `${auth.userData?.image}`} : NoPhoto}
           size={99}
-          resizeMode={'cover'}
-          borderRadius={'full'}
+          resizeMode={"cover"}
+          borderRadius={"full"}
           alt="Profile Pic"
         />
         <View style={styles.head}>
@@ -44,7 +44,7 @@ const Profile = ({ navigation }) => {
       <View style={styles.container}>
         <View>
           <TouchableOpacity style={styles.linkItem}
-            onPress={() => navigation.navigate('Favorite')}>
+            onPress={() => navigation.navigate("Favorite")}>
             <Text fontSize="2xl">Your favourites</Text>
             <FaIcon name="chevron-right" size={25} />
           </TouchableOpacity>
@@ -57,16 +57,16 @@ const Profile = ({ navigation }) => {
             <FaIcon name="chevron-right" size={25} />
           </TouchableOpacity>
           {
-            auth.userData?.role === 'admin' &&
+            auth.userData?.role === "admin" &&
             <TouchableOpacity style={styles.linkItem}
-              onPress={() => navigation.navigate('AddVehicle')}>
+              onPress={() => navigation.navigate("AddVehicle")}>
               <Text fontSize="2xl">Add Vehicle</Text>
               <FaIcon name="chevron-right" size={25} />
             </TouchableOpacity>
           }
           <TouchableOpacity
             style={styles.linkItem}
-            onPress={() => navigation.navigate('UpdateProfile')}>
+            onPress={() => navigation.navigate("UpdateProfile")}>
             <Text fontSize="2xl">Update profile</Text>
             <FaIcon name="chevron-right" size={25} />
           </TouchableOpacity>
@@ -81,19 +81,19 @@ const Profile = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   main: {
-    backgroundColor: '#fff',
-    height: '100%',
+    backgroundColor: "#fff",
+    height: "100%",
   },
   container: {
     padding: 20,
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    height: '80%',
+    flexDirection: "column",
+    justifyContent: "space-between",
+    height: "80%",
   },
   header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#fff',
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#fff",
     elevation: 19,
     paddingHorizontal: 20,
     paddingVertical: 30,
@@ -106,9 +106,9 @@ const styles = StyleSheet.create({
   },
   linkItem: {
     marginVertical: 25,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
 });
 

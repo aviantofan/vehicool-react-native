@@ -4,18 +4,18 @@ import {
   TextInput,
   StyleSheet,
   ScrollView,
-} from 'react-native';
-import React, { useEffect, useState } from 'react';
-import { Text, Image, Center, Radio, Stack } from 'native-base';
-import EntypoIcon from 'react-native-vector-icons/Entypo';
-import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Button from '../components/Button';
-import { useNavigation } from '@react-navigation/native';
-import PushNotification from 'react-native-push-notification';
-import { useDispatch, useSelector } from 'react-redux';
-import { dataUser, updateData } from '../redux/actions/auth';
-import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
-import NoPhoto from '../assets/photo-camera.png';
+} from "react-native";
+import React, { useEffect, useState } from "react";
+import { Text, Image, Center, Radio, Stack } from "native-base";
+import EntypoIcon from "react-native-vector-icons/Entypo";
+import MaterialIcon from "react-native-vector-icons/MaterialCommunityIcons";
+import Button from "../components/Button";
+import { useNavigation } from "@react-navigation/native";
+import PushNotification from "react-native-push-notification";
+import { useDispatch, useSelector } from "react-redux";
+import { dataUser, updateData } from "../redux/actions/auth";
+import { launchCamera, launchImageLibrary } from "react-native-image-picker";
+import NoPhoto from "../assets/photo-camera.png";
 
 const UpdateProfile = ({ navigation: { goBack } }) => {
 
@@ -29,7 +29,7 @@ const UpdateProfile = ({ navigation: { goBack } }) => {
   const [phone, setPhone] = useState(`${auth.userData?.phone}`);
   const [birthdate, setBirthdate] = useState(`${auth.userData?.birthdate}`);
   const [address, setAddress] = useState(`${auth.userData?.address}`);
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState("");
 
   useEffect(() => {
     dispatch(dataUser(auth.token));
@@ -75,11 +75,11 @@ const UpdateProfile = ({ navigation: { goBack } }) => {
     ));
     // console.log(image)
     PushNotification.localNotification({
-      channelId: 'updateProfile',
-      title: 'Update Profile Success!',
-      message: 'You can see your personal information'
+      channelId: "updateProfile",
+      title: "Update Profile Success!",
+      message: "You can see your personal information"
     });
-    navigation.navigate('Profile');
+    navigation.navigate("Profile");
   };
 
   return (
@@ -102,8 +102,8 @@ const UpdateProfile = ({ navigation: { goBack } }) => {
               <Image
                 source={image ? { uri: image.uri } : auth.userData?.image ? { uri: `${auth.userData?.image}` } : NoPhoto}
                 size={99}
-                resizeMode={'cover'}
-                borderRadius={'full'}
+                resizeMode={"cover"}
+                borderRadius={"full"}
                 alt="Profile Pic"
               />
             </Center>
@@ -136,7 +136,7 @@ const UpdateProfile = ({ navigation: { goBack } }) => {
               accessibilityLabel="favorite colorscheme"
               onChange={value => { setGender(value); }}>
               <Stack
-                direction={{ base: 'row' }}
+                direction={{ base: "row" }}
                 alignItems="center"
                 space={4}
                 w="75%"
@@ -212,56 +212,56 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   back: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginVertical: 10,
   },
   icon: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   textBack: {},
   profilePict: {
     marginTop: 10,
-    justifyContent: 'center',
-    position: 'relative',
+    justifyContent: "center",
+    position: "relative",
   },
   iconEdit: {
-    position: 'absolute',
-    alignSelf: 'center',
+    position: "absolute",
+    alignSelf: "center",
     bottom: 0,
     right: 140,
-    backgroundColor: '#5C527F',
+    backgroundColor: "#5C527F",
     padding: 9,
     borderRadius: 50,
   },
   iconEditCam: {
-    position: 'absolute',
-    alignSelf: 'center',
+    position: "absolute",
+    alignSelf: "center",
     bottom: 60,
     right: 140,
-    backgroundColor: '#5C527F',
+    backgroundColor: "#5C527F",
     padding: 9,
     borderRadius: 50,
   },
   radioGrup: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     marginTop: 20,
   },
   textRadio: {
     marginLeft: 8,
   },
   label: {
-    color: 'gray',
+    color: "gray",
     marginTop: 20,
     marginBottom: 15,
   },
   input: {
     height: 50,
-    color: 'black',
+    color: "black",
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: 'gray',
+    borderColor: "gray",
     paddingHorizontal: 15,
   },
   button: {

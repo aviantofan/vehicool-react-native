@@ -3,37 +3,37 @@ const initialState = {
   userData: null,
   message: null,
   isError: false,
-  errMessage: '',
+  errMessage: "",
 };
 
 const auth = (state = initialState, action) => {
   switch (action.type) {
-  case 'AUTH_LOGIN': {
+  case "AUTH_LOGIN": {
     state.token = action.payload;
     return { ...state };
   }
-  case 'AUTH_LOGOUT': {
+  case "AUTH_LOGOUT": {
     return { ...initialState };
   }
-  case 'GET_PROFILE': {
+  case "GET_PROFILE": {
     state.userData = action.payload;
     return { ...state };
   }
-  case 'UPDATE_PROFILE': {
+  case "UPDATE_PROFILE": {
     state.userData = action.payload.result;
     state.message = action.payload.message;
     state.errMsg = null;
     state.isError = false;
     return { ...state };
   }
-  case 'AUTH_ERROR': {
+  case "AUTH_ERROR": {
     state.token = null;
     state.isError = true;
     state.errMessage = action.payload;
     return { ...state };
   }
-  case 'AUTH_CLEAR_ERR': {
-    return { ...state, isError: false, errMessage: '' };
+  case "AUTH_CLEAR_ERR": {
+    return { ...state, isError: false, errMessage: "" };
   }
   default: {
     return { ...state };

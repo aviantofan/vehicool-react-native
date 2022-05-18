@@ -1,14 +1,14 @@
 const initialState = {
   isLoading: false,
   err: false,
-  errMsg: '',
+  errMsg: "",
   successMsg: null,
   list: {},
 };
 
 const listVehicle = (state = initialState, action) => {
   switch (action.type) {
-  case 'GET_VEHICLE_LIST': {
+  case "GET_VEHICLE_LIST": {
     state.list = action.payload.results;
     return { ...state };
   }

@@ -1,8 +1,8 @@
-import { View, StyleSheet } from 'react-native';
-import React from 'react';
-import { Image, Text } from 'native-base';
-import FaIcon from 'react-native-vector-icons/FontAwesome';
-import LinearGradient from 'react-native-linear-gradient';
+import { View, StyleSheet } from "react-native";
+import React from "react";
+import { Image, Text } from "native-base";
+import FaIcon from "react-native-vector-icons/FontAwesome";
+import LinearGradient from "react-native-linear-gradient";
 
 const ListHistories = ({ image, name, rentStartDate, rentEndDate, prepayment, returned, ...set }) => {
   return (
@@ -11,7 +11,7 @@ const ListHistories = ({ image, name, rentStartDate, rentEndDate, prepayment, re
         <Image
           source={image}
           alt={name}
-          resizeMode={'cover'}
+          resizeMode={"cover"}
           width={150}
           height={120}
           borderRadius={30}
@@ -20,7 +20,7 @@ const ListHistories = ({ image, name, rentStartDate, rentEndDate, prepayment, re
       </View>
       <View style={styles.right}>
         <View>
-          <Text fontSize={'lg'} bold>
+          <Text fontSize={"lg"} bold>
             {name}
           </Text>
           <Text>{rentStartDate} to {rentEndDate}</Text>
@@ -38,7 +38,7 @@ const ListHistories = ({ image, name, rentStartDate, rentEndDate, prepayment, re
             </Text>
           }
           {
-            returned === 'No Data' &&
+            returned === "No Data" &&
             <Text style={styles.textNoData}>
               There's no data
             </Text>
@@ -55,25 +55,25 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
   },
   listVehicles: {
-    flexDirection: 'row',
+    flexDirection: "row",
     marginVertical: 18,
   },
   left: {
-    position: 'relative',
-    width: '40%',
+    position: "relative",
+    width: "40%",
   },
   right: {
     marginLeft: 35,
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
   },
   textReturned: {
-    color: 'green'
+    color: "green"
   },
   textNotReturned: {
-    color: 'red'
+    color: "red"
   },
   textNoData: {
-    color: 'black'
+    color: "black"
   }
 });
 

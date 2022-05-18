@@ -1,8 +1,8 @@
-import { View, ScrollView, TouchableOpacity, StyleSheet, } from 'react-native';
-import React, { useEffect, useState } from 'react';
-import ListHistories from '../components/ListHistories';
-import { useDispatch, useSelector } from 'react-redux';
-import { listHistory } from '../redux/actions/transaction';
+import { View, ScrollView, TouchableOpacity, StyleSheet, } from "react-native";
+import React, { useEffect, useState } from "react";
+import ListHistories from "../components/ListHistories";
+import { useDispatch, useSelector } from "react-redux";
+import { listHistory } from "../redux/actions/transaction";
 
 const History = () => {
   const dispatch = useDispatch();
@@ -15,48 +15,48 @@ const History = () => {
   const listHistories = [
     {
       id: 1,
-      name: 'No Data',
-      rentStartDate: 'Null',
-      rentEndDate: 'Null',
-      prepayment: 'Null',
-      image: require('../assets/photo-camera.png'),
-      returned: 'No Data',
+      name: "No Data",
+      rentStartDate: "Null",
+      rentEndDate: "Null",
+      prepayment: "Null",
+      image: require("../assets/photo-camera.png"),
+      returned: "No Data",
     },
     {
       id: 2,
-      name: 'No Data',
-      rentStartDate: 'Null',
-      rentEndDate: 'Null',
-      prepayment: 'Null',
-      image: require('../assets/photo-camera.png'),
-      returned: 'No Data',
+      name: "No Data",
+      rentStartDate: "Null",
+      rentEndDate: "Null",
+      prepayment: "Null",
+      image: require("../assets/photo-camera.png"),
+      returned: "No Data",
     },
     {
       id: 3,
-      name: 'No Data',
-      rentStartDate: 'Null',
-      rentEndDate: 'Null',
-      prepayment: 'Null',
-      image: require('../assets/photo-camera.png'),
-      returned: 'No Data',
+      name: "No Data",
+      rentStartDate: "Null",
+      rentEndDate: "Null",
+      prepayment: "Null",
+      image: require("../assets/photo-camera.png"),
+      returned: "No Data",
     },
     {
       id: 4,
-      name: 'No Data',
-      rentStartDate: 'Null',
-      rentEndDate: 'Null',
-      prepayment: 'Null',
-      image: require('../assets/photo-camera.png'),
-      returned: 'No Data',
+      name: "No Data",
+      rentStartDate: "Null",
+      rentEndDate: "Null",
+      prepayment: "Null",
+      image: require("../assets/photo-camera.png"),
+      returned: "No Data",
     },
     {
       id: 5,
-      name: 'No Data',
-      rentStartDate: 'Null',
-      rentEndDate: 'Null',
-      prepayment: 'Null',
-      image: require('../assets/photo-camera.png'),
-      returned: 'No Data',
+      name: "No Data",
+      rentStartDate: "Null",
+      rentEndDate: "Null",
+      prepayment: "Null",
+      image: require("../assets/photo-camera.png"),
+      returned: "No Data",
     },
   ];
 
@@ -107,16 +107,16 @@ const styles = StyleSheet.create({
     paddingLeft: 20
   },
   search: {
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    backgroundColor: '#fff',
+    alignItems: "center",
+    justifyContent: "space-between",
+    backgroundColor: "#fff",
     elevation: 19,
     paddingHorizontal: 20,
     paddingTop: 20
   },
   filter: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     paddingBottom: 10,
   },
 });

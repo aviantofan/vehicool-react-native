@@ -4,7 +4,7 @@ const initialState = {
 
 const pages = (state = initialState, action) => {
   switch (action.type) {
-  case 'PAGES_LOADING': {
+  case "PAGES_LOADING": {
     state.isLoading = !state.isLoading;
     return { ...state };
   }

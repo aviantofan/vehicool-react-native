@@ -1,65 +1,65 @@
-import { combineReducers } from 'redux';
-import { persistReducer } from 'redux-persist';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { combineReducers } from "redux";
+import { persistReducer } from "redux-persist";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import auth from './auth';
-import register from './register';
-import forgot from './forgot';
-import change from './change';
-import counter from './counter';
-import category from './category';
-import popular from './popular';
-import detail from './detail.js';
-import transaction from './transaction';
-import listVehicle from './listVehicle';
+import auth from "./auth";
+import register from "./register";
+import forgot from "./forgot";
+import change from "./change";
+import counter from "./counter";
+import category from "./category";
+import popular from "./popular";
+import detail from "./detail.js";
+import transaction from "./transaction";
+import listVehicle from "./listVehicle";
 
 const persistAuth = {
-  key: 'auth',
+  key: "auth",
   storage: AsyncStorage,
 };
 
 const persistRegister = {
-  key: 'register',
+  key: "register",
   storage: AsyncStorage,
 };
 
 const persistForgot = {
-  key: 'forgot',
+  key: "forgot",
   storage: AsyncStorage,
 };
 
 const persistChange = {
-  key: 'change',
+  key: "change",
   storage: AsyncStorage,
 };
 
 const persistCounter = {
-  key: 'counter',
+  key: "counter",
   storage: AsyncStorage,
 };
 
 const persistCategory = {
-  key: 'category',
+  key: "category",
   storage: AsyncStorage,
 };
 
 const persistPopular = {
-  key: 'popular',
+  key: "popular",
   storage: AsyncStorage,
 };
 
 const persistDetail = {
-  key: 'detail',
+  key: "detail",
   storage: AsyncStorage,
 };
 
 const persistTransaction = {
-  key: 'transaction',
+  key: "transaction",
   storage: AsyncStorage,
 };
 
 const persistListVehicle = {
-  key: 'listVehicle',
+  key: "listVehicle",
   storage: AsyncStorage,
 };
 

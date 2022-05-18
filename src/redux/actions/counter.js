@@ -1,11 +1,11 @@
 export const increment = () => {
   return {
-    type: 'COUNTER_INCREMENT',
+    type: "COUNTER_INCREMENT",
   };
 };
 
 export const decrement = () => {
   return {
-    type: 'COUNTER_DECREMENT',
+    type: "COUNTER_DECREMENT",
   };
 };

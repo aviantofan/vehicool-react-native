@@ -1,8 +1,8 @@
-import { View, StyleSheet } from 'react-native';
-import React from 'react';
-import { Image, Text } from 'native-base';
-import FaIcon from 'react-native-vector-icons/FontAwesome';
-import LinearGradient from 'react-native-linear-gradient';
+import { View, StyleSheet } from "react-native";
+import React from "react";
+import { Image, Text } from "native-base";
+import FaIcon from "react-native-vector-icons/FontAwesome";
+import LinearGradient from "react-native-linear-gradient";
 
 const List = ({ image, name, seet, stock, price, ...set }) => {
   return (
@@ -11,7 +11,7 @@ const List = ({ image, name, seet, stock, price, ...set }) => {
         <Image
           source={image}
           alt={name}
-          resizeMode={'cover'}
+          resizeMode={"cover"}
           width={150}
           height={120}
           borderRadius={30}
@@ -20,9 +20,9 @@ const List = ({ image, name, seet, stock, price, ...set }) => {
         <LinearGradient
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
-          colors={['#3E2C41', '#5C527F', '#6E85B2']}
+          colors={["#3E2C41", "#5C527F", "#6E85B2"]}
           style={styles.rate}>
-          <Text bold color="white" fontSize={'md'}>
+          <Text bold color="white" fontSize={"md"}>
             4.5
           </Text>
           <FaIcon name="star" color="white" size={20} style={styles.iconRate} />
@@ -30,7 +30,7 @@ const List = ({ image, name, seet, stock, price, ...set }) => {
       </View>
       <View style={styles.right}>
         <View>
-          <Text fontSize={'lg'} bold>
+          <Text fontSize={"lg"} bold>
             {name}
           </Text>
           <Text>Max for {seet} person</Text>
@@ -45,7 +45,7 @@ const List = ({ image, name, seet, stock, price, ...set }) => {
             </Text>
           )}
         </View>
-        <Text fontSize={'lg'} bold style={styles.price}>
+        <Text fontSize={"lg"} bold style={styles.price}>
           Rp.{price}/day
         </Text>
       </View>
@@ -59,22 +59,22 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
   },
   listVehicles: {
-    flexDirection: 'row',
+    flexDirection: "row",
     marginVertical: 18,
   },
   left: {
-    position: 'relative',
-    width: '40%',
+    position: "relative",
+    width: "40%",
   },
   image: {},
   rate: {
-    flexDirection: 'row',
+    flexDirection: "row",
     width: 65,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     padding: 7,
     borderRadius: 20,
-    position: 'absolute',
+    position: "absolute",
     right: -18,
     top: -10,
   },
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
   },
   right: {
     marginLeft: 35,
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
   },
 });
 

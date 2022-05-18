@@ -4,21 +4,21 @@ const categoryState = {
   bike: {},
   isLoading: false,
   err: false,
-  errMsg: '',
+  errMsg: "",
   successMsg: null,
 };
 
 const category = (state = categoryState, action) => {
   switch (action.type) {
-  case 'GET_CARS': {
+  case "GET_CARS": {
     state.cars = action.payload.results;
     return { ...state };
   }
-  case 'GET_MOTORBIKE': {
+  case "GET_MOTORBIKE": {
     state.motorbike = action.payload.results;
     return { ...state };
   }
-  case 'GET_BIKE': {
+  case "GET_BIKE": {
     state.bike = action.payload.results;
     return { ...state };
   }

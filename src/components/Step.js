@@ -1,42 +1,42 @@
-import { View, Text, StyleSheet } from 'react-native';
-import React from 'react';
-import LinearGradient from 'react-native-linear-gradient';
+import { View, Text, StyleSheet } from "react-native";
+import React from "react";
+import LinearGradient from "react-native-linear-gradient";
 
 const Step = ({ currentlyActive, count = 3 }) => {
   const weight = 36;
   const styles = StyleSheet.create({
     wrapper: {
-      flexDirection: 'row',
-      justifyContent: 'center',
-      alignItems: 'center',
+      flexDirection: "row",
+      justifyContent: "center",
+      alignItems: "center",
     },
     lineWrapper: {
-      flexDirection: 'row',
-      position: 'absolute',
-      width: '100%',
-      justifyContent: 'space-around',
+      flexDirection: "row",
+      position: "absolute",
+      width: "100%",
+      justifyContent: "space-around",
     },
     line: {
       height: 4,
       width: weight + 5,
     },
     stepper: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center',
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
       height: weight,
     },
     item: {
       width: weight,
       height: weight,
       borderRadius: weight / 2,
-      justifyContent: 'center',
-      alignItems: 'center',
+      justifyContent: "center",
+      alignItems: "center",
     },
     text: {
       fontSize: weight / 2,
-      color: 'white',
-      fontWeight: 'bold',
+      color: "white",
+      fontWeight: "bold",
     },
   });
 
@@ -53,8 +53,8 @@ const Step = ({ currentlyActive, count = 3 }) => {
                 end={{ x: 1, y: 0 }}
                 colors={
                   currentlyActive - 1 >= index + 1
-                    ? ['#3E2C41', '#5C527F', '#6E85B2']
-                    : ['#DFDEDE', '#DFDEDE']
+                    ? ["#3E2C41", "#5C527F", "#6E85B2"]
+                    : ["#DFDEDE", "#DFDEDE"]
                 }
                 style={styles.line}
               />
@@ -69,8 +69,8 @@ const Step = ({ currentlyActive, count = 3 }) => {
               end={{ x: 1, y: 0 }}
               colors={
                 currentlyActive >= index + 1
-                  ? ['#3E2C41', '#5C527F', '#6E85B2']
-                  : ['#DFDEDE', '#DFDEDE']
+                  ? ["#3E2C41", "#5C527F", "#6E85B2"]
+                  : ["#DFDEDE", "#DFDEDE"]
               }
               style={styles.item}>
               <Text style={styles.text}>{index + 1}</Text>

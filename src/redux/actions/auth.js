@@ -1,29 +1,29 @@
-import http from '../../helper/http';
-import qs from 'qs';
-import RNFetchBlob from 'rn-fetch-blob';
+import http from "../../helper/http";
+import qs from "qs";
+import RNFetchBlob from "rn-fetch-blob";
 const { REACT_APP_URL } = process.env;
 
 export const authLogin = (email, password) => {
   return async dispatch => {
     dispatch({
-      type: 'AUTH_CLEAR_ERR',
+      type: "AUTH_CLEAR_ERR",
     });
     try {
       const input = { email: email, password: password };
-      const { data } = await http().post('/auth/login', qs.stringify(input));
+      const { data } = await http().post("/auth/login", qs.stringify(input));
       dispatch({
-        type: 'AUTH_LOGIN',
+        type: "AUTH_LOGIN",
         payload: data.result.token,
       });
     } catch (err) {
-      let payload = '';
+      let payload = "";
       if (err.response) {
         payload = err.response.data.message;
       } else {
         payload = err.message;
       }
       dispatch({
-        type: 'AUTH_ERROR',
+        type: "AUTH_ERROR",
         payload: payload,
       });
     }
@@ -33,9 +33,9 @@ export const authLogin = (email, password) => {
 export const dataUser = (token) => {
   return async dispatch => {
     try {
-      const { data } = await http(token).get('/profile');
+      const { data } = await http(token).get("/profile");
       dispatch({
-        type: 'GET_PROFILE',
+        type: "GET_PROFILE",
         payload: data.result
       });
     } catch (err) {
@@ -48,56 +48,56 @@ export const updateData = (id, token, name, email, username, gender, phone, birt
   return async dispatch => {
     try {
       dispatch({
-        type: 'PAGES_LOADING',
+        type: "PAGES_LOADING",
       });
       if (image) {
         const { data } = await RNFetchBlob.fetch(
-          'PATCH',
+          "PATCH",
           `${REACT_APP_URL}/users/${id}`,
           {
             Authorization: `Bearer ${token}`,
-            'Content-Type': 'multipart/form-data',
+            "Content-Type": "multipart/form-data",
           },
           [
             {
-              name: 'image',
+              name: "image",
               filename: image.fileName,
               type: image.type,
               data: RNFetchBlob.wrap(image.uri),
             },
-            { name: 'name', data: name },
-            { name: 'username', data: username },
-            { name: 'email', data: email },
-            { name: 'gender', data: gender },
-            { name: 'birthdate', data: birthdate },
-            { name: 'phone', data: phone },
-            { name: 'address', data: address },
+            { name: "name", data: name },
+            { name: "username", data: username },
+            { name: "email", data: email },
+            { name: "gender", data: gender },
+            { name: "birthdate", data: birthdate },
+            { name: "phone", data: phone },
+            { name: "address", data: address },
           ],
         );
         dispatch({
-          type: 'UPDATE_PROFILE',
+          type: "UPDATE_PROFILE",
           payload: JSON.parse(data)
         });
       } else {
         const { data } = await RNFetchBlob.fetch(
-          'PATCH',
+          "PATCH",
           `${REACT_APP_URL}/users/${id}`,
           {
             Authorization: `Bearer ${token}`,
-            'Content-Type': 'multipart/form-data',
+            "Content-Type": "multipart/form-data",
           },
           [
-            { name: 'name', data: name },
-            { name: 'username', data: username },
-            { name: 'email', data: email },
-            { name: 'gender', data: gender },
-            { name: 'birthdate', data: birthdate },
-            { name: 'phone', data: phone },
-            { name: 'address', data: address },
+            { name: "name", data: name },
+            { name: "username", data: username },
+            { name: "email", data: email },
+            { name: "gender", data: gender },
+            { name: "birthdate", data: birthdate },
+            { name: "phone", data: phone },
+            { name: "address", data: address },
           ],
         );
         dispatch({
-          type: 'UPDATE_PROFILE',
+          type: "UPDATE_PROFILE",
           payload: JSON.parse(data)
         });
       }

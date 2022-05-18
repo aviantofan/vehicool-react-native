@@ -1,24 +1,24 @@
-import { View, TextInput, Text as Texts, Image as Images, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
-import { Text, Image, Center, Radio, Stack } from 'native-base';
-import React, { useEffect, useState } from 'react';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import LinearGradient from 'react-native-linear-gradient';
-import { useNavigation } from '@react-navigation/native';
-import Button from '../components/Button';
-import DatePicker from 'react-native-date-picker';
-import { Picker } from '@react-native-picker/picker';
-import moment from 'moment';
-import { getVehicleDetail, updateVehicle } from '../redux/actions/detail';
-import { useDispatch, useSelector } from 'react-redux';
-import { increment, decrement } from '../redux/actions/counter';
-import NoPhoto from '../assets/photo-camera.png';
-import EntypoIcon from 'react-native-vector-icons/Entypo';
-import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
-import PushNotification from 'react-native-push-notification';
-import { getData } from '../redux/actions/transaction';
+import { View, TextInput, Text as Texts, Image as Images, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
+import { Text, Image, Center, Radio, Stack } from "native-base";
+import React, { useEffect, useState } from "react";
+import Icon from "react-native-vector-icons/FontAwesome";
+import AntDesign from "react-native-vector-icons/AntDesign";
+import MaterialIcon from "react-native-vector-icons/MaterialCommunityIcons";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import LinearGradient from "react-native-linear-gradient";
+import { useNavigation } from "@react-navigation/native";
+import Button from "../components/Button";
+import DatePicker from "react-native-date-picker";
+import { Picker } from "@react-native-picker/picker";
+import moment from "moment";
+import { getVehicleDetail, updateVehicle } from "../redux/actions/detail";
+import { useDispatch, useSelector } from "react-redux";
+import { increment, decrement } from "../redux/actions/counter";
+import NoPhoto from "../assets/photo-camera.png";
+import EntypoIcon from "react-native-vector-icons/Entypo";
+import { launchCamera, launchImageLibrary } from "react-native-image-picker";
+import PushNotification from "react-native-push-notification";
+import { getData } from "../redux/actions/transaction";
 
 const Detail = ({ route }) => {
   const [fav, setFav] = useState(false);
@@ -47,7 +47,7 @@ const Detail = ({ route }) => {
   const [reservationBefore, setReservationBefore] = useState(`${detail.vehicle?.reservationBefore}`);
   const [price, setPrice] = useState(`${detail.vehicle?.price}`);
   const [stock, setStock] = useState(`${detail.vehicle?.stock}`);
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState("");
 
   const addImage = async () => {
 
@@ -107,26 +107,26 @@ const Detail = ({ route }) => {
       image
     ));
     PushNotification.localNotification({
-      channelId: 'updateVehicle',
-      title: 'Update Vehicle Success!',
-      message: 'Your Vehicle Update Success!'
+      channelId: "updateVehicle",
+      title: "Update Vehicle Success!",
+      message: "Your Vehicle Update Success!"
     });
   };
 
   const transaction = {
-    rentStartDate: moment(rentStartDate).format('YYYY/MM/DD'),
-    rentEndDate: moment(rentEndDate).format('YYYY/MM/DD')
+    rentStartDate: moment(rentStartDate).format("YYYY/MM/DD"),
+    rentEndDate: moment(rentEndDate).format("YYYY/MM/DD")
   };
 
   const dataTransaction = () => {
     dispatch(getData(transaction));
-    navigation.navigate('Payment');
+    navigation.navigate("Payment");
   };
 
   return (
     <View style={styles.wrapper}>
       {
-        auth.userData?.role === 'user' &&
+        auth.userData?.role === "user" &&
         <>
           <View style={styles.barWrapper}>
             <View style={styles.imgWrapper}>
@@ -139,7 +139,7 @@ const Detail = ({ route }) => {
                 </TouchableOpacity>
               </View>
               <View style={styles.barSectionRight}>
-                <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['#3E2C41', '#5C527F']} style={styles.barRating}>
+                <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={["#3E2C41", "#5C527F"]} style={styles.barRating}>
                   <Texts style={styles.barRatings}>4.5<Icon name='star' /></Texts>
                 </LinearGradient>
                 <TouchableOpacity onPress={() => setFav(!fav)}>
@@ -185,27 +185,27 @@ const Detail = ({ route }) => {
             <Texts style={styles.selectQty}>Select Bikes</Texts>
             <View style={styles.counters}>
               <TouchableOpacity style={styles.counter} onPress={onincrement}>
-                <Texts style={{ alignSelf: 'center', fontSize: 20, fontWeight: 'bold' }}>
+                <Texts style={{ alignSelf: "center", fontSize: 20, fontWeight: "bold" }}>
                   +
                 </Texts>
               </TouchableOpacity>
-              <Texts style={{ color: 'black', marginLeft: 20, marginRight: 20, alignSelf: 'center', fontSize: 15, fontWeight: 'bold' }}>
+              <Texts style={{ color: "black", marginLeft: 20, marginRight: 20, alignSelf: "center", fontSize: 15, fontWeight: "bold" }}>
                 {counter.value}
               </Texts>
               <TouchableOpacity style={styles.counter} onPress={ondecrement}>
-                <Texts style={{ alignSelf: 'center', fontSize: 20, fontWeight: 'bold' }}>
+                <Texts style={{ alignSelf: "center", fontSize: 20, fontWeight: "bold" }}>
                   -
                 </Texts>
               </TouchableOpacity>
             </View>
           </View>
-          <View style={{ marginTop: 19, marginLeft: 19, marginRight: 19, justifyContent: 'space-between', flexDirection: 'row' }}>
+          <View style={{ marginTop: 19, marginLeft: 19, marginRight: 19, justifyContent: "space-between", flexDirection: "row" }}>
             <TouchableOpacity style={styles.startDate}>
               <TouchableOpacity
                 title={String(rentStartDate)}
                 onPress={() => setOpen(true)}>
-                <Texts style={{ color: 'black' }}>
-                  {isStart ? moment(rentStartDate).format('YYYY/MM/DD') : 'Rent Start Date'}
+                <Texts style={{ color: "black" }}>
+                  {isStart ? moment(rentStartDate).format("YYYY/MM/DD") : "Rent Start Date"}
                 </Texts>
               </TouchableOpacity>
               <DatePicker
@@ -231,8 +231,8 @@ const Detail = ({ route }) => {
               <TouchableOpacity
                 title={String(rentEndDate)}
                 onPress={() => setOp(true)}>
-                <Texts style={{ color: 'black' }}>
-                  {isEnd ? moment(rentEndDate).format('YYYY/MM/DD') : 'Rent End Date'}
+                <Texts style={{ color: "black" }}>
+                  {isEnd ? moment(rentEndDate).format("YYYY/MM/DD") : "Rent End Date"}
                 </Texts>
               </TouchableOpacity>
               <DatePicker
@@ -262,7 +262,7 @@ const Detail = ({ route }) => {
       }
 
       {
-        auth.userData?.role === 'admin' &&
+        auth.userData?.role === "admin" &&
         <View>
           <TouchableOpacity style={styles.back} onPress={navigation.goBack}>
             <EntypoIcon
@@ -282,8 +282,8 @@ const Detail = ({ route }) => {
                   <Image
                     source={image ? { uri: image.uri } : detail.vehicle?.image ? { uri: `${detail.vehicle?.image}` } : NoPhoto}
                     size={99}
-                    resizeMode={'cover'}
-                    borderRadius={'full'}
+                    resizeMode={"cover"}
+                    borderRadius={"full"}
                     alt="Profile Pic"
                   />
                 </Center>
@@ -374,7 +374,7 @@ const Detail = ({ route }) => {
                     accessibilityLabel="favorite colorscheme"
                     onChange={value => { setIsAvailable(value); }}>
                     <Stack
-                      direction={{ base: 'row' }}
+                      direction={{ base: "row" }}
                       alignItems="center"
                       space={4}
                       w="75%"
@@ -399,7 +399,7 @@ const Detail = ({ route }) => {
                     accessibilityLabel="favorite colorscheme"
                     onChange={value => { setIsPrepay(value); }}>
                     <Stack
-                      direction={{ base: 'row' }}
+                      direction={{ base: "row" }}
                       alignItems="center"
                       space={4}
                       w="75%"
@@ -424,7 +424,7 @@ const Detail = ({ route }) => {
                     accessibilityLabel="favorite colorscheme"
                     onChange={value => { setPaymentMethod(value); }}>
                     <Stack
-                      direction={{ base: 'row' }}
+                      direction={{ base: "row" }}
                       alignItems="center"
                       space={4}
                       w="75%"
@@ -452,7 +452,7 @@ const Detail = ({ route }) => {
                     accessibilityLabel="favorite colorscheme"
                     onChange={value => { setCategoryId(value); }}>
                     <Stack
-                      direction={{ base: 'row' }}
+                      direction={{ base: "row" }}
                       alignItems="center"
                       space={4}
                       w="75%"
@@ -483,44 +483,44 @@ const Detail = ({ route }) => {
 
 const styles = StyleSheet.create({
   wrapper: {
-    backgroundColor: 'white',
-    height: '100%'
+    backgroundColor: "white",
+    height: "100%"
   },
   imgWrapper: {
     height: 250,
-    justifyContent: 'center'
+    justifyContent: "center"
   },
   img: {
-    width: '100%',
+    width: "100%",
     height: 299
   },
   barWrapper: {
-    position: 'relative'
+    position: "relative"
   },
   barItem: {
-    flexDirection: 'row',
+    flexDirection: "row",
     paddingHorizontal: 19,
     paddingVertical: 12,
-    position: 'absolute'
+    position: "absolute"
   },
   barSectionLeft: {
     flex: 1
   },
   barSectionRight: {
-    flexDirection: 'row'
+    flexDirection: "row"
   },
   barRating: {
-    flexDirection: 'row',
+    flexDirection: "row",
     paddingHorizontal: 8,
     paddingVertical: 4,
     borderRadius: 40,
     marginRight: 11
   },
   barRatingText: {
-    color: 'white'
+    color: "white"
   },
   descWrapper: {
-    flexDirection: 'row'
+    flexDirection: "row"
   },
   desc: {
     flex: 1,
@@ -528,167 +528,167 @@ const styles = StyleSheet.create({
     paddingHorizontal: 19
   },
   chatIcon: {
-    flexDirection: 'row',
+    flexDirection: "row",
     marginTop: 30,
     paddingHorizontal: 19,
   },
   descVehicle: {
-    color: 'black',
+    color: "black",
     fontSize: 28,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   detailV: {
     marginTop: 20,
     paddingHorizontal: 19,
   },
   detailVehicle: {
-    color: 'black',
+    color: "black",
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   detailVehicleSuccess: {
-    color: 'green',
+    color: "green",
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   detailVehicleWarning: {
-    color: 'red',
+    color: "red",
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   locWrapper: {
     marginTop: 20,
-    flexDirection: 'row'
+    flexDirection: "row"
   },
   loc: {
-    backgroundColor: '#6E85B2',
+    backgroundColor: "#6E85B2",
     width: 45,
     height: 45,
     borderRadius: 10,
     marginTop: 19,
     marginLeft: 19,
     paddingVertical: 8,
-    textAlign: 'center',
-    alignItems: 'center'
+    textAlign: "center",
+    alignItems: "center"
   },
   locText: {
     marginTop: 19,
     marginLeft: 19,
     paddingVertical: 8,
-    color: 'black'
+    color: "black"
   },
   direction: {
     marginTop: 10,
-    flexDirection: 'row'
+    flexDirection: "row"
   },
   direct: {
-    backgroundColor: '#6E85B2',
+    backgroundColor: "#6E85B2",
     width: 45,
     height: 45,
     borderRadius: 10,
     marginTop: 19,
     marginLeft: 19,
     paddingVertical: 8,
-    textAlign: 'center',
-    alignItems: 'center'
+    textAlign: "center",
+    alignItems: "center"
   },
   directText: {
     marginTop: 19,
     marginLeft: 19,
     paddingVertical: 8,
-    color: 'black'
+    color: "black"
   },
   qtyWrapper: {
-    flexDirection: 'row',
+    flexDirection: "row",
     marginTop: 10,
-    flexDirection: 'row',
+    flexDirection: "row",
     marginLeft: 19,
     marginTop: 20,
   },
   selectQty: {
     flex: 1,
     marginTop: 19,
-    color: 'black',
+    color: "black",
     fontSize: 15,
-    fontWeight: 'bold'
+    fontWeight: "bold"
   },
   counter: {
-    backgroundColor: '#6E85B2',
+    backgroundColor: "#6E85B2",
     width: 30,
     height: 30,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     borderRadius: 50,
   },
   counters: {
-    flexDirection: 'row',
+    flexDirection: "row",
     marginTop: 19,
     marginRight: 19
   },
   btn: {
     marginHorizontal: 19,
     fontSize: 50,
-    fontWeight: 'bold'
+    fontWeight: "bold"
   },
   startDate: {
     borderRadius: 10,
-    backgroundColor: 'rgba(57, 57, 57, 0.15)',
+    backgroundColor: "rgba(57, 57, 57, 0.15)",
     padding: 15,
-    width: '50%',
+    width: "50%",
   },
   wrapper1: {
     padding: 20,
   },
   back: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginVertical: 10,
   },
   icon: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   profilePict: {
     marginTop: 10,
-    justifyContent: 'center',
-    position: 'relative',
+    justifyContent: "center",
+    position: "relative",
   },
   iconEdit: {
-    position: 'absolute',
-    alignSelf: 'center',
+    position: "absolute",
+    alignSelf: "center",
     bottom: 0,
     right: 140,
-    backgroundColor: '#5C527F',
+    backgroundColor: "#5C527F",
     padding: 9,
     borderRadius: 50,
   },
   iconEditCam: {
-    position: 'absolute',
-    alignSelf: 'center',
+    position: "absolute",
+    alignSelf: "center",
     bottom: 60,
     right: 140,
-    backgroundColor: '#5C527F',
+    backgroundColor: "#5C527F",
     padding: 9,
     borderRadius: 50,
   },
   radioGrup: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     marginTop: 20,
   },
   textRadio: {
     marginLeft: 8,
   },
   label: {
-    color: 'gray',
+    color: "gray",
     marginTop: 20,
     marginBottom: 15,
   },
   input: {
     height: 50,
-    color: 'black',
+    color: "black",
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: 'gray',
+    borderColor: "gray",
     paddingHorizontal: 15,
   },
   button: {

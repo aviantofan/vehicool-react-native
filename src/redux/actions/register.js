@@ -1,10 +1,10 @@
-import http from '../../helper/http';
-import qs from 'qs';
+import http from "../../helper/http";
+import qs from "qs";
 
 export const authRegister = (name, username, email, password) => {
   return async dispatch => {
     dispatch({
-      type: 'REGISTER_CLEAR',
+      type: "REGISTER_CLEAR",
     });
     try {
       const input = {
@@ -13,20 +13,20 @@ export const authRegister = (name, username, email, password) => {
         email,
         password,
       };
-      const { data } = await http().post('/auth/register', qs.stringify(input));
+      const { data } = await http().post("/auth/register", qs.stringify(input));
       dispatch({
-        type: 'AUTH_REGISTER',
+        type: "AUTH_REGISTER",
         payload: data,
       });
     } catch (err) {
-      let payload = '';
+      let payload = "";
       if (err.response) {
         payload = err.response.data.message;
       } else {
         payload = err.message;
       }
       dispatch({
-        type: 'REGISTER_ERR',
+        type: "REGISTER_ERR",
         payload: payload,
       });
     }

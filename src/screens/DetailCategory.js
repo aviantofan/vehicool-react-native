@@ -3,86 +3,86 @@ import {
   ScrollView,
   StyleSheet,
   TouchableOpacity
-} from 'react-native';
-import { Text } from 'native-base';
-import React from 'react';
-import List from '../components/List';
-import EntypoIcon from 'react-native-vector-icons/Entypo';
-import { useNavigation } from '@react-navigation/native';
+} from "react-native";
+import { Text } from "native-base";
+import React from "react";
+import List from "../components/List";
+import EntypoIcon from "react-native-vector-icons/Entypo";
+import { useNavigation } from "@react-navigation/native";
 
 const DetailCategory = () => {
   const navigation = useNavigation();
   const listVehicles = [
     {
-      name: 'Vespa Matic',
+      name: "Vespa Matic",
       seet: 2,
       stock: 14,
       price: 50000,
-      image: require('../assets/vespa.png'),
+      image: require("../assets/vespa.png"),
       rating: 4,
     },
     {
-      name: 'Honda',
+      name: "Honda",
       seet: 2,
       stock: 14,
       price: 50000,
-      image: require('../assets/honda.png'),
+      image: require("../assets/honda.png"),
       rating: 4,
     },
     {
-      name: 'Honda',
+      name: "Honda",
       seet: 2,
       stock: 2,
       price: 50000,
-      image: require('../assets/honda.png'),
+      image: require("../assets/honda.png"),
       rating: 4,
     },
     {
-      name: 'KLX',
+      name: "KLX",
       seet: 2,
       stock: 1,
       price: 50000,
-      image: require('../assets/klx.png'),
+      image: require("../assets/klx.png"),
       rating: 4,
     },
     {
-      name: 'Vespa',
+      name: "Vespa",
       seet: 2,
       stock: 14,
       price: 50000,
-      image: require('../assets/vespa.png'),
+      image: require("../assets/vespa.png"),
       rating: 4,
     },
     {
-      name: 'Honda',
+      name: "Honda",
       seet: 2,
       stock: 14,
       price: 50000,
-      image: require('../assets/classic.png'),
+      image: require("../assets/classic.png"),
       rating: 4,
     },
     {
-      name: 'KLX',
+      name: "KLX",
       seet: 2,
       stock: 14,
       price: 50000,
-      image: require('../assets/klx.png'),
+      image: require("../assets/klx.png"),
       rating: 4,
     },
     {
-      name: 'Honda',
+      name: "Honda",
       seet: 2,
       stock: 14,
       price: 50000,
-      image: require('../assets/honda.png'),
+      image: require("../assets/honda.png"),
       rating: 4,
     },
     {
-      name: 'Vespa',
+      name: "Vespa",
       seet: 2,
       stock: 14,
       price: 50000,
-      image: require('../assets/vespa.png'),
+      image: require("../assets/vespa.png"),
       rating: 4,
     },
   ];
@@ -105,7 +105,7 @@ const DetailCategory = () => {
           return (
             <TouchableOpacity
               key={index}
-              onPress={() => navigation.navigate('DetailVehicle')}>
+              onPress={() => navigation.navigate("DetailVehicle")}>
               <List
                 image={data.image}
                 name={data.name}
@@ -128,27 +128,27 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
   },
   back: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginVertical: 10,
   },
   listVehicles: {
-    flexDirection: 'row',
+    flexDirection: "row",
     marginVertical: 18,
   },
   left: {
-    position: 'relative',
-    width: '40%',
+    position: "relative",
+    width: "40%",
   },
   image: {},
   rate: {
-    flexDirection: 'row',
+    flexDirection: "row",
     width: 65,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     padding: 7,
     borderRadius: 20,
-    position: 'absolute',
+    position: "absolute",
     right: -18,
     top: -10,
   },
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
   },
   right: {
     marginLeft: 35,
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
   },
   bottom: {
     paddingBottom: 40,

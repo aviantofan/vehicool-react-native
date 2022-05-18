@@ -1,5 +1,5 @@
-import { TextInput, StyleSheet, View } from 'react-native';
-import React from 'react';
+import { TextInput, StyleSheet, View } from "react-native";
+import React from "react";
 
 const InputNew = ({ placeholder, type, ...set }) => {
   return (
@@ -25,8 +25,8 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 60,
-    color: 'black',
-    backgroundColor: 'rgba(178, 190, 195,0.3)',
+    color: "black",
+    backgroundColor: "rgba(178, 190, 195,0.3)",
     borderRadius: 10,
     fontSize: 20,
     paddingHorizontal: 15,

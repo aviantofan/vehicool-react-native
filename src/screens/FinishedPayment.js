@@ -4,15 +4,15 @@ import {
   StyleSheet,
   Image,
   ScrollView,
-} from 'react-native';
-import React from 'react';
-import { Box, Text } from 'native-base';
-import EntypoIcon from 'react-native-vector-icons/Entypo';
-import Format from '../helper/format';
-import Rating from '../components/Rating';
-import Button from '../components/Button';
-import { useNavigation } from '@react-navigation/native';
-import { useDispatch, useSelector } from 'react-redux';
+} from "react-native";
+import React from "react";
+import { Box, Text } from "native-base";
+import EntypoIcon from "react-native-vector-icons/Entypo";
+import Format from "../helper/format";
+import Rating from "../components/Rating";
+import Button from "../components/Button";
+import { useNavigation } from "@react-navigation/native";
+import { useDispatch, useSelector } from "react-redux";
 
 const FinishedPayment = () => {
   const { transaction } = useSelector(state => state);
@@ -44,17 +44,17 @@ const FinishedPayment = () => {
   const navigation = useNavigation();
   return (
     <Box p="5">
-      <TouchableOpacity style={styles.back} onPress={() => navigation.navigate('Home')}>
+      <TouchableOpacity style={styles.back} onPress={() => navigation.navigate("Home")}>
         <EntypoIcon name="chevron-left" color="black" size={35} />
-        <Text fontSize={'2xl'} pl="2" bold>
+        <Text fontSize={"2xl"} pl="2" bold>
           See history
         </Text>
       </TouchableOpacity>
       <ScrollView showsVerticalScrollIndicator={false}>
         <Text
-          textAlign={'center'}
+          textAlign={"center"}
           my="6"
-          fontSize={'2xl'}
+          fontSize={"2xl"}
           color="success.700"
           bold>
           Payment Success!
@@ -69,28 +69,28 @@ const FinishedPayment = () => {
             <Rating rate={4} right={30} top={-60} />
           </Box>
         </Box>
-        <Box py={'5'}>
-          <Text py={'1'}>
+        <Box py={"5"}>
+          <Text py={"1"}>
             {vehicle.name}
           </Text>
-          <Text py={'1'}>Prepayment (no tax)</Text>
-          <Text py={'1'}>
+          <Text py={"1"}>Prepayment (no tax)</Text>
+          <Text py={"1"}>
             {vehicle.startDate} to {vehicle.endDate}
           </Text>
         </Box>
         <View style={styles.borderBtm} />
         <Box>
-          <Text py={'1'}>ID: {customer.id}</Text>
-          <Text py={'1'}>
+          <Text py={"1"}>ID: {customer.id}</Text>
+          <Text py={"1"}>
             {customer.name} ({customer.email})
           </Text>
-          <Text py={'1'}>
-            {customer.phone}{' '}
+          <Text py={"1"}>
+            {customer.phone}{" "}
             <Text color="success.700" bold>
               Active
             </Text>
           </Text>
-          <Text py={'1'}>{customer.address}</Text>
+          <Text py={"1"}>{customer.address}</Text>
         </Box>
         <Box my="5">
           <Button color="primary">Total: {Format(customer.total)}</Button>
@@ -103,23 +103,23 @@ const FinishedPayment = () => {
 
 const styles = StyleSheet.create({
   back: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   imgWrapper: {
-    backgroundColor: 'rgba(30, 39, 46,1.0)',
+    backgroundColor: "rgba(30, 39, 46,1.0)",
     borderRadius: 20,
   },
   imageBg: {
-    width: '100%',
+    width: "100%",
     height: 250,
     borderRadius: 20,
-    resizeMode: 'cover',
-    backgroundColor: 'gray',
+    resizeMode: "cover",
+    backgroundColor: "gray",
   },
   borderBtm: {
     borderBottomWidth: 1,
-    borderBottomColor: 'gray',
+    borderBottomColor: "gray",
     marginBottom: 30,
   },
 });

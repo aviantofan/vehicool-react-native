@@ -1,6 +1,6 @@
-import { View, StyleSheet } from 'react-native';
-import React from 'react';
-import { Image, Text } from 'native-base';
+import { View, StyleSheet } from "react-native";
+import React from "react";
+import { Image, Text } from "native-base";
 
 const FavoriteList = ({ image, name, seet, stock, price, ...set }) => {
   return (
@@ -9,7 +9,7 @@ const FavoriteList = ({ image, name, seet, stock, price, ...set }) => {
         <Image
           source={image}
           alt={name}
-          resizeMode={'cover'}
+          resizeMode={"cover"}
           width={150}
           height={120}
           borderRadius={30}
@@ -18,7 +18,7 @@ const FavoriteList = ({ image, name, seet, stock, price, ...set }) => {
       </View>
       <View style={styles.right}>
         <View>
-          <Text fontSize={'lg'} bold>
+          <Text fontSize={"lg"} bold>
             {name}
           </Text>
           <Text>Max for {seet} person</Text>
@@ -33,7 +33,7 @@ const FavoriteList = ({ image, name, seet, stock, price, ...set }) => {
             </Text>
           )}
         </View>
-        <Text fontSize={'lg'} bold style={styles.price}>
+        <Text fontSize={"lg"} bold style={styles.price}>
           Rp.{price}/day
         </Text>
       </View>
@@ -47,16 +47,16 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
   },
   listVehicles: {
-    flexDirection: 'row',
+    flexDirection: "row",
     marginVertical: 18,
   },
   left: {
-    position: 'relative',
-    width: '40%',
+    position: "relative",
+    width: "40%",
   },
   right: {
     marginLeft: 35,
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
   },
 });
 

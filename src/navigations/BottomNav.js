@@ -1,17 +1,17 @@
-import React from 'react';
-import HomeNav from './HomeNav';
-import HistoryNav from './HistoryNav';
-import Search from '../screens/Search';
-import Profile from '../screens/Profile';
+import React from "react";
+import HomeNav from "./HomeNav";
+import HistoryNav from "./HistoryNav";
+import Search from "../screens/Search";
+import Profile from "../screens/Profile";
 
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 const BottomTab = createBottomTabNavigator();
 
 const BottomNav = () => {
   return (
-    <BottomTab.Navigator screenOptions={{ headerShown: false, tabBarShowLabel: false, tabBarActiveTintColor: '#5C527F' }}>
+    <BottomTab.Navigator screenOptions={{ headerShown: false, tabBarShowLabel: false, tabBarActiveTintColor: "#5C527F" }}>
 
       <BottomTab.Screen options={{
         tabBarIcon: ({ focused, color, size }) => <Icon name='home' color={color} size={size} />

@@ -1,13 +1,13 @@
-import { TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
-import React, { useEffect, useState } from 'react';
-import EntypoIcon from 'react-native-vector-icons/Entypo';
-import { Box, Text } from 'native-base';
-import Stepper from '../components/Step';
-import InputPayment from '../components/InputNew';
-import { Picker } from '@react-native-picker/picker';
-import Button from '../components/Button';
-import { useNavigation } from '@react-navigation/native';
-import { useDispatch, useSelector } from 'react-redux';
+import { TouchableOpacity, StyleSheet, ScrollView } from "react-native";
+import React, { useEffect, useState } from "react";
+import EntypoIcon from "react-native-vector-icons/Entypo";
+import { Box, Text } from "native-base";
+import Stepper from "../components/Step";
+import InputPayment from "../components/InputNew";
+import { Picker } from "@react-native-picker/picker";
+import Button from "../components/Button";
+import { useNavigation } from "@react-navigation/native";
+import { useDispatch, useSelector } from "react-redux";
 // import { dataUser, updateData } from '../redux/actions/auth'
 
 const Payment = () => {
@@ -18,17 +18,17 @@ const Payment = () => {
   const [selectPayment, setSelectPayment] = useState();
   const [isSelect, setIsSelect] = useState(false);
   const navigation = useNavigation();
-  const payment = ['OVO', 'Dana', 'Virtual Account'];
+  const payment = ["OVO", "Dana", "Virtual Account"];
   return (
-    <Box p={'3'}>
+    <Box p={"3"}>
       <TouchableOpacity style={styles.wrapper} onPress={() => navigation.goBack()}>
         <EntypoIcon name="chevron-left" color="black" size={35} />
-        <Text fontSize={'2xl'} pl="2" bold>
+        <Text fontSize={"2xl"} pl="2" bold>
           Payment
         </Text>
       </TouchableOpacity>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <Box py={'10'}>
+        <Box py={"10"}>
           <Stepper currentlyActive={1} />
         </Box>
         <Box py="2">
@@ -76,10 +76,10 @@ const Payment = () => {
             ))}
           </Picker>
         </Box>
-        <Box pt={'100'}>
+        <Box pt={"100"}>
           <Button
             color="secondary"
-            onPress={() => navigation.navigate('PaymentStepTwo')}>
+            onPress={() => navigation.navigate("PaymentStepTwo")}>
             See Order Details
           </Button>
         </Box>
@@ -90,12 +90,12 @@ const Payment = () => {
 
 const styles = StyleSheet.create({
   wrapper: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   picker: {
     height: 60,
     // color: 'gray',
-    backgroundColor: 'rgba(178, 190, 195,0.3)',
+    backgroundColor: "rgba(178, 190, 195,0.3)",
     borderRadius: 40,
     fontSize: 20,
     paddingHorizontal: 15,

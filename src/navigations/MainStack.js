@@ -1,16 +1,16 @@
-import React from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import React from "react";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import BottomNav from './BottomNav';
-import UpdateProfile from '../screens/UpdateProfile';
-import Favorite from '../screens/Favorite';
-import ChatRoom from '../screens/ChatRoom';
-import Detail from '../screens/Detail';
-import Payment from '../screens/Payment';
-import PaymentStepTwo from '../screens/PaymentStepTwo';
-import PaymentStepThree from '../screens/PaymentStepThree';
-import FinishedPayment from '../screens/FinishedPayment';
-import AddVehicle from '../screens/AddVehicle';
+import BottomNav from "./BottomNav";
+import UpdateProfile from "../screens/UpdateProfile";
+import Favorite from "../screens/Favorite";
+import ChatRoom from "../screens/ChatRoom";
+import Detail from "../screens/Detail";
+import Payment from "../screens/Payment";
+import PaymentStepTwo from "../screens/PaymentStepTwo";
+import PaymentStepThree from "../screens/PaymentStepThree";
+import FinishedPayment from "../screens/FinishedPayment";
+import AddVehicle from "../screens/AddVehicle";
 
 const MainStack = createNativeStackNavigator();
 

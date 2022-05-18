@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import React from "react";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
 const Title = ({ child, resChild, onPress }) => {
   return (
@@ -15,21 +15,21 @@ const Title = ({ child, resChild, onPress }) => {
 const styles = StyleSheet.create({
   t: {
     flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     margin: 20,
   },
   header: {
     fontSize: 28,
-    fontWeight: 'bold',
-    color: '#261C2C'
+    fontWeight: "bold",
+    color: "#261C2C"
   },
   link: {
-    marginLeft: 'auto',
+    marginLeft: "auto",
   },
   line: {
-    textDecorationLine: 'underline',
-    color: '#261C2C'
+    textDecorationLine: "underline",
+    color: "#261C2C"
   },
 });
 

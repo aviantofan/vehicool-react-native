@@ -6,14 +6,14 @@ import {
   SafeAreaView,
   TouchableOpacity,
   ScrollView
-} from 'react-native';
-import { Box } from 'native-base';
-import React, { useState, useEffect } from 'react';
-import Button from '../components/Button';
-import Input from '../components/Input';
-import { useNavigation } from '@react-navigation/native';
-import { useDispatch, useSelector } from 'react-redux';
-import { authLogin } from '../redux/actions/auth';
+} from "react-native";
+import { Box } from "native-base";
+import React, { useState, useEffect } from "react";
+import Button from "../components/Button";
+import Input from "../components/Input";
+import { useNavigation } from "@react-navigation/native";
+import { useDispatch, useSelector } from "react-redux";
+import { authLogin } from "../redux/actions/auth";
 
 const Login = () => {
   const [email, setEmail] = useState();
@@ -23,7 +23,7 @@ const Login = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch({
-      type: 'AUTH_CLEAR_ERR',
+      type: "AUTH_CLEAR_ERR",
     });
   }, [dispatch]);
 
@@ -41,7 +41,7 @@ const Login = () => {
     <ScrollView style={styles.container}>
       <Box style={styles.main}>
         <Image
-          source={require('../assets/auth-bg.png')}
+          source={require("../assets/auth-bg.png")}
           resizeMode="cover"
           style={styles.img}
         />
@@ -62,7 +62,7 @@ const Login = () => {
             />
             <TouchableOpacity>
               <Text style={styles.forgot} onPress={() => {
-                navigation.navigate('ForgotPassword');
+                navigation.navigate("ForgotPassword");
               }}>Forgot Password ?</Text>
             </TouchableOpacity>
           </SafeAreaView>
@@ -76,7 +76,7 @@ const Login = () => {
             <Text style={styles.signup}>Don`t have account? </Text>
             <TouchableOpacity>
               <Text style={styles.signup} onPress={() => {
-                navigation.navigate('Register');
+                navigation.navigate("Register");
               }}> Sign up now</Text>
             </TouchableOpacity>
           </View>
@@ -88,11 +88,11 @@ const Login = () => {
 
 const styles = StyleSheet.create({
   main: {
-    position: 'relative',
+    position: "relative",
   },
   forms: {
-    position: 'absolute',
-    width: '100%'
+    position: "absolute",
+    width: "100%"
   },
   container: {
     flex: 1
@@ -102,24 +102,24 @@ const styles = StyleSheet.create({
     height: 855,
   },
   text: {
-    color: 'white',
+    color: "white",
     fontSize: 36,
-    fontFamily: 'Roboto',
+    fontFamily: "Roboto",
     lineHeight: 42,
-    fontWeight: '900',
-    textAlign: 'justify',
+    fontWeight: "900",
+    textAlign: "justify",
     marginVertical: 10,
     marginHorizontal: 25,
     marginTop: 100,
     marginEnd: 50,
   },
   text1: {
-    color: 'white',
+    color: "white",
     fontSize: 36,
-    fontFamily: 'Roboto',
+    fontFamily: "Roboto",
     lineHeight: 42,
-    fontWeight: '900',
-    textAlign: 'justify',
+    fontWeight: "900",
+    textAlign: "justify",
     marginVertical: 10,
     marginHorizontal: 25,
     marginEnd: 50,
@@ -127,28 +127,28 @@ const styles = StyleSheet.create({
   btn: {
     marginBottom: 30,
     marginHorizontal: 15,
-    justifyContent: 'center'
+    justifyContent: "center"
   },
   form: {
     marginTop: 130,
   },
   forgot: {
-    color: 'white',
+    color: "white",
     fontSize: 14,
-    fontFamily: 'Roboto',
+    fontFamily: "Roboto",
     lineHeight: 19,
-    fontWeight: '400',
-    textAlign: 'justify',
+    fontWeight: "400",
+    textAlign: "justify",
     marginVertical: 10,
     marginHorizontal: 15,
     marginEnd: 235,
   },
   signupWrapper: {
-    flexDirection: 'row',
-    justifyContent: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
   },
   signup: {
-    color: 'white',
+    color: "white",
 
   }
 });

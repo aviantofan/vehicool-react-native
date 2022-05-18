@@ -4,34 +4,34 @@ import {
   TextInput,
   StyleSheet,
   ScrollView,
-} from 'react-native';
-import React, { useEffect, useState } from 'react';
-import { Text, Image, Center, Radio, Stack } from 'native-base';
-import EntypoIcon from 'react-native-vector-icons/Entypo';
-import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Button from '../components/Button';
-import { useNavigation } from '@react-navigation/native';
-import PushNotification from 'react-native-push-notification';
-import { useDispatch, useSelector } from 'react-redux';
-import { addVehicle } from '../redux/actions/addVehicle';
-import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+} from "react-native";
+import React, { useEffect, useState } from "react";
+import { Text, Image, Center, Radio, Stack } from "native-base";
+import EntypoIcon from "react-native-vector-icons/Entypo";
+import MaterialIcon from "react-native-vector-icons/MaterialCommunityIcons";
+import Button from "../components/Button";
+import { useNavigation } from "@react-navigation/native";
+import PushNotification from "react-native-push-notification";
+import { useDispatch, useSelector } from "react-redux";
+import { addVehicle } from "../redux/actions/addVehicle";
+import { launchCamera, launchImageLibrary } from "react-native-image-picker";
 
 const AddVehicle = () => {
 
   const dispatch = useDispatch();
   const { auth } = useSelector(state => state);
 
-  const [name, setName] = useState('');
-  const [color, setColor] = useState('');
-  const [loc, setLoc] = useState('');
-  const [isAvailable, setIsAvailable] = useState('');
-  const [paymentMethod, setPaymentMethod] = useState('');
-  const [capacity, setCapacity] = useState('');
-  const [categoryId, setCategoryId] = useState('');
-  const [reservationBefore, setReservationBefore] = useState('');
-  const [price, setPrice] = useState('');
-  const [stock, setStock] = useState('');
-  const [image, setImage] = useState('');
+  const [name, setName] = useState("");
+  const [color, setColor] = useState("");
+  const [loc, setLoc] = useState("");
+  const [isAvailable, setIsAvailable] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState("");
+  const [capacity, setCapacity] = useState("");
+  const [categoryId, setCategoryId] = useState("");
+  const [reservationBefore, setReservationBefore] = useState("");
+  const [price, setPrice] = useState("");
+  const [stock, setStock] = useState("");
+  const [image, setImage] = useState("");
 
   const addImage = async () => {
 
@@ -77,16 +77,16 @@ const AddVehicle = () => {
       stock,
       image));
     PushNotification.localNotification({
-      channelId: 'addingVehicle',
-      title: 'Adding Vehicle Success!',
-      message: 'Your Vehicle is ready to show!'
+      channelId: "addingVehicle",
+      title: "Adding Vehicle Success!",
+      message: "Your Vehicle is ready to show!"
     });
-    navigation.navigate('Home');
+    navigation.navigate("Home");
   };
 
   return (
     <View>
-      <TouchableOpacity style={styles.back} onPress={() => navigation.navigate('Profile')}>
+      <TouchableOpacity style={styles.back} onPress={() => navigation.navigate("Profile")}>
         <EntypoIcon
           name="chevron-left"
           color="black"
@@ -105,16 +105,16 @@ const AddVehicle = () => {
                 <Image
                   source={{ uri: image.uri }}
                   size={99}
-                  resizeMode={'cover'}
-                  borderRadius={'full'}
+                  resizeMode={"cover"}
+                  borderRadius={"full"}
                   alt="Profile Pic"
                 />
               ) : (
                 <Image
-                  source={require('../assets/photo-camera.png')}
+                  source={require("../assets/photo-camera.png")}
                   size={99}
-                  resizeMode={'cover'}
-                  borderRadius={'full'}
+                  resizeMode={"cover"}
+                  borderRadius={"full"}
                   alt="Profile Pic"
                 />
               )}
@@ -206,7 +206,7 @@ const AddVehicle = () => {
                 accessibilityLabel="favorite colorscheme"
                 onChange={value => { setIsAvailable(value); }}>
                 <Stack
-                  direction={{ base: 'row' }}
+                  direction={{ base: "row" }}
                   alignItems="center"
                   space={4}
                   w="75%"
@@ -231,7 +231,7 @@ const AddVehicle = () => {
                 accessibilityLabel="favorite colorscheme"
                 onChange={value => { setPaymentMethod(value); }}>
                 <Stack
-                  direction={{ base: 'row' }}
+                  direction={{ base: "row" }}
                   alignItems="center"
                   space={4}
                   w="75%"
@@ -259,7 +259,7 @@ const AddVehicle = () => {
                 accessibilityLabel="favorite colorscheme"
                 onChange={value => { setCategoryId(value); }}>
                 <Stack
-                  direction={{ base: 'row' }}
+                  direction={{ base: "row" }}
                   alignItems="center"
                   space={4}
                   w="75%"
@@ -293,56 +293,56 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   back: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginVertical: 10,
   },
   icon: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   textBack: {},
   profilePict: {
     marginTop: 10,
-    justifyContent: 'center',
-    position: 'relative',
+    justifyContent: "center",
+    position: "relative",
   },
   iconEdit: {
-    position: 'absolute',
-    alignSelf: 'center',
+    position: "absolute",
+    alignSelf: "center",
     bottom: 0,
     right: 140,
-    backgroundColor: '#5C527F',
+    backgroundColor: "#5C527F",
     padding: 9,
     borderRadius: 50,
   },
   iconEditCam: {
-    position: 'absolute',
-    alignSelf: 'center',
+    position: "absolute",
+    alignSelf: "center",
     bottom: 60,
     right: 140,
-    backgroundColor: '#5C527F',
+    backgroundColor: "#5C527F",
     padding: 9,
     borderRadius: 50,
   },
   radioGrup: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     marginTop: 20,
   },
   textRadio: {
     marginLeft: 8,
   },
   label: {
-    color: 'gray',
+    color: "gray",
     marginTop: 20,
     marginBottom: 15,
   },
   input: {
     height: 50,
-    color: 'black',
+    color: "black",
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: 'gray',
+    borderColor: "gray",
     paddingHorizontal: 15,
   },
   button: {
