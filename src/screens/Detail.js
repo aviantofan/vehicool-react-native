@@ -1,9 +1,9 @@
-import { View, SafeAreaView, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
-import { skeleton } from 'native-base'
+import { View, TextInput, Text as Texts, Image as Images, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
+import { Text, Image, Center, Radio, Stack } from 'native-base'
 import React, { useEffect, useState } from 'react'
-import detailImg from '../assets/detail.png'
 import Icon from 'react-native-vector-icons/FontAwesome'
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
+import AntDesign from 'react-native-vector-icons/AntDesign'
+import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import LinearGradient from 'react-native-linear-gradient'
 import { useNavigation } from '@react-navigation/native'
@@ -11,23 +11,57 @@ import Button from '../components/Button'
 import DatePicker from 'react-native-date-picker';
 import { Picker } from '@react-native-picker/picker';
 import moment from 'moment';
-import { getVehicleDetail } from '../redux/actions/detail';
+import { getVehicleDetail, updateVehicle } from '../redux/actions/detail';
 import { useDispatch, useSelector } from 'react-redux';
 import { increment, decrement } from '../redux/actions/counter'
 import NoPhoto from '../assets/photo-camera.png'
+import EntypoIcon from 'react-native-vector-icons/Entypo';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+import PushNotification from 'react-native-push-notification'
+import { getData } from '../redux/actions/transaction';
 
 const Detail = ({ route }) => {
   const [fav, setFav] = useState(false)
   const [count, setCount] = useState(0);
   const [open, setOpen] = useState(false);
-  const [date, setDate] = useState(new Date());
+  const [rentStartDate, setRentStartDate] = useState(new Date());
   const [isStart, setIsStart] = useState(false);
-  const [endDate, setEndDate] = useState();
+  const [op, setOp] = useState(false);
+  const [rentEndDate, setRentEndDate] = useState(new Date());
+  const [isEnd, setIsEnd] = useState(false);
   const navigation = useNavigation()
   const dispatch = useDispatch()
   const { detail } = useSelector(state => state);
   const { id: idVehicle } = route.params;
   const counter = useSelector(state => state.counter)
+  const auth = useSelector(state => state.auth)
+
+  const [name, setName] = useState(`${detail.vehicle?.name}`);
+  const [color, setColor] = useState(`${detail.vehicle?.color}`);
+  const [loc, setLoc] = useState(`${detail.vehicle?.loc}`);
+  const [isAvailable, setIsAvailable] = useState(`${detail.vehicle?.isAvailable}`);
+  const [isPrepay, setIsPrepay] = useState(`${detail.vehicle?.isPrepay}`);
+  const [paymentMethod, setPaymentMethod] = useState(`${detail.vehicle?.paymentMethod}`);
+  const [capacity, setCapacity] = useState(`${detail.vehicle?.capacity}`);
+  const [categoryId, setCategoryId] = useState(`${detail.vehicle?.categoryId}`);
+  const [reservationBefore, setReservationBefore] = useState(`${detail.vehicle?.reservationBefore}`);
+  const [price, setPrice] = useState(`${detail.vehicle?.price}`);
+  const [stock, setStock] = useState(`${detail.vehicle?.stock}`);
+  const [image, setImage] = useState('');
+
+  const addImage = async () => {
+
+    const photo = await launchImageLibrary({});
+    setImage(photo.assets[0]);
+  }
+
+  const handlePhotoCamera = async () => {
+    const photo = await launchCamera({
+      maxWidth: 640,
+      maxHeight: 640
+    });
+    setImage(photo.assets[0]);
+  };
 
   const onincrement = () => {
     dispatch(increment())
@@ -39,126 +73,410 @@ const Detail = ({ route }) => {
   useEffect(() => {
     dispatch(getVehicleDetail(idVehicle));
   }, [dispatch, idVehicle]);
+
+  const update = () => {
+    // const data = {
+    //   name,
+    //   color,
+    //   loc,
+    //   price,
+    //   stock,
+    //   capacity,
+    //   reservationBefore,
+    //   isAvailable,
+    //   isPrepay,
+    //   paymentMethod,
+    //   categoryId,
+    //   image
+    // }
+    // console.log(data);
+    dispatch(updateVehicle(
+      idVehicle,
+      auth.token,
+      name,
+      color,
+      loc,
+      price,
+      stock,
+      capacity,
+      reservationBefore,
+      isAvailable,
+      isPrepay,
+      paymentMethod,
+      categoryId,
+      image
+    ))
+    PushNotification.localNotification({
+      channelId: 'updateVehicle',
+      title: 'Update Vehicle Success!',
+      message: 'Your Vehicle Update Success!'
+    })
+  }
+
+  const transaction = {
+    rentStartDate: moment(rentStartDate).format('YYYY/MM/DD'),
+    rentEndDate: moment(rentEndDate).format('YYYY/MM/DD')
+  }
+
+  const dataTransaction = () => {
+    dispatch(getData(transaction))
+    navigation.navigate('Payment')
+  }
+
   return (
     <View style={styles.wrapper}>
-      <View style={styles.barWrapper}>
-        <View style={styles.imgWrapper}>
-          <Image source={detail.vehicle?.image ? { uri: `${detail.vehicle?.image}` } : NoPhoto} style={styles.img} />
-        </View>
-        <View style={styles.barItem}>
-          <View style={styles.barSectionLeft}>
-            <TouchableOpacity onPress={navigation.goBack}>
-              <Icon name='chevron-left' size={30} color='white' />
-            </TouchableOpacity>
+      {
+        auth.userData?.role === 'user' &&
+        <>
+          <View style={styles.barWrapper}>
+            <View style={styles.imgWrapper}>
+              <Images source={detail.vehicle?.image ? { uri: `${detail.vehicle?.image}` } : NoPhoto} style={styles.img} />
+            </View>
+            <View style={styles.barItem}>
+              <View style={styles.barSectionLeft}>
+                <TouchableOpacity onPress={navigation.goBack}>
+                  <Icon name='chevron-left' size={30} color='white' />
+                </TouchableOpacity>
+              </View>
+              <View style={styles.barSectionRight}>
+                <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['#3E2C41', '#5C527F']} style={styles.barRating}>
+                  <Texts style={styles.barRatings}>4.5<Icon name='star' /></Texts>
+                </LinearGradient>
+                <TouchableOpacity onPress={() => setFav(!fav)}>
+                  {fav ? <AntDesign name='heart' size={30} color='#ed716b' /> : <AntDesign name='hearto' size={30} color='white' />}
+                </TouchableOpacity>
+              </View>
+            </View>
           </View>
-          <View style={styles.barSectionRight}>
-            <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['#3E2C41', '#5C527F']} style={styles.barRating}>
-              <Text style={styles.barRatingText}>4.5<Icon name='star' /></Text>
-            </LinearGradient>
-            <TouchableOpacity onPress={() => setFav(!fav)}>
-              {fav ? <MaterialIcon name='favorite' size={30} color='#ed716b' /> : <MaterialIcon name='favorite-border' size={30} color='white' />}
-            </TouchableOpacity>
+          <View style={styles.descWrapper}>
+            <View style={styles.desc}>
+              <Texts style={styles.descVehicle}>{detail.vehicle?.name} </Texts>
+              <Texts style={styles.descVehicle}>Rp. {detail.vehicle?.price}/day </Texts>
+            </View>
+            <View style={styles.chatIcon}>
+              <Ionicons name='chatbubble-outline' size={40} color='#5C527F' />
+            </View>
           </View>
-        </View>
-      </View>
-      <View style={styles.descWrapper}>
-        <View style={styles.desc}>
-          <Text style={styles.descVehicle}>{detail.vehicle?.name} </Text>
-          <Text style={styles.descVehicle}>Rp. {detail.vehicle?.price}/day </Text>
-        </View>
-        <View style={styles.chatIcon}>
-          <Ionicons name='chatbubble-outline' size={40} color='#5C527F' />
-        </View>
-      </View>
-      <View style={styles.detailV}>
-        <Text style={styles.detailVehicle}>Max for {detail.vehicle?.capacity} person</Text>
-        {detail.vehicle?.isPrepay === 1 &&
-          <Text style={styles.detailVehicle}>Prepayment</Text>
-        }
-        {detail.vehicle?.isPrepay === 0 &&
-          <Text style={styles.detailVehicle}>No Prepayment</Text>
-        }
-        {detail.vehicle?.isAvailable === 1 &&
-          <Text style={styles.detailVehicleSuccess}>Available</Text>
-        }
-        {detail.vehicle?.isAvailable === 0 &&
-          <Text style={styles.detailVehicleWarning}>Not Available</Text>
-        }
-      </View>
-      <View></View>
-      <View style={styles.locWrapper}>
-        <Icon style={styles.loc} name='map-marker' size={30} color='#3E2C41' />
-        <Text style={styles.locText}>{detail.vehicle?.loc}</Text>
-      </View>
-      <View style={styles.direction}>
-        <MaterialIcon style={styles.direct} name='directions-walk' size={30} color='#3E2C41' />
-        <Text style={styles.directText}>3.2 miles from your location</Text>
-      </View>
-      <View style={styles.qtyWrapper}>
-        <Text style={styles.selectQty}>Select Bikes</Text>
-        <View style={styles.counters}>
-          <TouchableOpacity style={styles.counter} onPress={onincrement}>
-            <Text style={{ alignSelf: 'center', fontSize: 20, fontWeight: 'bold' }}>
-              +
-            </Text>
-          </TouchableOpacity>
-          <Text style={{ color: 'black', marginLeft: 20, marginRight: 20, alignSelf: 'center', fontSize: 15, fontWeight: 'bold' }}>
-            {counter.value}
-          </Text>
-          <TouchableOpacity style={styles.counter} onPress={ondecrement}>
-            <Text style={{ alignSelf: 'center', fontSize: 20, fontWeight: 'bold' }}>
-              -
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-      <View style={{ marginTop: 19, marginLeft: 19, marginRight: 19, justifyContent: 'space-between', flexDirection: 'row' }}>
-        <TouchableOpacity style={styles.startDate}>
-          <TouchableOpacity
-            title={String(date)}
-            onPress={() => setOpen(true)}>
-            <Text style={{ color: 'black' }}>
-              {isStart ? moment(date).format('MMM DD YYYY') : 'Select date'}
-            </Text>
-          </TouchableOpacity>
-          <DatePicker
-            style={styles.datePicker}
-            fadeToColor="white"
-            theme="dark"
-            textColor="white"
-            modal
-            mode="date"
-            open={open}
-            date={date}
-            onConfirm={dateItem => {
-              setOpen(false);
-              setDate(dateItem);
-              setIsStart(true);
-            }}
-            onCancel={() => {
-              setOpen(false);
-            }}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.endDate}>
-          <Picker
-            style={{ color: 'black' }}
-            selectedValue={endDate}
-            onValueChange={(itemValue, itemIndex) => setEndDate(itemValue)}>
-            {[...Array(7)].map((data, index) => (
-              <Picker.Item
-                style={{ color: 'white' }}
-                label={String(index + 1) + ' Day'}
-                value={index + 1}
-                key={index}
+          <View style={styles.detailV}>
+            <Texts style={styles.detailVehicle}>Max for {detail.vehicle?.capacity} person</Texts>
+            {detail.vehicle?.isPrepay === 1 &&
+              <Texts style={styles.detailVehicle}>Prepayment</Texts>
+            }
+            {detail.vehicle?.isPrepay === 0 &&
+              <Texts style={styles.detailVehicle}>No Prepayment</Texts>
+            }
+            {detail.vehicle?.isAvailable === 1 &&
+              <Texts style={styles.detailVehicleSuccess}>Available</Texts>
+            }
+            {detail.vehicle?.isAvailable === 0 &&
+              <Texts style={styles.detailVehicleWarning}>Not Available</Texts>
+            }
+          </View>
+          <View></View>
+          <View style={styles.locWrapper}>
+            <Icon style={styles.loc} name='map-marker' size={30} color='#3E2C41' />
+            <Texts style={styles.locText}>{detail.vehicle?.loc}</Texts>
+          </View>
+          <View style={styles.direction}>
+            <MaterialIcon style={styles.direct} name='walk' size={30} color='#3E2C41' />
+            <Texts style={styles.directText}>3.2 miles from your location</Texts>
+          </View>
+          <View style={styles.qtyWrapper}>
+            <Texts style={styles.selectQty}>Select Bikes</Texts>
+            <View style={styles.counters}>
+              <TouchableOpacity style={styles.counter} onPress={onincrement}>
+                <Texts style={{ alignSelf: 'center', fontSize: 20, fontWeight: 'bold' }}>
+                  +
+                </Texts>
+              </TouchableOpacity>
+              <Texts style={{ color: 'black', marginLeft: 20, marginRight: 20, alignSelf: 'center', fontSize: 15, fontWeight: 'bold' }}>
+                {counter.value}
+              </Texts>
+              <TouchableOpacity style={styles.counter} onPress={ondecrement}>
+                <Texts style={{ alignSelf: 'center', fontSize: 20, fontWeight: 'bold' }}>
+                  -
+                </Texts>
+              </TouchableOpacity>
+            </View>
+          </View>
+          <View style={{ marginTop: 19, marginLeft: 19, marginRight: 19, justifyContent: 'space-between', flexDirection: 'row' }}>
+            <TouchableOpacity style={styles.startDate}>
+              <TouchableOpacity
+                title={String(rentStartDate)}
+                onPress={() => setOpen(true)}>
+                <Texts style={{ color: 'black' }}>
+                  {isStart ? moment(rentStartDate).format('YYYY/MM/DD') : 'Rent Start Date'}
+                </Texts>
+              </TouchableOpacity>
+              <DatePicker
+                style={styles.datePicker}
+                fadeToColor="white"
+                theme="dark"
+                textColor="white"
+                modal
+                mode="date"
+                open={open}
+                date={rentStartDate}
+                onConfirm={dateItem => {
+                  setOpen(false);
+                  setRentStartDate(dateItem);
+                  setIsStart(true);
+                }}
+                onCancel={() => {
+                  setOpen(false);
+                }}
               />
-            ))}
-          </Picker>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.btn}>
-        <Button onPress={() => navigation.navigate('Payment')}>Reservation</Button>
-      </View>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.startDate}>
+              <TouchableOpacity
+                title={String(rentEndDate)}
+                onPress={() => setOp(true)}>
+                <Texts style={{ color: 'black' }}>
+                  {isEnd ? moment(rentEndDate).format('YYYY/MM/DD') : 'Rent End Date'}
+                </Texts>
+              </TouchableOpacity>
+              <DatePicker
+                style={styles.datePicker}
+                fadeToColor="white"
+                theme="dark"
+                textColor="white"
+                modal
+                mode="date"
+                open={op}
+                date={rentEndDate}
+                onConfirm={dateItem => {
+                  setOp(false);
+                  setRentEndDate(dateItem);
+                  setIsEnd(true);
+                }}
+                onCancel={() => {
+                  setOp(false);
+                }}
+              />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.btn}>
+            <Button onPress={dataTransaction}>Reservation</Button>
+          </View>
+        </>
+      }
+
+      {
+        auth.userData?.role === 'admin' &&
+        <View>
+          <TouchableOpacity style={styles.back} onPress={navigation.goBack}>
+            <EntypoIcon
+              name="chevron-left"
+              color="black"
+              size={35}
+              style={styles.icon}
+            />
+            <Text fontSize={20} bold style={styles.textBack}>
+              Update Vehicle
+            </Text>
+          </TouchableOpacity>
+          <ScrollView showsVerticalScrollIndicator={false}>
+            <View style={styles.wrapper1}>
+              <View style={styles.profilePict}>
+                <Center>
+                  <Image
+                    source={image ? { uri: image.uri } : detail.vehicle?.image ? { uri: `${detail.vehicle?.image}` } : NoPhoto}
+                    size={99}
+                    resizeMode={'cover'}
+                    borderRadius={'full'}
+                    alt="Profile Pic"
+                  />
+                </Center>
+                <TouchableOpacity onPress={addImage}>
+                  <View style={styles.iconEdit}>
+                    <MaterialIcon
+                      color="white"
+                      name="plus"
+                      style={styles.iconPen}
+                      size={21}
+                    />
+                  </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={handlePhotoCamera}>
+                  <View style={styles.iconEditCam}>
+                    <MaterialIcon
+                      color="white"
+                      name="camera"
+                      style={styles.iconPen}
+                      size={21}
+                    />
+                  </View>
+                </TouchableOpacity>
+              </View>
+              <View>
+                <Text style={styles.label}>Name:</Text>
+                <TextInput
+                  value={name}
+                  onChangeText={setName}
+                  style={styles.input}
+                />
+              </View>
+              <View>
+                <Text style={styles.label}>Color:</Text>
+                <TextInput
+                  value={color}
+                  onChangeText={setColor}
+                  style={styles.input}
+                />
+              </View>
+              <View>
+                <Text style={styles.label}>Location:</Text>
+                <TextInput
+                  value={loc}
+                  onChangeText={setLoc}
+                  style={styles.input}
+                />
+              </View>
+              <View>
+                <Text style={styles.label}>Price:</Text>
+                <TextInput
+                  value={price}
+                  onChangeText={setPrice}
+                  style={styles.input}
+                />
+              </View>
+              <View>
+                <Text style={styles.label}>Stock:</Text>
+                <TextInput
+                  value={stock}
+                  onChangeText={setStock}
+                  style={styles.input}
+                />
+              </View>
+              <View>
+                <Text style={styles.label}>Capacity:</Text>
+                <TextInput
+                  value={capacity}
+                  onChangeText={setCapacity}
+                  style={styles.input}
+                />
+              </View>
+              <View>
+                <Text style={styles.label}>Reservation Before:</Text>
+                <TextInput
+                  value={reservationBefore}
+                  onChangeText={setReservationBefore}
+                  style={styles.input}
+                />
+              </View>
+              <View>
+                <Text style={styles.label}>Available:</Text>
+                <View style={styles.radioGrup}>
+                  <Radio.Group
+                    defaultValue="1"
+                    name="myRadioGroup"
+                    value={isAvailable}
+                    accessibilityLabel="favorite colorscheme"
+                    onChange={value => { setIsAvailable(value) }}>
+                    <Stack
+                      direction={{ base: 'row' }}
+                      alignItems="center"
+                      space={4}
+                      w="75%"
+                      maxW="300px">
+                      <Radio colorScheme='purple' value="1" my={1}>
+                        <Text style={styles.textRadio}>Available</Text>
+                      </Radio>
+                      <Radio colorScheme='purple' value="0" my={1}>
+                        <Text style={styles.textRadio}>Not Available</Text>
+                      </Radio>
+                    </Stack>
+                  </Radio.Group>
+                </View>
+              </View>
+              <View>
+                <Text style={styles.label}>Prepayment:</Text>
+                <View style={styles.radioGrup}>
+                  <Radio.Group
+                    defaultValue="1"
+                    name="myRadioGroup"
+                    value={isPrepay}
+                    accessibilityLabel="favorite colorscheme"
+                    onChange={value => { setIsPrepay(value) }}>
+                    <Stack
+                      direction={{ base: 'row' }}
+                      alignItems="center"
+                      space={4}
+                      w="75%"
+                      maxW="300px">
+                      <Radio colorScheme='purple' value="1" my={1}>
+                        <Text style={styles.textRadio}>Has Prepayment</Text>
+                      </Radio>
+                      <Radio colorScheme='purple' value="0" my={1}>
+                        <Text style={styles.textRadio}>Can't Prepayment</Text>
+                      </Radio>
+                    </Stack>
+                  </Radio.Group>
+                </View>
+              </View>
+              <View>
+                <Text style={styles.label}>Payment Method:</Text>
+                <View style={styles.radioGrup}>
+                  <Radio.Group
+                    defaultValue="1"
+                    name="myRadioGroup"
+                    value={paymentMethod}
+                    accessibilityLabel="favorite colorscheme"
+                    onChange={value => { setPaymentMethod(value) }}>
+                    <Stack
+                      direction={{ base: 'row' }}
+                      alignItems="center"
+                      space={4}
+                      w="75%"
+                      maxW="300px">
+                      <Radio colorScheme='purple' value="Cash" my={1}>
+                        <Text style={styles.textRadio}>Cash</Text>
+                      </Radio>
+                      <Radio colorScheme='purple' value="Transfer" my={1}>
+                        <Text style={styles.textRadio}>Transfer</Text>
+                      </Radio>
+                      <Radio colorScheme='purple' value="Excash" my={1}>
+                        <Text style={styles.textRadio}>Excash</Text>
+                      </Radio>
+                    </Stack>
+                  </Radio.Group>
+                </View>
+              </View>
+              <View>
+                <Text style={styles.label}>Category:</Text>
+                <View style={styles.radioGrup}>
+                  <Radio.Group
+                    defaultValue="1"
+                    name="myRadioGroup"
+                    value={categoryId}
+                    accessibilityLabel="favorite colorscheme"
+                    onChange={value => { setCategoryId(value) }}>
+                    <Stack
+                      direction={{ base: 'row' }}
+                      alignItems="center"
+                      space={4}
+                      w="75%"
+                      maxW="300px">
+                      <Radio colorScheme='purple' value="1" my={1}>
+                        <Text style={styles.textRadio}>Car</Text>
+                      </Radio>
+                      <Radio colorScheme='purple' value="2" my={1}>
+                        <Text style={styles.textRadio}>Motorbike</Text>
+                      </Radio>
+                      <Radio colorScheme='purple' value="3" my={1}>
+                        <Text style={styles.textRadio}>Bike</Text>
+                      </Radio>
+                    </Stack>
+                  </Radio.Group>
+                </View>
+              </View>
+              <View style={styles.button}>
+                <Button color="primary" onPress={update}>Save Changes</Button>
+              </View>
+            </View>
+          </ScrollView>
+        </View>
+      }
     </View>
   )
 }
@@ -316,12 +634,66 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: 'rgba(57, 57, 57, 0.15)',
     padding: 15,
-    width: '60%',
+    width: '50%',
   },
-  endDate: {
-    width: '35%',
+  wrapper1: {
+    padding: 20,
+  },
+  back: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: 10,
+  },
+  icon: {
+    fontWeight: 'bold',
+  },
+  profilePict: {
+    marginTop: 10,
+    justifyContent: 'center',
+    position: 'relative',
+  },
+  iconEdit: {
+    position: 'absolute',
+    alignSelf: 'center',
+    bottom: 0,
+    right: 140,
+    backgroundColor: '#5C527F',
+    padding: 9,
+    borderRadius: 50,
+  },
+  iconEditCam: {
+    position: 'absolute',
+    alignSelf: 'center',
+    bottom: 60,
+    right: 140,
+    backgroundColor: '#5C527F',
+    padding: 9,
+    borderRadius: 50,
+  },
+  radioGrup: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 20,
+  },
+  textRadio: {
+    marginLeft: 8,
+  },
+  label: {
+    color: 'gray',
+    marginTop: 20,
+    marginBottom: 15,
+  },
+  input: {
+    height: 50,
+    color: 'black',
     borderRadius: 10,
-    backgroundColor: 'rgba(57, 57, 57, 0.15)',
+    borderWidth: 1,
+    borderColor: 'gray',
+    paddingHorizontal: 15,
+  },
+  button: {
+    marginBottom: 80,
+    marginTop: 40,
   },
 })
 
