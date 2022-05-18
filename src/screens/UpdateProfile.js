@@ -42,8 +42,8 @@ const UpdateProfile = ({ navigation: { goBack } }) => {
 
   const handlePhotoCamera = async () => {
     const photo = await launchCamera({
-      maxWidth:640,
-      maxHeight:640
+      maxWidth: 640,
+      maxHeight: 640
     });
     setImage(photo.assets[0]);
   }
@@ -73,7 +73,7 @@ const UpdateProfile = ({ navigation: { goBack } }) => {
       address,
       image
     ))
-    console.log(image)
+    // console.log(image)
     PushNotification.localNotification({
       channelId: 'updateProfile',
       title: 'Update Profile Success!',
@@ -99,13 +99,13 @@ const UpdateProfile = ({ navigation: { goBack } }) => {
         <View style={styles.wrapper}>
           <View style={styles.profilePict}>
             <Center>
-                <Image
-                  source={image? {uri: image.uri} : auth.userData?.image ? { uri: `${auth.userData?.image}`} : NoPhoto}
-                  size={99}
-                  resizeMode={'cover'}
-                  borderRadius={'full'}
-                  alt="Profile Pic"
-                />
+              <Image
+                source={image ? { uri: image.uri } : auth.userData?.image ? { uri: `${auth.userData?.image}` } : NoPhoto}
+                size={99}
+                resizeMode={'cover'}
+                borderRadius={'full'}
+                alt="Profile Pic"
+              />
             </Center>
             <TouchableOpacity onPress={addImage}>
               <View style={styles.iconEdit}>
@@ -118,13 +118,13 @@ const UpdateProfile = ({ navigation: { goBack } }) => {
               </View>
             </TouchableOpacity>
             <TouchableOpacity onPress={handlePhotoCamera}>
-            <View style={styles.iconEditCam}>
-              <MaterialIcon
+              <View style={styles.iconEditCam}>
+                <MaterialIcon
                   color="white"
                   name="camera"
                   style={styles.iconPen}
                   size={21}
-              />
+                />
               </View>
             </TouchableOpacity>
           </View>
