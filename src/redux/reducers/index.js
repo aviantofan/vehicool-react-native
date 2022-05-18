@@ -11,6 +11,7 @@ import category from './category';
 import popular from './popular';
 import detail from './detail.js';
 import transaction from './transaction';
+import listVehicle from './listVehicle'
 
 const persistAuth = {
     key: 'auth',
@@ -57,6 +58,11 @@ const persistTransaction = {
     storage: AsyncStorage,
 };
 
+const persistListVehicle = {
+  key: 'listVehicle',
+  storage: AsyncStorage,
+};
+
 const rootReducers = combineReducers({
     auth: persistReducer(persistAuth, auth),
     register: persistReducer(persistRegister, register),
@@ -66,7 +72,8 @@ const rootReducers = combineReducers({
     category: persistReducer(persistCategory, category),
     popular: persistReducer(persistPopular, popular),
     detail: persistReducer(persistDetail, detail),
-    transaction: persistReducer(persistTransaction, transaction)
+    transaction: persistReducer(persistTransaction, transaction),
+    listVehicle: persistReducer(persistListVehicle, listVehicle)
 });
 
 export default rootReducers;

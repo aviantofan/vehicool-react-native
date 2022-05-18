@@ -5,97 +5,70 @@ import {
   StyleSheet,
 } from 'react-native'
 import { Text, Input } from 'native-base';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Icon from 'react-native-vector-icons/AntDesign';
 import Icons from 'react-native-vector-icons/FontAwesome'
 import List from '../components/List';
+import { getVehicleList} from '../redux/actions/listVehicle'
+import { useDispatch, useSelector } from 'react-redux';
 
 const Search = ({ navigation }) => {
+  const dispatch = useDispatch()
+  const [search, setSearch] = useState('');
+
+  const {listVehicle} = useSelector(state => state);
+
+  useEffect(() => {
+    dispatch(getVehicleList())
+  }, [dispatch])
+
   const listVehicles = [
     {
       id: 1,
-      name: 'Vespa Matic',
-      seet: 2,
-      stock: 14,
-      price: 50000,
-      image: require('../assets/vespa.png'),
+      name: 'No Data',
+      seet: 'Null',
+      stock: 'Null',
+      price: 'Null',
+      image: require('../assets/photo-camera.png'),
       rating: 4,
     },
     {
       id: 2,
-      name: 'Honda',
-      seet: 2,
-      stock: 14,
-      price: 50000,
-      image: require('../assets/honda.png'),
+      name: 'No Data',
+      seet: 'Null',
+      stock: 'Null',
+      price: 'Null',
+      image: require('../assets/photo-camera.png'),
       rating: 4,
     },
     {
       id: 3,
-      name: 'Honda',
-      seet: 2,
-      stock: 2,
-      price: 50000,
-      image: require('../assets/honda.png'),
+      name: 'No Data',
+      seet: 'Null',
+      stock: 'Null',
+      price: 'Null',
+      image: require('../assets/photo-camera.png'),
       rating: 4,
     },
     {
       id: 4,
-      name: 'KLX',
-      seet: 2,
-      stock: 1,
-      price: 50000,
-      image: require('../assets/klx.png'),
+      name: 'No Data',
+      seet: 'Null',
+      stock: 'Null',
+      price: 'Null',
+      image: require('../assets/photo-camera.png'),
       rating: 4,
     },
     {
       id: 5,
-      name: 'Vespa',
-      seet: 2,
-      stock: 14,
-      price: 50000,
-      image: require('../assets/vespa.png'),
+      name: 'No Data',
+      seet: 'Null',
+      stock: 'Null',
+      price: 'Null',
+      image: require('../assets/photo-camera.png'),
       rating: 4,
-    },
-    {
-      id: 6,
-      name: 'Honda',
-      seet: 2,
-      stock: 14,
-      price: 50000,
-      image: require('../assets/classic.png'),
-      rating: 4,
-    },
-    {
-      id: 7,
-      name: 'KLX',
-      seet: 2,
-      stock: 14,
-      price: 50000,
-      image: require('../assets/klx.png'),
-      rating: 4,
-    },
-    {
-      id: 8,
-      name: 'Honda',
-      seet: 2,
-      stock: 14,
-      price: 50000,
-      image: require('../assets/honda.png'),
-      rating: 4,
-    },
-    {
-      id: 9,
-      name: 'Vespa',
-      seet: 2,
-      stock: 14,
-      price: 50000,
-      image: require('../assets/vespa.png'),
-      rating: 4,
-    },
+    }
   ];
-
-  const [search, setSearch] = useState('');
 
   return (
     <View style={styles.mainWrapper}>
@@ -121,7 +94,20 @@ const Search = ({ navigation }) => {
         <ScrollView
           showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}>
-          {listVehicles.map((data, index) => (
+          {listVehicle.list ? 
+          listVehicle?.list.map((data, index) => (
+            <TouchableOpacity key={data.id} onPress={() => navigation.navigate('DetailVehicle', { id: data.id })}>
+              <List
+                image={{uri : `${data.image}`}}
+                name={data.name}
+                seet={data.capacity}
+                stock={data.stock}
+                price={data.price}
+              />
+            </TouchableOpacity>
+          )) 
+          :
+          listVehicles.map((data, index) => (
             <TouchableOpacity key={data.id}>
               <List
                 image={data.image}
