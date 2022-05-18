@@ -40,6 +40,11 @@ pushNotification.createChannel({
   channelName: 'Notification Vehicle'
 })
 
+pushNotification.createChannel({
+  channelId: 'updateVehicle',
+  channelName: 'Notification Vehicle'
+})
+
 const { store, persistor } = Store();
 
 const App = () => {
