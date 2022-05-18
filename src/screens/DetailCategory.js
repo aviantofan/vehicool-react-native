@@ -11,7 +11,7 @@ import EntypoIcon from 'react-native-vector-icons/Entypo';
 import { useNavigation } from '@react-navigation/native';
 
 const DetailCategory = () => {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
   const listVehicles = [
     {
       name: 'Vespa Matic',
@@ -119,8 +119,8 @@ const DetailCategory = () => {
         <View style={styles.bottom} />
       </ScrollView>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -164,4 +164,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default DetailCategory
+export default DetailCategory;

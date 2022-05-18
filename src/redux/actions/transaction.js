@@ -43,5 +43,5 @@ export const listHistory = (id, token) => {
     } catch (err) {
       payload = err.message;
     }
-  }
-} 
+  };
+}; 

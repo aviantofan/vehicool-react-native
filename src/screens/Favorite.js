@@ -11,7 +11,7 @@ import EntypoIcon from 'react-native-vector-icons/Entypo';
 import { useNavigation } from '@react-navigation/native';
 
 const Favorite = () => {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
   const listVehicles = [
     {
       name: 'Vespa Matic',
@@ -85,7 +85,7 @@ const Favorite = () => {
       image: require('../assets/vespa.png'),
       rating: 4,
     },
-  ]
+  ];
   return (
     <View>
       <TouchableOpacity style={styles.back} onPress={navigation.goBack}>
@@ -118,8 +118,8 @@ const Favorite = () => {
         <View style={styles.bottom} />
       </ScrollView>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -161,6 +161,6 @@ const styles = StyleSheet.create({
   bottom: {
     paddingBottom: 40,
   },
-})
+});
 
-export default Favorite
+export default Favorite;

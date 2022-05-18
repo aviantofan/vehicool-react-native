@@ -10,7 +10,7 @@ import {
 import { Box } from 'native-base';
 import React, { useState, useEffect } from 'react';
 import Button from '../components/Button';
-import Input from '../components/Input'
+import Input from '../components/Input';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { changePass } from '../redux/actions/change';
@@ -21,7 +21,7 @@ const ChangePassword = () => {
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
   const [isError, setIsError] = useState();
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   const { change } = useSelector(state => state);
   const dispatch = useDispatch();
@@ -45,7 +45,7 @@ const ChangePassword = () => {
     } else {
       setIsError(true);
     }
-  }
+  };
 
   return (
     <ScrollView style={styles.container}>
@@ -91,8 +91,8 @@ const ChangePassword = () => {
         </Box>
       </Box>
     </ScrollView>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   main: {
@@ -149,6 +149,6 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     marginTop: 20,
   },
-})
+});
 
-export default ChangePassword
+export default ChangePassword;

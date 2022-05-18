@@ -1,13 +1,13 @@
 import React from 'react';
-import HomeNav from './HomeNav'
-import HistoryNav from './HistoryNav'
-import Search from '../screens/Search'
-import Profile from '../screens/Profile'
+import HomeNav from './HomeNav';
+import HistoryNav from './HistoryNav';
+import Search from '../screens/Search';
+import Profile from '../screens/Profile';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Icon from 'react-native-vector-icons/FontAwesome'
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-const BottomTab = createBottomTabNavigator()
+const BottomTab = createBottomTabNavigator();
 
 const BottomNav = () => {
   return (
@@ -30,7 +30,7 @@ const BottomNav = () => {
       }} name='Profile' component={Profile} />
 
     </BottomTab.Navigator>
-  )
-}
+  );
+};
 
-export default BottomNav
+export default BottomNav;

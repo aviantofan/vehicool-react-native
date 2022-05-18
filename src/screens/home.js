@@ -14,13 +14,13 @@ import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCars, getMotorbike, getBike } from '../redux/actions/category';
 import { getPopular } from '../redux/actions/popular';
-import { getVehicleList } from '../redux/actions/listVehicle'
+import { getVehicleList } from '../redux/actions/listVehicle';
 import { listHistory } from '../redux/actions/transaction';
 import { dataUser } from '../redux/actions/auth';
 import Zonk from '../assets/photo-camera.png';
 
 const Home = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const data = [
     { id: 1, image: require('../assets/1.png') },
@@ -34,16 +34,16 @@ const Home = () => {
   const { popular } = useSelector(state => state);
 
   useEffect(() => {
-    dispatch(listHistory(auth.userData?.id, auth.token))
+    dispatch(listHistory(auth.userData?.id, auth.token));
     dispatch(dataUser(auth.token));
-    dispatch(getCars())
-    dispatch(getMotorbike())
-    dispatch(getBike())
-    dispatch(getPopular())
-    dispatch(getVehicleList())
+    dispatch(getCars());
+    dispatch(getMotorbike());
+    dispatch(getBike());
+    dispatch(getPopular());
+    dispatch(getVehicleList());
   }, [dispatch, auth.userData?.id, auth.token]);
 
-  const navigation = useNavigation()
+  const navigation = useNavigation();
   const renderItem = ({ item }) => {
     return (
       <TouchableOpacity key={item.id} style={styles.coverImg} onPress={() => navigation.navigate('DetailVehicle', { id: item.id })}>

@@ -1,18 +1,18 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from 'react';
 
-import { NavigationContainer } from '@react-navigation/native'
-import { NativeBaseProvider } from 'native-base'
+import { NavigationContainer } from '@react-navigation/native';
+import { NativeBaseProvider } from 'native-base';
 
 import { Provider, useSelector } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 
 import Store from './src/redux/store';
 
-import MainStackNav from './src/navigations/MainStack'
-import AuthStack from './src/navigations/AuthStackNav'
+import MainStackNav from './src/navigations/MainStack';
+import AuthStack from './src/navigations/AuthStackNav';
 
-import pushNotification from 'react-native-push-notification'
-import RNBootSplash from "react-native-bootsplash";
+import pushNotification from 'react-native-push-notification';
+import RNBootSplash from 'react-native-bootsplash';
 
 const Main = () => {
   const { auth } = useSelector(state => state);
@@ -28,22 +28,22 @@ const Main = () => {
 pushNotification.createChannel({
   channelId: 'payment',
   channelName: 'Notification Transaction'
-})
+});
 
 pushNotification.createChannel({
   channelId: 'updateProfile',
   channelName: 'Notification Auth'
-})
+});
 
 pushNotification.createChannel({
   channelId: 'addingVehicle',
   channelName: 'Notification Vehicle'
-})
+});
 
 pushNotification.createChannel({
   channelId: 'updateVehicle',
   channelName: 'Notification Vehicle'
-})
+});
 
 const { store, persistor } = Store();
 
@@ -55,8 +55,8 @@ const App = () => {
         <Main />
       </PersistGate>
     </Provider>
-  )
-}
+  );
+};
 
 // const App = () => {
 //   return (
@@ -72,4 +72,4 @@ const App = () => {
 //     </Provider >
 //   )
 // }
-export default App
+export default App;

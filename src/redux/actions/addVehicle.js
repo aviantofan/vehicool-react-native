@@ -1,6 +1,6 @@
 /*eslint no-undef: "error"*/
 import RNFetchBlob from 'rn-fetch-blob';
-const { REACT_APP_URL } = process.env
+const { REACT_APP_URL } = process.env;
 // import http from '../../helper/http'
 // import qs from 'qs'
 
@@ -72,7 +72,7 @@ export const addVehicle = (
         payload: JSON.parse(data)
       });
     } catch (e) {
-      payload = JSON.parse(e.response.data.message);
+      payload = JSON.parse(e.response.data.message); // eslint-disable-line
     }
   };
 };

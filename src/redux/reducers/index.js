@@ -11,51 +11,51 @@ import category from './category';
 import popular from './popular';
 import detail from './detail.js';
 import transaction from './transaction';
-import listVehicle from './listVehicle'
+import listVehicle from './listVehicle';
 
 const persistAuth = {
-    key: 'auth',
-    storage: AsyncStorage,
+  key: 'auth',
+  storage: AsyncStorage,
 };
 
 const persistRegister = {
-    key: 'register',
-    storage: AsyncStorage,
+  key: 'register',
+  storage: AsyncStorage,
 };
 
 const persistForgot = {
-    key: 'forgot',
-    storage: AsyncStorage,
+  key: 'forgot',
+  storage: AsyncStorage,
 };
 
 const persistChange = {
-    key: 'change',
-    storage: AsyncStorage,
+  key: 'change',
+  storage: AsyncStorage,
 };
 
 const persistCounter = {
-    key: 'counter',
-    storage: AsyncStorage,
+  key: 'counter',
+  storage: AsyncStorage,
 };
 
 const persistCategory = {
-    key: 'category',
-    storage: AsyncStorage,
+  key: 'category',
+  storage: AsyncStorage,
 };
 
 const persistPopular = {
-    key: 'popular',
-    storage: AsyncStorage,
+  key: 'popular',
+  storage: AsyncStorage,
 };
 
 const persistDetail = {
-    key: 'detail',
-    storage: AsyncStorage,
+  key: 'detail',
+  storage: AsyncStorage,
 };
 
 const persistTransaction = {
-    key: 'transaction',
-    storage: AsyncStorage,
+  key: 'transaction',
+  storage: AsyncStorage,
 };
 
 const persistListVehicle = {
@@ -64,16 +64,16 @@ const persistListVehicle = {
 };
 
 const rootReducers = combineReducers({
-    auth: persistReducer(persistAuth, auth),
-    register: persistReducer(persistRegister, register),
-    forgot: persistReducer(persistForgot, forgot),
-    change: persistReducer(persistChange, change),
-    counter: persistReducer(persistCounter, counter),
-    category: persistReducer(persistCategory, category),
-    popular: persistReducer(persistPopular, popular),
-    detail: persistReducer(persistDetail, detail),
-    transaction: persistReducer(persistTransaction, transaction),
-    listVehicle: persistReducer(persistListVehicle, listVehicle)
+  auth: persistReducer(persistAuth, auth),
+  register: persistReducer(persistRegister, register),
+  forgot: persistReducer(persistForgot, forgot),
+  change: persistReducer(persistChange, change),
+  counter: persistReducer(persistCounter, counter),
+  category: persistReducer(persistCategory, category),
+  popular: persistReducer(persistPopular, popular),
+  detail: persistReducer(persistDetail, detail),
+  transaction: persistReducer(persistTransaction, transaction),
+  listVehicle: persistReducer(persistListVehicle, listVehicle)
 });
 
 export default rootReducers;

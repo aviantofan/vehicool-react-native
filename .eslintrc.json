@@ -1,0 +1,36 @@
+{
+  "env": {
+    "es2021": true,
+    "node": true
+  },
+  "extends": "eslint:recommended",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "parser": "@babel/eslint-parser",
+  "rules": {
+    "indent": [
+      "error",
+      2
+    ],
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
+    "no-undef": "off",
+    "no-unused-vars": "off",
+    "no-fallthrough": "off",
+    "no-dupe-keys": "off",
+    "no-undefined": "off",
+    "no-use-before-define": "off"
+  }
+}

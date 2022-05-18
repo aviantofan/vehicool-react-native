@@ -10,7 +10,7 @@ import {
 import { Box } from 'native-base';
 import React, { useState, useEffect } from 'react';
 import Button from '../components/Button';
-import Input from '../components/Input'
+import Input from '../components/Input';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import { authLogin } from '../redux/actions/auth';
@@ -34,9 +34,9 @@ const Login = () => {
     } else {
       setIsError(true);
     }
-  }
+  };
 
-  const navigation = useNavigation()
+  const navigation = useNavigation();
   return (
     <ScrollView style={styles.container}>
       <Box style={styles.main}>
@@ -62,7 +62,7 @@ const Login = () => {
             />
             <TouchableOpacity>
               <Text style={styles.forgot} onPress={() => {
-                navigation.navigate('ForgotPassword')
+                navigation.navigate('ForgotPassword');
               }}>Forgot Password ?</Text>
             </TouchableOpacity>
           </SafeAreaView>
@@ -76,15 +76,15 @@ const Login = () => {
             <Text style={styles.signup}>Don`t have account? </Text>
             <TouchableOpacity>
               <Text style={styles.signup} onPress={() => {
-                navigation.navigate('Register')
+                navigation.navigate('Register');
               }}> Sign up now</Text>
             </TouchableOpacity>
           </View>
         </Box>
       </Box>
     </ScrollView>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   main: {
@@ -151,6 +151,6 @@ const styles = StyleSheet.create({
     color: 'white',
 
   }
-})
+});
 
-export default Login
+export default Login;

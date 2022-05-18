@@ -1,6 +1,6 @@
 import http from '../../helper/http';
 import RNFetchBlob from 'rn-fetch-blob';
-const { REACT_APP_URL } = process.env
+const { REACT_APP_URL } = process.env;
 
 export const getVehicleDetail = id => {
   return async dispatch => {
@@ -107,4 +107,4 @@ export const updateVehicle =
         console.log(e.message);
       }
     };
-  }
+  };

@@ -11,7 +11,7 @@ import EntypoIcon from 'react-native-vector-icons/Entypo';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Button from '../components/Button';
 import { useNavigation } from '@react-navigation/native';
-import PushNotification from 'react-native-push-notification'
+import PushNotification from 'react-native-push-notification';
 import { useDispatch, useSelector } from 'react-redux';
 import { addVehicle } from '../redux/actions/addVehicle';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
@@ -37,7 +37,7 @@ const AddVehicle = () => {
 
     const photo = await launchImageLibrary({});
     setImage(photo.assets[0]);
-  }
+  };
 
   const handlePhotoCamera = async () => {
     const photo = await launchCamera({
@@ -47,7 +47,7 @@ const AddVehicle = () => {
     setImage(photo.assets[0]);
   };
 
-  const navigation = useNavigation()
+  const navigation = useNavigation();
   const addDataVehicle = () => {
     // const data = {
     //   name,
@@ -75,14 +75,14 @@ const AddVehicle = () => {
       paymentMethod,
       price,
       stock,
-      image))
+      image));
     PushNotification.localNotification({
       channelId: 'addingVehicle',
       title: 'Adding Vehicle Success!',
       message: 'Your Vehicle is ready to show!'
-    })
-    navigation.navigate('Home')
-  }
+    });
+    navigation.navigate('Home');
+  };
 
   return (
     <View>
@@ -130,13 +130,13 @@ const AddVehicle = () => {
               </View>
             </TouchableOpacity>
             <TouchableOpacity onPress={handlePhotoCamera}>
-            <View style={styles.iconEditCam}>
-              <MaterialIcon
+              <View style={styles.iconEditCam}>
+                <MaterialIcon
                   color="white"
                   name="camera"
                   style={styles.iconPen}
                   size={21}
-              />
+                />
               </View>
             </TouchableOpacity>
           </View>
@@ -204,7 +204,7 @@ const AddVehicle = () => {
                 name="myRadioGroup"
                 value={isAvailable}
                 accessibilityLabel="favorite colorscheme"
-                onChange={value => { setIsAvailable(value) }}>
+                onChange={value => { setIsAvailable(value); }}>
                 <Stack
                   direction={{ base: 'row' }}
                   alignItems="center"
@@ -229,7 +229,7 @@ const AddVehicle = () => {
                 name="myRadioGroup"
                 value={paymentMethod}
                 accessibilityLabel="favorite colorscheme"
-                onChange={value => { setPaymentMethod(value) }}>
+                onChange={value => { setPaymentMethod(value); }}>
                 <Stack
                   direction={{ base: 'row' }}
                   alignItems="center"
@@ -257,7 +257,7 @@ const AddVehicle = () => {
                 name="myRadioGroup"
                 value={categoryId}
                 accessibilityLabel="favorite colorscheme"
-                onChange={value => { setCategoryId(value) }}>
+                onChange={value => { setCategoryId(value); }}>
                 <Stack
                   direction={{ base: 'row' }}
                   alignItems="center"
@@ -283,10 +283,10 @@ const AddVehicle = () => {
         </View>
       </ScrollView>
     </View>
-  )
-}
+  );
+};
 
-export default AddVehicle
+export default AddVehicle;
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -349,4 +349,4 @@ const styles = StyleSheet.create({
     marginBottom: 80,
     marginTop: 40,
   },
-})
+});

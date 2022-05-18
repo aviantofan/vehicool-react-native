@@ -11,11 +11,11 @@ import EntypoIcon from 'react-native-vector-icons/Entypo';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Button from '../components/Button';
 import { useNavigation } from '@react-navigation/native';
-import PushNotification from 'react-native-push-notification'
+import PushNotification from 'react-native-push-notification';
 import { useDispatch, useSelector } from 'react-redux';
 import { dataUser, updateData } from '../redux/actions/auth';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
-import NoPhoto from '../assets/photo-camera.png'
+import NoPhoto from '../assets/photo-camera.png';
 
 const UpdateProfile = ({ navigation: { goBack } }) => {
 
@@ -38,7 +38,7 @@ const UpdateProfile = ({ navigation: { goBack } }) => {
   const addImage = async () => {
     const photo = await launchImageLibrary({});
     setImage(photo.assets[0]);
-  }
+  };
 
   const handlePhotoCamera = async () => {
     const photo = await launchCamera({
@@ -46,9 +46,9 @@ const UpdateProfile = ({ navigation: { goBack } }) => {
       maxHeight: 640
     });
     setImage(photo.assets[0]);
-  }
+  };
 
-  const navigation = useNavigation()
+  const navigation = useNavigation();
   const update = () => {
     // const data = {
     //   name,
@@ -72,15 +72,15 @@ const UpdateProfile = ({ navigation: { goBack } }) => {
       birthdate,
       address,
       image
-    ))
+    ));
     // console.log(image)
     PushNotification.localNotification({
       channelId: 'updateProfile',
       title: 'Update Profile Success!',
       message: 'You can see your personal information'
-    })
-    navigation.navigate('Profile')
-  }
+    });
+    navigation.navigate('Profile');
+  };
 
   return (
     <View>
@@ -134,7 +134,7 @@ const UpdateProfile = ({ navigation: { goBack } }) => {
               name="myRadioGroup"
               value={gender}
               accessibilityLabel="favorite colorscheme"
-              onChange={value => { setGender(value) }}>
+              onChange={value => { setGender(value); }}>
               <Stack
                 direction={{ base: 'row' }}
                 alignItems="center"
@@ -204,8 +204,8 @@ const UpdateProfile = ({ navigation: { goBack } }) => {
         </View>
       </ScrollView>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -270,4 +270,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default UpdateProfile
+export default UpdateProfile;

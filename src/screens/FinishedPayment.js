@@ -15,8 +15,8 @@ import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 
 const FinishedPayment = () => {
-  const { transaction } = useSelector(state => state)
-  const { auth } = useSelector(state => state)
+  const { transaction } = useSelector(state => state);
+  const { auth } = useSelector(state => state);
   const { detail } = useSelector(state => state);
 
   const vehicle = {
@@ -29,9 +29,9 @@ const FinishedPayment = () => {
     days: `${transaction.dataTransaction.days}`,
     startDate: `${transaction.dataTransaction.rentStartDate}`,
     endDate: `${transaction.dataTransaction.rentEndDate}`,
-  }
+  };
 
-  const price = vehicle.price * vehicle.qty
+  const price = vehicle.price * vehicle.qty;
 
   const customer = {
     id: `${auth.userData?.id}`,
@@ -40,8 +40,8 @@ const FinishedPayment = () => {
     address: `${auth.userData?.address}`,
     email: `${auth.userData?.email}`,
     total: price
-  }
-  const navigation = useNavigation()
+  };
+  const navigation = useNavigation();
   return (
     <Box p="5">
       <TouchableOpacity style={styles.back} onPress={() => navigation.navigate('Home')}>
@@ -98,8 +98,8 @@ const FinishedPayment = () => {
         <Box />
       </ScrollView>
     </Box>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   back: {
@@ -122,6 +122,6 @@ const styles = StyleSheet.create({
     borderBottomColor: 'gray',
     marginBottom: 30,
   },
-})
+});
 
-export default FinishedPayment
+export default FinishedPayment;

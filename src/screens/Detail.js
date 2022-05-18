@@ -1,27 +1,27 @@
-import { View, TextInput, Text as Texts, Image as Images, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
-import { Text, Image, Center, Radio, Stack } from 'native-base'
-import React, { useEffect, useState } from 'react'
-import Icon from 'react-native-vector-icons/FontAwesome'
-import AntDesign from 'react-native-vector-icons/AntDesign'
+import { View, TextInput, Text as Texts, Image as Images, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { Text, Image, Center, Radio, Stack } from 'native-base';
+import React, { useEffect, useState } from 'react';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Ionicons from 'react-native-vector-icons/Ionicons'
-import LinearGradient from 'react-native-linear-gradient'
-import { useNavigation } from '@react-navigation/native'
-import Button from '../components/Button'
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import LinearGradient from 'react-native-linear-gradient';
+import { useNavigation } from '@react-navigation/native';
+import Button from '../components/Button';
 import DatePicker from 'react-native-date-picker';
 import { Picker } from '@react-native-picker/picker';
 import moment from 'moment';
 import { getVehicleDetail, updateVehicle } from '../redux/actions/detail';
 import { useDispatch, useSelector } from 'react-redux';
-import { increment, decrement } from '../redux/actions/counter'
-import NoPhoto from '../assets/photo-camera.png'
+import { increment, decrement } from '../redux/actions/counter';
+import NoPhoto from '../assets/photo-camera.png';
 import EntypoIcon from 'react-native-vector-icons/Entypo';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
-import PushNotification from 'react-native-push-notification'
+import PushNotification from 'react-native-push-notification';
 import { getData } from '../redux/actions/transaction';
 
 const Detail = ({ route }) => {
-  const [fav, setFav] = useState(false)
+  const [fav, setFav] = useState(false);
   const [count, setCount] = useState(0);
   const [open, setOpen] = useState(false);
   const [rentStartDate, setRentStartDate] = useState(new Date());
@@ -29,12 +29,12 @@ const Detail = ({ route }) => {
   const [op, setOp] = useState(false);
   const [rentEndDate, setRentEndDate] = useState(new Date());
   const [isEnd, setIsEnd] = useState(false);
-  const navigation = useNavigation()
-  const dispatch = useDispatch()
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
   const { detail } = useSelector(state => state);
   const { id: idVehicle } = route.params;
-  const counter = useSelector(state => state.counter)
-  const auth = useSelector(state => state.auth)
+  const counter = useSelector(state => state.counter);
+  const auth = useSelector(state => state.auth);
 
   const [name, setName] = useState(`${detail.vehicle?.name}`);
   const [color, setColor] = useState(`${detail.vehicle?.color}`);
@@ -53,7 +53,7 @@ const Detail = ({ route }) => {
 
     const photo = await launchImageLibrary({});
     setImage(photo.assets[0]);
-  }
+  };
 
   const handlePhotoCamera = async () => {
     const photo = await launchCamera({
@@ -64,11 +64,11 @@ const Detail = ({ route }) => {
   };
 
   const onincrement = () => {
-    dispatch(increment())
+    dispatch(increment());
   };
   const ondecrement = () => {
-    dispatch(decrement())
-  }
+    dispatch(decrement());
+  };
 
   useEffect(() => {
     dispatch(getVehicleDetail(idVehicle));
@@ -105,23 +105,23 @@ const Detail = ({ route }) => {
       paymentMethod,
       categoryId,
       image
-    ))
+    ));
     PushNotification.localNotification({
       channelId: 'updateVehicle',
       title: 'Update Vehicle Success!',
       message: 'Your Vehicle Update Success!'
-    })
-  }
+    });
+  };
 
   const transaction = {
     rentStartDate: moment(rentStartDate).format('YYYY/MM/DD'),
     rentEndDate: moment(rentEndDate).format('YYYY/MM/DD')
-  }
+  };
 
   const dataTransaction = () => {
-    dispatch(getData(transaction))
-    navigation.navigate('Payment')
-  }
+    dispatch(getData(transaction));
+    navigation.navigate('Payment');
+  };
 
   return (
     <View style={styles.wrapper}>
@@ -372,7 +372,7 @@ const Detail = ({ route }) => {
                     name="myRadioGroup"
                     value={isAvailable}
                     accessibilityLabel="favorite colorscheme"
-                    onChange={value => { setIsAvailable(value) }}>
+                    onChange={value => { setIsAvailable(value); }}>
                     <Stack
                       direction={{ base: 'row' }}
                       alignItems="center"
@@ -397,7 +397,7 @@ const Detail = ({ route }) => {
                     name="myRadioGroup"
                     value={isPrepay}
                     accessibilityLabel="favorite colorscheme"
-                    onChange={value => { setIsPrepay(value) }}>
+                    onChange={value => { setIsPrepay(value); }}>
                     <Stack
                       direction={{ base: 'row' }}
                       alignItems="center"
@@ -422,7 +422,7 @@ const Detail = ({ route }) => {
                     name="myRadioGroup"
                     value={paymentMethod}
                     accessibilityLabel="favorite colorscheme"
-                    onChange={value => { setPaymentMethod(value) }}>
+                    onChange={value => { setPaymentMethod(value); }}>
                     <Stack
                       direction={{ base: 'row' }}
                       alignItems="center"
@@ -450,7 +450,7 @@ const Detail = ({ route }) => {
                     name="myRadioGroup"
                     value={categoryId}
                     accessibilityLabel="favorite colorscheme"
-                    onChange={value => { setCategoryId(value) }}>
+                    onChange={value => { setCategoryId(value); }}>
                     <Stack
                       direction={{ base: 'row' }}
                       alignItems="center"
@@ -478,8 +478,8 @@ const Detail = ({ route }) => {
         </View>
       }
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -695,6 +695,6 @@ const styles = StyleSheet.create({
     marginBottom: 80,
     marginTop: 40,
   },
-})
+});
 
-export default Detail
+export default Detail;

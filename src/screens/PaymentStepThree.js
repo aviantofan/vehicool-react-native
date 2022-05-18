@@ -6,16 +6,16 @@ import Step from '../components/Step';
 import Button from '../components/Button';
 import Format from '../helper/format';
 import { useNavigation } from '@react-navigation/native';
-import PushNotification from 'react-native-push-notification'
+import PushNotification from 'react-native-push-notification';
 import { useDispatch, useSelector } from 'react-redux';
 import { inputTransaction } from '../redux/actions/transaction';
 
 const PaymentStepThree = () => {
 
-  const { transaction } = useSelector(state => state)
-  const { auth } = useSelector(state => state)
-  const { detail } = useSelector(state => state)
-  const dispatch = useDispatch()
+  const { transaction } = useSelector(state => state);
+  const { auth } = useSelector(state => state);
+  const { detail } = useSelector(state => state);
+  const dispatch = useDispatch();
 
   const dataOrder = {
     qty: `${transaction.dataTransaction.qty}`,
@@ -24,9 +24,9 @@ const PaymentStepThree = () => {
     rentStartDate: `${transaction.dataTransaction.rentStartDate}`,
     rentEndDate: `${transaction.dataTransaction.rentEndDate}`,
     price: `${transaction.dataTransaction.prepayment}`,
-  }
+  };
 
-  const price = dataOrder.price * dataOrder.qty
+  const price = dataOrder.price * dataOrder.qty;
 
   const inputData = {
     userId: `${transaction.dataTransaction.userId}`,
@@ -35,17 +35,17 @@ const PaymentStepThree = () => {
     rentEndDate: `${transaction.dataTransaction.rentEndDate}`,
     prepayment: price,
     isReturned: 1
-  }
+  };
   const paymentFinish = () => {
-    dispatch(inputTransaction(auth.token, inputData))
+    dispatch(inputTransaction(auth.token, inputData));
     PushNotification.localNotification({
       channelId: 'payment',
       title: 'Payment Success!',
       message: 'Your vehicle is waiting for you!'
-    })
-    navigation.navigate('FinishedPayment')
-  }
-  const navigation = useNavigation()
+    });
+    navigation.navigate('FinishedPayment');
+  };
+  const navigation = useNavigation();
   return (
     <Box p="5">
       <TouchableOpacity style={styles.back} onPress={() => navigation.goBack()}>
@@ -124,8 +124,8 @@ const PaymentStepThree = () => {
         <Box mb={'20'} />
       </ScrollView>
     </Box>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   back: {
@@ -137,6 +137,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     width: '100%',
   },
-})
+});
 
-export default PaymentStepThree
+export default PaymentStepThree;

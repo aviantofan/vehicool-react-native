@@ -3,24 +3,24 @@ import {
   ScrollView,
   TouchableOpacity,
   StyleSheet,
-} from 'react-native'
+} from 'react-native';
 import { Text, Input } from 'native-base';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
-import Icons from 'react-native-vector-icons/FontAwesome'
+import Icons from 'react-native-vector-icons/FontAwesome';
 import List from '../components/List';
-import { getVehicleList} from '../redux/actions/listVehicle'
+import { getVehicleList} from '../redux/actions/listVehicle';
 import { useDispatch, useSelector } from 'react-redux';
 
 const Search = ({ navigation }) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [search, setSearch] = useState('');
 
   const {listVehicle} = useSelector(state => state);
 
   useEffect(() => {
-    dispatch(getVehicleList())
-  }, [dispatch])
+    dispatch(getVehicleList());
+  }, [dispatch]);
 
   const listVehicles = [
     {
@@ -95,34 +95,34 @@ const Search = ({ navigation }) => {
           showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}>
           {listVehicle.list ? 
-          listVehicle?.list.map((data, index) => (
-            <TouchableOpacity key={data.id} onPress={() => navigation.navigate('DetailVehicle', { id: data.id })}>
-              <List
-                image={{uri : `${data.image}`}}
-                name={data.name}
-                seet={data.capacity}
-                stock={data.stock}
-                price={data.price}
-              />
-            </TouchableOpacity>
-          )) 
-          :
-          listVehicles.map((data, index) => (
-            <TouchableOpacity key={data.id}>
-              <List
-                image={data.image}
-                name={data.name}
-                seet={data.seet}
-                stock={data.stock}
-                price={data.price}
-              />
-            </TouchableOpacity>
-          ))}
+            listVehicle?.list.map((data, index) => (
+              <TouchableOpacity key={data.id} onPress={() => navigation.navigate('DetailVehicle', { id: data.id })}>
+                <List
+                  image={{uri : `${data.image}`}}
+                  name={data.name}
+                  seet={data.capacity}
+                  stock={data.stock}
+                  price={data.price}
+                />
+              </TouchableOpacity>
+            )) 
+            :
+            listVehicles.map((data, index) => (
+              <TouchableOpacity key={data.id}>
+                <List
+                  image={data.image}
+                  name={data.name}
+                  seet={data.seet}
+                  stock={data.stock}
+                  price={data.price}
+                />
+              </TouchableOpacity>
+            ))}
         </ScrollView>
       </View>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   mainWrapper: {
@@ -145,6 +145,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingBottom: 10,
   },
-})
+});
 
-export default Search
+export default Search;

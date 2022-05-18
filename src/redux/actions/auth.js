@@ -1,7 +1,7 @@
 import http from '../../helper/http';
 import qs from 'qs';
 import RNFetchBlob from 'rn-fetch-blob';
-const { REACT_APP_URL } = process.env
+const { REACT_APP_URL } = process.env;
 
 export const authLogin = (email, password) => {
   return async dispatch => {

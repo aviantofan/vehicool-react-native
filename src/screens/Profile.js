@@ -76,8 +76,8 @@ const Profile = ({ navigation }) => {
         </View>
       </View>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   main: {
@@ -112,4 +112,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Profile
+export default Profile;

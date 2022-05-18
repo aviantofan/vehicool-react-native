@@ -17,7 +17,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { authRegister } from '../redux/actions/register';
 
 const Register = () => {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   const [isEmpty, setIsEmpty] = useState();
   const [name, setName] = useState();
@@ -96,15 +96,15 @@ const Register = () => {
             <Text style={styles.login}>Already have an account?</Text>
             <TouchableOpacity >
               <Text style={styles.login} onPress={() => {
-                navigation.navigate('Login')
+                navigation.navigate('Login');
               }}> Login now</Text>
             </TouchableOpacity>
           </View>
         </Box>
       </Box>
     </ScrollView>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   main: {
@@ -170,6 +170,6 @@ const styles = StyleSheet.create({
   login: {
     color: 'white'
   }
-})
+});
 
-export default Register
+export default Register;

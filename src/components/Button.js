@@ -1,5 +1,5 @@
-import React from 'react'
-import { SafeAreaView, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import React from 'react';
+import { SafeAreaView, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 const Button = ({ children, color, onPress }) => {
   return (
@@ -8,8 +8,8 @@ const Button = ({ children, color, onPress }) => {
         <Text style={styles.text}>{children}</Text>
       </TouchableOpacity>
     </SafeAreaView>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   primary: {
@@ -35,5 +35,5 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
   }
-})
-export default Button
+});
+export default Button;

@@ -7,7 +7,7 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint ./**/**.js --fix"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.17.3",
@@ -44,10 +44,10 @@
   },
   "devDependencies": {
     "@babel/core": "^7.17.8",
+    "@babel/eslint-parser": "^7.17.0",
     "@babel/runtime": "^7.17.8",
-    "@react-native-community/eslint-config": "^3.0.1",
     "babel-jest": "^27.5.1",
-    "eslint": "^8.12.0",
+    "eslint": "^8.15.0",
     "jest": "^27.5.1",
     "metro-react-native-babel-preset": "^0.70.0",
     "react-test-renderer": "17.0.2"

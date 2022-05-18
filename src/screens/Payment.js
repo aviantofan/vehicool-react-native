@@ -17,7 +17,7 @@ const Payment = () => {
 
   const [selectPayment, setSelectPayment] = useState();
   const [isSelect, setIsSelect] = useState(false);
-  const navigation = useNavigation()
+  const navigation = useNavigation();
   const payment = ['OVO', 'Dana', 'Virtual Account'];
   return (
     <Box p={'3'}>
@@ -85,8 +85,8 @@ const Payment = () => {
         </Box>
       </ScrollView>
     </Box>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -102,4 +102,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Payment
+export default Payment;

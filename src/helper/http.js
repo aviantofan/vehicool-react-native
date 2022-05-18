@@ -1,5 +1,5 @@
 import axios from 'axios';
-const { REACT_APP_URL } = process.env
+const { REACT_APP_URL } = process.env;
 
 const http = token => {
   const headers = {};

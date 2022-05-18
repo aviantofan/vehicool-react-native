@@ -8,7 +8,7 @@ import {
 import { Box } from 'native-base';
 import React, { useState, useEffect } from 'react';
 import Button from '../components/Button';
-import Input from '../components/Input'
+import Input from '../components/Input';
 import { useDispatch, useSelector } from 'react-redux';
 import { authForgot } from '../redux/actions/forgot';
 import { useNavigation } from '@react-navigation/native';
@@ -16,7 +16,7 @@ import { useNavigation } from '@react-navigation/native';
 const ForgotPassword = () => {
   const [email, setEmail] = useState();
   const [isError, setIsError] = useState();
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   const { forgot } = useSelector(state => state);
   const dispatch = useDispatch();
@@ -40,7 +40,7 @@ const ForgotPassword = () => {
     } else {
       setIsError(true);
     }
-  }
+  };
 
   return (
     <View style={styles.container}>
@@ -71,8 +71,8 @@ const ForgotPassword = () => {
         </Box>
       </Box>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   main: {
@@ -129,6 +129,6 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     marginTop: 20,
   },
-})
+});
 
-export default ForgotPassword
+export default ForgotPassword;

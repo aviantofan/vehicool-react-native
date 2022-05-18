@@ -38,8 +38,8 @@ const FavoriteList = ({ image, name, seet, stock, price, ...set }) => {
         </Text>
       </View>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -61,4 +61,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default FavoriteList
+export default FavoriteList;

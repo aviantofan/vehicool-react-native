@@ -20,8 +20,8 @@ const PaymentStepTwo = () => {
   const { detail } = useSelector(state => state);
   const { auth } = useSelector(state => state);
   const { transaction } = useSelector(state => state);
-  const counter = useSelector(state => state.counter)
-  const dispatch = useDispatch()
+  const counter = useSelector(state => state.counter);
+  const dispatch = useDispatch();
 
   const vehicle = {
     vehicleId: `${detail.vehicle?.id}`,
@@ -38,10 +38,10 @@ const PaymentStepTwo = () => {
   };
 
   const getCode = () => {
-    dispatch(getData(vehicle))
-    navigation.navigate('PaymentStepThree')
-  }
-  const navigation = useNavigation()
+    dispatch(getData(vehicle));
+    navigation.navigate('PaymentStepThree');
+  };
+  const navigation = useNavigation();
 
   return (
     <Box p="5">
@@ -92,8 +92,8 @@ const PaymentStepTwo = () => {
         </Box>
       </ScrollView>
     </Box>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   back: {
@@ -115,6 +115,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: 'gray',
   },
-})
+});
 
-export default PaymentStepTwo
+export default PaymentStepTwo;

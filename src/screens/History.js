@@ -1,15 +1,15 @@
-import { View, ScrollView, TouchableOpacity, StyleSheet, } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import { View, ScrollView, TouchableOpacity, StyleSheet, } from 'react-native';
+import React, { useEffect, useState } from 'react';
 import ListHistories from '../components/ListHistories';
 import { useDispatch, useSelector } from 'react-redux';
 import { listHistory } from '../redux/actions/transaction';
 
 const History = () => {
-  const dispatch = useDispatch()
-  const { transaction } = useSelector(state => state)
-  const { auth } = useSelector(state => state)
+  const dispatch = useDispatch();
+  const { transaction } = useSelector(state => state);
+  const { auth } = useSelector(state => state);
   useEffect(() => {
-    dispatch(listHistory(auth.userData?.id, auth.token))
+    dispatch(listHistory(auth.userData?.id, auth.token));
   }, [dispatch, auth.userData?.id, auth.token]);
 
   const listHistories = [
@@ -97,8 +97,8 @@ const History = () => {
         </ScrollView>
       </View>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   mainWrapper: {
@@ -119,6 +119,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingBottom: 10,
   },
-})
+});
 
-export default History
+export default History;
