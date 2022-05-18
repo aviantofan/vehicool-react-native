@@ -1,11 +1,16 @@
 import { View, ScrollView, TouchableOpacity, StyleSheet, } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import ListHistories from '../components/ListHistories';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { listHistory } from '../redux/actions/transaction';
 
 const History = () => {
-
+  const dispatch = useDispatch()
   const { transaction } = useSelector(state => state)
+  const { auth } = useSelector(state => state)
+  useEffect(() => {
+    dispatch(listHistory(auth.userData?.id, auth.token))
+  }, [dispatch, auth.userData?.id, auth.token]);
 
   const listHistories = [
     {
@@ -61,7 +66,7 @@ const History = () => {
         <ScrollView
           showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}>
-          {transaction.histories ?
+          {transaction.isSuccess === true &&
             transaction.histories.map((data, index) => (
               <TouchableOpacity key={data.id}>
                 <ListHistories
@@ -74,7 +79,9 @@ const History = () => {
                 />
               </TouchableOpacity>
             ))
-            :
+          }
+          {
+            transaction.isSuccess === false &&
             listHistories.map((data, index) => (
               <TouchableOpacity key={data.id}>
                 <ListHistories
