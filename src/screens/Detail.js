@@ -218,7 +218,7 @@ const Detail = ({ route }) => {
             </View>
           </View>
           <View style={{ marginTop: 19, marginLeft: 19, marginRight: 19, justifyContent: "space-between", flexDirection: "row" }}>
-            <TouchableOpacity style={styles.startDate}>
+            <TouchableOpacity style={styles.datePick}>
               <TouchableOpacity
                 title={String(rentStartDate)}
                 onPress={() => setOpen(true)}>
@@ -245,7 +245,7 @@ const Detail = ({ route }) => {
                 }}
               />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.startDate}>
+            <TouchableOpacity style={styles.datePick}>
               <TouchableOpacity
                 title={String(rentEndDate)}
                 onPress={() => setOp(true)}>
@@ -648,7 +648,7 @@ const styles = StyleSheet.create({
     fontSize: 50,
     fontWeight: "bold"
   },
-  startDate: {
+  datePick: {
     borderRadius: 10,
     backgroundColor: "rgba(57, 57, 57, 0.15)",
     padding: 15,
