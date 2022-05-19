@@ -16,6 +16,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { dataUser, updateData } from "../redux/actions/auth";
 import { launchCamera, launchImageLibrary } from "react-native-image-picker";
 import NoPhoto from "../assets/photo-camera.png";
+import DatePicker from "react-native-date-picker";
+import moment from "moment";
 
 const UpdateProfile = ({ navigation: { goBack } }) => {
 
@@ -27,9 +29,12 @@ const UpdateProfile = ({ navigation: { goBack } }) => {
   const [username, setUsername] = useState(`${auth.userData?.username}`);
   const [gender, setGender] = useState(`${auth.userData?.gender}`);
   const [phone, setPhone] = useState(`${auth.userData?.phone}`);
-  const [birthdate, setBirthdate] = useState(`${auth.userData?.birthdate}`);
+  const [birthdate, setBirthdate] = useState(new Date());
   const [address, setAddress] = useState(`${auth.userData?.address}`);
   const [image, setImage] = useState("");
+
+  const [open, setOpen] = useState(false);
+  const [isDate, setIsDate] = useState(false);
 
   useEffect(() => {
     dispatch(dataUser(auth.token));
@@ -49,6 +54,11 @@ const UpdateProfile = ({ navigation: { goBack } }) => {
   };
 
   const navigation = useNavigation();
+
+  const dataBirthdate = {
+    birthdate: moment(birthdate).format("YYYY/MM/DD")
+  };
+
   const update = () => {
     // const data = {
     //   name,
@@ -56,10 +66,10 @@ const UpdateProfile = ({ navigation: { goBack } }) => {
     //   username,
     //   gender,
     //   phone,
-    //   birthdate,
+    //   birthdate: moment(birthdate).format("YYYY/MM/DD"),
     //   address,
     //   image
-    // }
+    // };
     // console.log(data);
     dispatch(updateData(
       auth.userData?.id,
@@ -69,17 +79,17 @@ const UpdateProfile = ({ navigation: { goBack } }) => {
       username,
       gender,
       phone,
-      birthdate,
+      dataBirthdate.birthdate,
       address,
       image
     ));
-    // console.log(image)
-    PushNotification.localNotification({
-      channelId: "updateProfile",
-      title: "Update Profile Success!",
-      message: "You can see your personal information"
-    });
-    navigation.navigate("Profile");
+    console.log(image);
+    // PushNotification.localNotification({
+    //   channelId: "updateProfile",
+    //   title: "Update Profile Success!",
+    //   message: "You can see your personal information"
+    // });
+    // navigation.navigate("Profile");
   };
 
   return (
@@ -184,11 +194,33 @@ const UpdateProfile = ({ navigation: { goBack } }) => {
           </View>
           <View>
             <Text style={styles.label}>Date Of Birth:</Text>
-            <TextInput
-              value={birthdate}
-              style={styles.input}
-              onChangeText={setBirthdate}
-            />
+            <TouchableOpacity style={styles.datePick}>
+              <TouchableOpacity
+                title={String(birthdate)}
+                onPress={() => setOpen(true)}>
+                <Text style={{ color: "black" }}>
+                  {isDate ? moment(birthdate).format("YYYY/MM/DD") : `${auth.userData?.birthdate}`}
+                </Text>
+              </TouchableOpacity>
+              <DatePicker
+                style={styles.datePicker}
+                fadeToColor="white"
+                theme="dark"
+                textColor="white"
+                modal
+                mode="date"
+                open={open}
+                date={birthdate}
+                onConfirm={dateItem => {
+                  setOpen(false);
+                  setBirthdate(dateItem);
+                  setIsDate(true);
+                }}
+                onCancel={() => {
+                  setOpen(false);
+                }}
+              />
+            </TouchableOpacity>
           </View>
           <View>
             <Text style={styles.label}>Delivery Address:</Text>
@@ -267,6 +299,12 @@ const styles = StyleSheet.create({
   button: {
     marginBottom: 80,
     marginTop: 40,
+  },
+  datePick: {
+    borderRadius: 10,
+    backgroundColor: "rgba(57, 57, 57, 0.15)",
+    padding: 15,
+    width: "100%",
   },
 });
 
