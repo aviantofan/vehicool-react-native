@@ -84,12 +84,12 @@ const UpdateProfile = ({ navigation: { goBack } }) => {
       image
     ));
     console.log(image);
-    // PushNotification.localNotification({
-    //   channelId: "updateProfile",
-    //   title: "Update Profile Success!",
-    //   message: "You can see your personal information"
-    // });
-    // navigation.navigate("Profile");
+    PushNotification.localNotification({
+      channelId: "updateProfile",
+      title: "Update Profile Success!",
+      message: "You can see your personal information"
+    });
+    navigation.navigate("Profile");
   };
 
   return (
