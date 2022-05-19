@@ -39,15 +39,33 @@ const Detail = ({ route }) => {
   const [name, setName] = useState(`${detail.vehicle?.name}`);
   const [color, setColor] = useState(`${detail.vehicle?.color}`);
   const [loc, setLoc] = useState(`${detail.vehicle?.loc}`);
-  const [isAvailable, setIsAvailable] = useState(`${detail.vehicle?.isAvailable}`);
-  const [isPrepay, setIsPrepay] = useState(`${detail.vehicle?.isPrepay}`);
-  const [paymentMethod, setPaymentMethod] = useState(`${detail.vehicle?.paymentMethod}`);
+  const [isAvailable, setIsAvailable] = useState("");
+  const [isPrepay, setIsPrepay] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState("");
   const [capacity, setCapacity] = useState(`${detail.vehicle?.capacity}`);
-  const [categoryId, setCategoryId] = useState(`${detail.vehicle?.categoryId}`);
+  const [categoryId, setCategoryId] = useState("");
   const [reservationBefore, setReservationBefore] = useState(`${detail.vehicle?.reservationBefore}`);
   const [price, setPrice] = useState(`${detail.vehicle?.price}`);
   const [stock, setStock] = useState(`${detail.vehicle?.stock}`);
   const [image, setImage] = useState("");
+
+  useEffect(() => {
+    setName(detail.vehicle?.name ? detail.vehicle?.name : "Loading..");
+    setColor(detail.vehicle?.color ? detail.vehicle?.color : "Loading..");
+    setLoc(detail.vehicle?.loc ? detail.vehicle?.loc : "Loading..");
+    setPrice(detail.vehicle?.price ? `${detail.vehicle?.price}` : "Loading..");
+    setStock(detail.vehicle?.stock ? `${detail.vehicle?.stock}` : "Loading..");
+    setCapacity(detail.vehicle?.capacity ? `${detail.vehicle?.capacity}` : "Loading..");
+    setReservationBefore(detail.vehicle?.reservationBefore ? detail.vehicle?.reservationBefore : "Loading..");
+  }, [
+    detail.vehicle.name,
+    detail.vehicle.color,
+    detail.vehicle.loc,
+    detail.vehicle.price,
+    detail.vehicle.stock,
+    detail.vehicle.capacity,
+    detail.vehicle.reservationBefore
+  ]);
 
   const addImage = async () => {
 
@@ -370,7 +388,7 @@ const Detail = ({ route }) => {
                   <Radio.Group
                     defaultValue="1"
                     name="myRadioGroup"
-                    value={isAvailable}
+                    value={isAvailable ? isAvailable : detail.vehicle?.isAvailable ? `${detail.vehicle?.isAvailable}` : ""}
                     accessibilityLabel="favorite colorscheme"
                     onChange={value => { setIsAvailable(value); }}>
                     <Stack
@@ -395,7 +413,7 @@ const Detail = ({ route }) => {
                   <Radio.Group
                     defaultValue="1"
                     name="myRadioGroup"
-                    value={isPrepay}
+                    value={isPrepay ? isPrepay : detail.vehicle?.isPrepay ? `${detail.vehicle?.isPrepay}` : ""}
                     accessibilityLabel="favorite colorscheme"
                     onChange={value => { setIsPrepay(value); }}>
                     <Stack
@@ -420,7 +438,7 @@ const Detail = ({ route }) => {
                   <Radio.Group
                     defaultValue="1"
                     name="myRadioGroup"
-                    value={paymentMethod}
+                    value={paymentMethod ? paymentMethod : detail.vehicle?.paymentMethod ? `${detail.vehicle?.paymentMethod}` : ""}
                     accessibilityLabel="favorite colorscheme"
                     onChange={value => { setPaymentMethod(value); }}>
                     <Stack
@@ -448,7 +466,7 @@ const Detail = ({ route }) => {
                   <Radio.Group
                     defaultValue="1"
                     name="myRadioGroup"
-                    value={categoryId}
+                    value={categoryId ? categoryId : detail.vehicle?.categoryId ? `${detail.vehicle?.categoryId}` : ""}
                     accessibilityLabel="favorite colorscheme"
                     onChange={value => { setCategoryId(value); }}>
                     <Stack
